@@ -3,7 +3,6 @@ from typing import Any
 from backend.models.home import HomeResponse
 
 app = APIRouter(
-    prefix="",
     tags=["Home"]
 )
 
@@ -15,6 +14,6 @@ app = APIRouter(
 
 def home() -> dict[str, Any]:
     return {
-        "connection": True,
+        "success": True,
         "message": "MathAPI - Web Services Connected Successfully"
     }

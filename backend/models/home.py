@@ -1,5 +1,5 @@
 from pydantic import BaseModel
 
 class HomeResponse(BaseModel):
-    connection: bool
+    success: bool
     message: str

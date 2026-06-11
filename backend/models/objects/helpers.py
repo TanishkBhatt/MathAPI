@@ -1,6 +1,6 @@
 from pydantic import BaseModel
-from enum import Enum
 from typing import List
+from enum import Enum
 
 class Branch(Enum):
     arithmetic = "Arithmetic"
@@ -16,20 +16,37 @@ class Branch(Enum):
     relations_functions = "Relations and Functions"
     introductory_linear_algebra = "Introductory Linear Algebra"
     introductory_calculas = "Introductory Calculas"
-    mathematical_reasoning = "Mathematical Reasoning"
 
 class Difficulty(Enum):
     beginner = "Beginner"
     intermediate = "Intermediate"
     advanced = "Advanced"
 
-class Topic(BaseModel):
-    _id: str
-    name: str
-    branch: Branch
+class Example(BaseModel):
+    question: str
     difficulty: Difficulty
-    questions_available: int
-    learning_sources_available: int
+    key_observation: str
+    concept_used: str
+    formulae_used: List[str]
+    answer: str|int|float|bool|None
+    interpretation: str
 
-class Topics(BaseModel):
-    topics: List[Topic]
+class Options(BaseModel):
+    A: str|int|float|bool|None
+    B: str|int|float|bool|None
+    C: str|int|float|bool|None
+    D: str|int|float|bool|None
+
+class Answer(Enum):
+    a = "A"
+    b = "B"
+    c = "C"
+    d = "D"
+
+class QuestionType(Enum):
+    theoretical = "Theoretical"
+    numerical = "Numerical"
+    to_prove = "To Prove"
+    word_problem = "Word Problem"
+    case_based = "Case Based"
+    hots = "High Order Thinking Skills"
