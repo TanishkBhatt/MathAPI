@@ -1,0 +1,85 @@
+{
+    "data": [
+        {
+            "_id": "algebra-quadratic-equation",
+            "definition": "A quadratic equation is an equation which contains the square of the unknown quantity, but no higher power, or an equation of second degree.",
+            "origin": "Originated nearly 4,000 years ago in ancient Babylon to solve practical land division and agriculural problems. Later evolved through Indian and Islamic algebric breakthroughs before Rene Descartes fromulized the modern formula and notation in 17th century Europe, transforming how we solve for unknown variable today.",
+            "applications": [
+                "Projectile Motion",
+                "Designing reflective optics",
+                "Business and Economics",
+                "Architechure and Engineering",
+                "Geometry"
+            ],
+            "explination": [
+                {
+                    "title": "General Form", 
+                    "content": "The general form for a quadratic equation is : ax² + bx + c = 0, where x is the unknown quantity, a, b, c belongs to real number and a not equal to 0."
+                },
+                {
+                    "title": "Degree and Solutions", 
+                    "content": "As the degree of a quadratic equation is 2, and it must have at most 2 solutions. (values of the unknown quantity that satisfies the equation)"
+                },
+                {
+                    "title": "Graph", 
+                    "content": "If you plot a quadratic function in a x-y plane, you will find out that its graph is of parabolic shape. If (the coeff of x²) a > 0, it's a upward opening parabola else if a < 0, it's downward opening parabola."
+                },
+                {
+                    "title": "Solutions", 
+                    "content": "For solving such equations there are many ways like, factorization, completing the square, using the quadratic formula, Po-Shen-Loh method, etc."
+                },
+                {
+                    "title": "Factorization", 
+                    "content": "The most fundamental way of solving a quadratic is by factoring the given expression into two factors that are equal to 0 and then individually equating them equal to 0 and solving the linear equation."
+                },
+                {
+                    "title": "Quadratic Formula", 
+                    "content": "Most common way is to solve using the general quadtaic formula given by Indian mathematician Shridharacharya i.e. x = -b ± √b² - 4ac / 2a, where a, b, c are the coefficients from the general form. That's basically a generalised extent to completing the square method."
+                },
+                {
+                    "title": "Discriminant", 
+                    "content": "It might possible that the given equation has no real solution at all. we can determine that using discriminant of a quadratic equation. The discriminant (D) is defined as b² - 4ac. If D > 0, the equation has 2 real solutions, if D = 0, the equation has only one real solution and if D < 0, the equation has no real solutions."
+                }
+            ],
+            "formulae": [
+                {   
+                    "title": "General form",
+                    "plain_text": "ax² + bx + c = 0",
+                    "latex_code": "ax^2 + bx + c = 0"
+                },
+                {
+                    "title": "Quadratic formula",
+                    "plain_text": "x = -b ± √b² - 4ac / 2a",
+                    "latex_code": "x = \frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}"
+                },
+                {
+                    "title": "Discriminant",
+                    "plain_text": "D = b² - 4ac",
+                    "latex_code": "\\Delta = b^2 - 4ac"
+                }
+            ],
+            "learning_sources": [
+                {
+                    "title": "Math is fun",
+                    "type": "Website",
+                    "link": "https://www.mathisfun.com/algebra/quadratic-equation.html"
+                },
+                {
+                    "title": "Mr Jensen maths",
+                    "type": "Youtube",
+                    "link": "https://youtu.be/SGUP6BkA870?si=KwvTBL3jdo5IF0xq"
+                }
+            ],
+            "source_images": [
+                {
+                    "title": "Graph of a quadratic",
+                    "link": "https://textimgs.s3.amazonaws.com/boundless-algebra/trygx7sythwhphxv8rg3.jpe#fixme"
+                },
+                {
+                    "title": "Geometric meaning of a quadratic",
+                    "link": "https://i.ytimg.com/vi/OZlsB68NuzM/maxresdefault.jpg"
+                }
+            ]
+        }
+    ]
+}

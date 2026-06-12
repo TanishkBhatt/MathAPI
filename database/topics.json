@@ -1,0 +1,19 @@
+{
+    "data": [
+        {
+            "_id": "algebra-quadratic-equation",
+            "name": "Quadratic Equations",
+            "branch": "Algebra",
+            "difficulty": "Intermediate",
+            "prerequisites": [
+                "Linear Equations",
+                "Factorization"
+            ],
+            "related_topics": [
+                "Polynomials",
+                "Cubic Equations",
+                "Conic Sections"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "data":[
+        {
+            "topic_id": "algebra-quadratic-equation",
+            "question": "Solve 32 - 3x² = 10x",
+            "difficulty": "Beginner",
+            "question_type": "Numerical",
+            "options": {
+                "A": "2 & -3",
+                "B": "16 and -2/3",
+                "C": "2 & -16/3",
+                "D": "D.N.E"
+            },
+            "challange": null,
+            "answer": "C",
+            "solution_sources": [
+                {
+                    "title": "Tiger algebra",
+                    "type": "Website",
+                    "link": "https://www.tiger-algebra.com/drill/32-3x2=10x/"
+                }
+            ]
+        },
+        {
+            "topic_id": "algebra-quadratic-equation",
+            "question": "The diffrence of the reciprocals of two consecutive positive odd numbers if 2/675; find the smaller number.",
+            "difficulty": "Intermediate",
+            "question_type": "Word Problem",
+            "options": {
+                "A": 23,
+                "B": 25,
+                "C": 27,
+                "D": null
+            },
+            "challange": null,
+            "answer": "B",
+            "solution_sources": [
+                {
+                    "title": "Vedantu",
+                    "type": "Website",
+                    "link": "https://www.vedantu.com/question-answer/the-product-of-two-consecutive-odd-integers-is-class-9-maths-cbse-5f54eaf5aa9f7d480ee4113c"
+                }
+            ]
+        }
+    ]
+}

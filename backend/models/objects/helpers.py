@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Dict
 from enum import Enum
 
 class Branch(Enum):
@@ -22,15 +22,6 @@ class Difficulty(Enum):
     intermediate = "Intermediate"
     advanced = "Advanced"
 
-class Example(BaseModel):
-    question: str
-    difficulty: Difficulty
-    key_observation: str
-    concept_used: str
-    formulae_used: List[str]
-    answer: str|int|float|bool|None
-    interpretation: str
-
 class Options(BaseModel):
     A: str|int|float|bool|None
     B: str|int|float|bool|None
@@ -50,3 +41,34 @@ class QuestionType(Enum):
     word_problem = "Word Problem"
     case_based = "Case Based"
     hots = "High Order Thinking Skills"
+
+class Example(BaseModel):
+    question: str
+    difficulty: Difficulty
+    options: Options
+    key_observation: str
+    concept_used: str
+    formulae_used: List[Dict[str, str]]
+    answer: Answer
+    interpretation: str
+
+class Explination(BaseModel):
+    title: str
+    content: str
+
+class Formula(BaseModel):
+    title: str
+    plain_text: str
+    latex_code: str
+
+class LearningSource(BaseModel):
+    title: str
+    type: str
+    link: str
+
+class SolutionSource(LearningSource):
+    pass
+
+class SourceImage(BaseModel):
+    title: str
+    link: str

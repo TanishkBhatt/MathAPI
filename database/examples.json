@@ -1,0 +1,28 @@
+{
+    "data": [
+        {
+            "topic_id": "algebra-quadratic-equation",
+            "question": "Solve x² - 5x + 6 = 0",
+            "difficulty": "Beginner",
+            "options": {
+                "A": "2 & 3",
+                "B": "2 & -3",
+                "C": "1 & 2",
+                "D": "D.N.E"
+            },
+            "key_observation": "Middle term can be factored and then grouped.",
+            "concept_used": "Factorization",
+            "steps": [
+                "Split the middle term into two terms, as there sum remains 5 (coefficient of x) and product will give 6 (the constant term).",
+                "The equation now will look like : x² - 2x - 3x + 6 = 0",
+                "Group first two and the last two terms, then factor out x and -3 : x(x - 2) - 3(x - 2)",
+                "Now as both of the terma contains a (x - 2) Factor it out : (x - 2)(x - 3)",
+                "Now their product is equal to 0, than individual of them will be equal to zero. (x - 2) = 0 => x = 2 and (x - 3) = 0 => x = 3.",
+                "Hence, 2 and 3 are the values which satisfies the given equation."
+            ],
+            "formulae_used": [],
+            "answer": "A",
+            "interpretation": "2 and 3 are the values that satisfies the given equation : x² - 5x + 6 = 0"
+        }
+    ]
+}

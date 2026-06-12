@@ -18,6 +18,3 @@ uv.lock
 
 # Environment variables
 .env
-
-# Local
-database/
