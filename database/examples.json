@@ -11,7 +11,10 @@
                 "D": "2 only"
             },
             "key_observation": "Middle term can be splitted and then factored.",
-            "concept_used": "Factorization",
+            "concept_used": [
+                "Spliting the middle term",
+                "Factorization"
+            ],
             "steps": [
                 "Split the middle term into two terms, as there sum remains 5 (coefficient of x) and product will give 6 (the constant term)",
                 "The equation now will look like : x² - 2x - 3x + 6 = 0",
@@ -29,13 +32,16 @@
             "question": "If the altitude of a right angle triangle is 7 units less than its base, and the hypotenous is of 13 units, find the area of the triangle (in sq. units).",
             "difficulty": "Intermediate",
             "options": {
-                "A": 36,
-                "B": 40,
-                "C": 30,
-                "D": 25
+                "A": "36",
+                "B": "40",
+                "C": "30",
+                "D": "25"
             },
             "key_observation": "Special property of right angle triangles can be used.",
-            "concept_used": "Pythagorean Theorem and Quadratics",
+            "concept_used": [
+                "Pythagorean Theorem",
+                "Understanding of quadratics"
+            ],
             "steps": [
                 "Let the base be x, then the altitude is x - 7.",
                 "Now using the pythagorean theorem (b² + p² = h²): x² + (x - 7)² = 13²",

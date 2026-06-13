@@ -23,10 +23,10 @@ class Difficulty(Enum):
     advanced = "Advanced"
 
 class Options(BaseModel):
-    A: str|int|float|bool|None
-    B: str|int|float|bool|None
-    C: str|int|float|bool|None
-    D: str|int|float|bool|None
+    A: str
+    B: str
+    C: str
+    D: str
 
 class Answer(Enum):
     a = "A"
@@ -35,7 +35,7 @@ class Answer(Enum):
     d = "D"
 
 class QuestionType(Enum):
-    theoretical = "Theoretical"
+    conceptual = "Conceptual"
     numerical = "Numerical"
     to_prove = "To Prove"
     word_problem = "Word Problem"
@@ -47,7 +47,7 @@ class Example(BaseModel):
     difficulty: Difficulty
     options: Options
     key_observation: str
-    concept_used: str
+    concept_used: List[str]
     formulae_used: List[Dict[str, str]]
     answer: Answer
     interpretation: str

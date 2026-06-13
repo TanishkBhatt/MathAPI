@@ -67,7 +67,7 @@
                 },
                 {
                     "title": "Sum and product of roots",
-                    "plain_text": "Sum = -b/a; Product = c/a",
+                    "plain_text": "Sum = -b/a\nProduct = c/a",
                     "latex_code": "Sum = -b/a\\Product = c/a"
                 }
             ],

@@ -4,44 +4,85 @@
             "topic_id": "algebra-quadratic-equation",
             "question": "Solve 32 - 3x² = 10x",
             "difficulty": "Beginner",
-            "question_type": "Numerical",
+            "question_type": [
+                "Numerical"
+            ],
             "options": {
                 "A": "2 & -3",
                 "B": "16 & -2/3",
                 "C": "2 & -16/3",
                 "D": "2 only"
             },
-            "challange": "Do not use the quadratic formula blindly.",
+            "hint": "Compare the equation with the standered form and hence use the quadratic formula.",
             "answer": "C",
             "solution_sources": []
         },
         {
             "topic_id": "algebra-quadratic-equation",
-            "question": "The diffrence of the reciprocals of two consecutive odd positive numbers is 2/675; find the smaller number.",
-            "difficulty": "Intermediate",
-            "question_type": "Word Problem",
+            "question": "Solve for x; 3/(x - 2) - 2/(x + 1) = 5/4 where x ≠ {2, -1}",
+            "difficulty": "Beginner",
+            "question_type": [
+                "Numerical"
+            ],
             "options": {
-                "A": 23,
-                "B": 25,
-                "C": 27,
-                "D": 29
+                "A": "6 & -2",
+                "B": "2 & -1",
+                "C": "4 & -3",
+                "D": "5 & -2"
             },
-            "challange": "Do not use the quadratic formula blindly.",
+            "hint": "Cross multiply both sides, convert it to the standered form and hence use the quadratic formula.",
+            "answer": "A",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "algebra-quadratic-equation",
+            "question": "The diffrence of the reciprocals of two consecutive odd positive numbers is 2/675; find the smaller number.",
+            "difficulty": "Beginner",
+            "question_type": [
+                "Word Problem"
+            ],
+            "options": {
+                "A": "23",
+                "B": "25",
+                "C": "27",
+                "D": "29"
+            },
+            "hint": "Let the numbers be x and x + 2 and try forming equations according to the question. NOTE: Be aware of the question's demand.",
             "answer": "B",
             "solution_sources": []
         },
         {
             "topic_id": "algebra-quadratic-equation",
-            "question": "Find the values of k for which the given equation will have two distinct real roots: 2x² + kx + 3 = 0",
-            "difficulty": "Intermediate",
-            "question_type": "Numerical",
+            "question": "If the roots of the equation x² - 8x + k = 0 differ by 2, find the value of k.",
+            "difficulty": "Beginner",
+            "question_type": [
+                "Numerical"
+            ],
             "options": {
-                "A": "k < 24 or k > 6",
-                "B": "k < -2√6 or k > 2√6",
-                "C": "k < √6 or k > √6",
-                "D": "No value for k can make the equation has 2 dictinct real roots."
+                "A": "12",
+                "B": "15",
+                "C": "16",
+                "D": "18"
             },
-            "challange": null,
+            "hint": "Use the relation between the roots and the coefficients of a quadratic.",
+            "answer": "A",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "algebra-quadratic-equation",
+            "question": "Find the positive values of k for which the given equation will have two distinct real roots: x² + kx + 4 = 0",
+            "difficulty": "Intermediate",
+            "question_type": [
+                "Conceptual",
+                "Numerical"
+            ],
+            "options": {
+                "A": "k > 6",
+                "B": "k > 4",
+                "C": "k > 16",
+                "D": "No positive value for k can make the equation has 2 dictinct real roots."
+            },
+            "hint": "Apply the conditions of discriminant for having two real disticnt solutions.",
             "answer": "B",
             "solution_sources": []
         },
@@ -49,15 +90,87 @@
             "topic_id": "algebra-quadratic-equation",
             "question": "If a, b, c are in an arithmetic progression, and the euqation ax² + bx + c = 0 has 2 as it's one root, fint the other root.",
             "difficulty": "Intermediate",
-            "question_type": "High Order Thinking Skills",
+            "question_type": [
+                "Conceptual",
+                "High Order Thinking Skills"
+            ],
             "options": {
-                "A": -2,
-                "B": 1.25,
-                "C": -1.25,
+                "A": "-2",
+                "B": "5/4",
+                "C": "-5/4",
                 "D": "The equation will have only one root."
             },
-            "challange": null,
+            "hint": "Apply the basis meaning of an A.P. and hence try forming relations between roots and coefficients.",
             "answer": "C",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "algebra-quadratic-equation",
+            "question": "A farmer bought a certain number of sheep for $3150; through disease he lost 10, but by selling the remainder at $10 each more than he gave for them, he gained $1190: how many did he buy?",
+            "difficulty": "Intermediate",
+            "question_type": [
+                "Word Problem"
+            ],
+            "options": {
+                "A": "50",
+                "B": "60",
+                "C": "70",
+                "D": "90"
+            },
+            "hint": "Let the number of sheeps be x, try forming euqations according to the question and hence solve the quadratic. NOTE: Be aware of double answer.",
+            "answer": "D",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "algebra-quadratic-equation",
+            "question": "By walking three-quarters of a kilometre more than his ordinary pace per hour, a man finds that he takes 1.5 hours less than usual to walk 11 kilometres: what is the ordinary rate?",
+            "difficulty": "Intermediate",
+            "question_type": [
+                "Word Problem"
+            ],
+            "options": {
+                "A": "2 km/h",
+                "B": "2.5 km/h",
+                "C": "4 km/h",
+                "D": "5.5 km/h"
+            },
+            "hint": "Let the ordinary speed be x, try forming euqations according to the question and hence solve the quadratic. NOTE: Be aware of double answer.",
+            "answer": "A",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "algebra-quadratic-equation",
+            "question": "Given the quadratic equation x² - (a - 2)x - a - 1 = 0 with roots α and β, find the value of a for which α² + β² is minimum.",
+            "difficulty": "Intermediate",
+            "question_type": [
+                "Numerical",
+                "High Order Thinking Skills"
+            ],
+            "options": {
+                "A": "1",
+                "B": "-1",
+                "C": "2",
+                "D": "-2"
+            },
+            "hint": "Try forming relation btw roots and coefficients and hence calculate the minima using the vertex.",
+            "answer": "B",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "algebra-quadratic-equation",
+            "question": "Arjun carried some arrows for fighting with Bheeshm. With half the arrows he cut down Bheeshm's arrows, with six arrows he killed the charioteer, with one arrow each he destroyed the chariot, flag and bow, and finally with one more than four times the square root of the total number of arrows he laid Bheeshm unconscious. Find the total number of arrows Arjun had.",
+            "difficulty": "Intermediate",
+            "question_type": [
+                "Word Problem"
+            ],
+            "options": {
+                "A": "10",
+                "B": "4",
+                "C": "80",
+                "D": "100"
+            },
+            "hint": "Let the number of arrows be x, try forming euqations according to the question and hence solve the quadratic. NOTE: Be aware of double answer.",
+            "answer": "D",
             "solution_sources": []
         }
     ]

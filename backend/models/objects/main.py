@@ -5,7 +5,7 @@ from backend.models.objects.helpers import *
 class Topic(BaseModel):
     topic_id: str
     name: str
-    branch: Branch
+    branch: List[Branch]
     difficulty: Difficulty
     prerequisites: List[str]
     related_topics: List[str]
@@ -16,9 +16,9 @@ class Question(BaseModel):
     topic_name: str
     question: str
     difficulty: Difficulty
-    question_type: QuestionType
+    question_type: List[QuestionType]
     options: Options
-    challange: str|None
+    hint: str|None
     answer: Answer
     solution_source: List[SolutionSource]
 

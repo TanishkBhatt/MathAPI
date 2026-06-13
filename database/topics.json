@@ -3,7 +3,9 @@
         {
             "topic_id": "algebra-quadratic-equation",
             "name": "Quadratic Equations",
-            "branch": "Algebra",
+            "branch": [
+                "Algebra"
+            ],
             "difficulty": "Intermediate",
             "prerequisites": [
                 "Linear Equations",
