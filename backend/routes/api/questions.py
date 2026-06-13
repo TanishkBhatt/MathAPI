@@ -3,7 +3,7 @@ from typing import Any
 from pymongo import MongoClient
 from backend.models.api.questions import GetQuestionsResponse
 from backend.models.objects.helpers import Difficulty
-from backend.utils.db_config import get_db
+from backend.utils.database import get_db
 from backend.controllers.api.questions import get_questions
 
 app = APIRouter(
