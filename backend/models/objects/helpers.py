@@ -66,8 +66,10 @@ class LearningSource(BaseModel):
     type: str
     link: str
 
-class SolutionSource(LearningSource):
-    pass
+class SolutionSource(BaseModel):
+    source: str
+    type: str
+    link: str
 
 class SourceImage(BaseModel):
     title: str

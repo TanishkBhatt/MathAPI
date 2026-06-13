@@ -8,21 +8,56 @@
                 "A": "2 & 3",
                 "B": "2 & -3",
                 "C": "1 & 2",
-                "D": "D.N.E"
+                "D": "2 only"
             },
-            "key_observation": "Middle term can be factored and then grouped.",
+            "key_observation": "Middle term can be splitted and then factored.",
             "concept_used": "Factorization",
             "steps": [
-                "Split the middle term into two terms, as there sum remains 5 (coefficient of x) and product will give 6 (the constant term).",
+                "Split the middle term into two terms, as there sum remains 5 (coefficient of x) and product will give 6 (the constant term)",
                 "The equation now will look like : x² - 2x - 3x + 6 = 0",
                 "Group first two and the last two terms, then factor out x and -3 : x(x - 2) - 3(x - 2)",
-                "Now as both of the terma contains a (x - 2) Factor it out : (x - 2)(x - 3)",
-                "Now their product is equal to 0, than individual of them will be equal to zero. (x - 2) = 0 => x = 2 and (x - 3) = 0 => x = 3.",
+                "Now as both of the terms contains a (x - 2). Factor it out : (x - 2)(x - 3)",
+                "Now their product is equal to 0, than individual of them will be equal to zero. (x - 2 = 0) => x = 2 and (x - 3 = 0) => x = 3.",
                 "Hence, 2 and 3 are the values which satisfies the given equation."
             ],
             "formulae_used": [],
             "answer": "A",
             "interpretation": "2 and 3 are the values that satisfies the given equation : x² - 5x + 6 = 0"
+        },
+        {
+            "topic_id": "algebra-quadratic-equation",
+            "question": "If the altitude of a right angle triangle is 7 units less than its base, and the hypotenous is of 13 units, find the area of the triangle (in sq. units).",
+            "difficulty": "Intermediate",
+            "options": {
+                "A": 36,
+                "B": 40,
+                "C": 30,
+                "D": 25
+            },
+            "key_observation": "Special property of right angle triangles can be used.",
+            "concept_used": "Pythagorean Theorem and Quadratics",
+            "steps": [
+                "Let the base be x, then the altitude is x - 7.",
+                "Now using the pythagorean theorem (b² + p² = h²): x² + (x - 7)² = 13²",
+                "Simplify and you will get the equation: x² - 7x - 60 = 0",
+                "Solve the equation by any method, you will get 12, -5 as its roots, but as side can't be negetive hence we will consider only 12 as the base.",
+                "Now we have the base = 12 units, so the altitude = 12 - 7 = 5 units.",
+                "Finally calculating the area : A = 1/2 * b * h => A = 30 sq. units"
+            ],
+            "formulae_used": [
+                {   
+                    "title": "Pythagorean Theorem",
+                    "plain_text": "b² + p² = h²",
+                    "latex_code": "b^2 + p^2 = h^2"
+                },
+                {   
+                    "title": "Area of Triangle",
+                    "plain_text": "A = 1/2 * b * h",
+                    "latex_code": "A = \\frac{1}{2} \\cdot b \\cdot h"
+                }
+            ],
+            "answer": "C",
+            "interpretation": "The base and altitude of triangle is 12 units and 5 units respectively, hence the area is 30 sq. units."
         }
     ]
 }

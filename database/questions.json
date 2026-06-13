@@ -1,5 +1,5 @@
 {
-    "data":[
+    "data": [
         {
             "topic_id": "algebra-quadratic-equation",
             "question": "Solve 32 - 3x² = 10x",
@@ -7,40 +7,58 @@
             "question_type": "Numerical",
             "options": {
                 "A": "2 & -3",
-                "B": "16 and -2/3",
+                "B": "16 & -2/3",
                 "C": "2 & -16/3",
-                "D": "D.N.E"
+                "D": "2 only"
             },
-            "challange": null,
+            "challange": "Do not use the quadratic formula blindly.",
             "answer": "C",
-            "solution_sources": [
-                {
-                    "title": "Tiger algebra",
-                    "type": "Website",
-                    "link": "https://www.tiger-algebra.com/drill/32-3x2=10x/"
-                }
-            ]
+            "solution_sources": []
         },
         {
             "topic_id": "algebra-quadratic-equation",
-            "question": "The diffrence of the reciprocals of two consecutive positive odd numbers if 2/675; find the smaller number.",
+            "question": "The diffrence of the reciprocals of two consecutive odd positive numbers is 2/675; find the smaller number.",
             "difficulty": "Intermediate",
             "question_type": "Word Problem",
             "options": {
                 "A": 23,
                 "B": 25,
                 "C": 27,
-                "D": null
+                "D": 29
+            },
+            "challange": "Do not use the quadratic formula blindly.",
+            "answer": "B",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "algebra-quadratic-equation",
+            "question": "Find the values of k for which the given equation will have two distinct real roots: 2x² + kx + 3 = 0",
+            "difficulty": "Intermediate",
+            "question_type": "Numerical",
+            "options": {
+                "A": "k < 24 or k > 6",
+                "B": "k < -2√6 or k > 2√6",
+                "C": "k < √6 or k > √6",
+                "D": "No value for k can make the equation has 2 dictinct real roots."
             },
             "challange": null,
             "answer": "B",
-            "solution_sources": [
-                {
-                    "title": "Vedantu",
-                    "type": "Website",
-                    "link": "https://www.vedantu.com/question-answer/the-product-of-two-consecutive-odd-integers-is-class-9-maths-cbse-5f54eaf5aa9f7d480ee4113c"
-                }
-            ]
+            "solution_sources": []
+        },
+        {
+            "topic_id": "algebra-quadratic-equation",
+            "question": "If a, b, c are in an arithmetic progression, and the euqation ax² + bx + c = 0 has 2 as it's one root, fint the other root.",
+            "difficulty": "Intermediate",
+            "question_type": "High Order Thinking Skills",
+            "options": {
+                "A": -2,
+                "B": 1.25,
+                "C": -1.25,
+                "D": "The equation will have only one root."
+            },
+            "challange": null,
+            "answer": "C",
+            "solution_sources": []
         }
     ]
 }

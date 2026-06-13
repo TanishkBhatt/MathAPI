@@ -1,7 +1,7 @@
 {
     "data": [
         {
-            "_id": "algebra-quadratic-equation",
+            "topic_id": "algebra-quadratic-equation",
             "definition": "A quadratic equation is an equation which contains the square of the unknown quantity, but no higher power, or an equation of second degree.",
             "origin": "Originated nearly 4,000 years ago in ancient Babylon to solve practical land division and agriculural problems. Later evolved through Indian and Islamic algebric breakthroughs before Rene Descartes fromulized the modern formula and notation in 17th century Europe, transforming how we solve for unknown variable today.",
             "applications": [
@@ -21,24 +21,32 @@
                     "content": "As the degree of a quadratic equation is 2, and it must have at most 2 solutions. (values of the unknown quantity that satisfies the equation)"
                 },
                 {
-                    "title": "Graph", 
-                    "content": "If you plot a quadratic function in a x-y plane, you will find out that its graph is of parabolic shape. If (the coeff of x²) a > 0, it's a upward opening parabola else if a < 0, it's downward opening parabola."
+                    "title": "Graph of a quadratic", 
+                    "content": "If you plot a quadratic function y = ax² + bx + c in a 2D plane, you will find out that its graph is of parabolic shape with following components: x-intercepts (roots), y-intercept, vertex (minima/ maxima) and the line of symetry. If (the coefficient of x²) a > 0, it's a upward opening parabola else if a < 0, it's downward opening parabola."
                 },
                 {
                     "title": "Solutions", 
-                    "content": "For solving such equations there are many ways like, factorization, completing the square, using the quadratic formula, Po-Shen-Loh method, etc."
+                    "content": "A solution refers to the values for x that satisfies the given equation, for solving such equations there are many ways like, Factorization, Completing the square, using the Quadratic formula, Po-Shen-Loh method, etc."
                 },
                 {
                     "title": "Factorization", 
                     "content": "The most fundamental way of solving a quadratic is by factoring the given expression into two factors that are equal to 0 and then individually equating them equal to 0 and solving the linear equation."
                 },
                 {
+                    "title": "Completing the square", 
+                    "content": "It's the most ancient way to solve a general quadratic equation of any pattern. The main concept includes visualizing the equation as a literal square and rectangilar pieces and finding the missing portion to complete the square and find the solutions. For example, we have the equation x² + 14x = 32, so we attempt to make the L.H.S. a perfect square i.e. (x + 7)² = 81, then taking square root both sides and subtracting 7 we get x = 2, -16."
+                },
+                {
                     "title": "Quadratic Formula", 
-                    "content": "Most common way is to solve using the general quadtaic formula given by Indian mathematician Shridharacharya i.e. x = -b ± √b² - 4ac / 2a, where a, b, c are the coefficients from the general form. That's basically a generalised extent to completing the square method."
+                    "content": "Most common way to solve q quadratic is using the quadratic formula given by Indian mathematician Shridharacharya i.e. x = -b ± √b² - 4ac / 2a, where a, b, c are the coefficients from the general form. That's basically a generalised extent to completing the square method."
+                },
+                {
+                    "title": "Po-Shen-Lo method of solving", 
+                    "content": "It's the most unique way of solving a quadratic. First we calculate the sum and product of roots by given relation: Sum of roots = -b/a, Product of roots = c/a. And we know that the vertex of a parabola is the mid point of the roots, thus v = Sum of roots/ 2 or v = -b/2a. Then as the distance btw both the roots and the L.O.S. is constant let it 'u'. Now, the roots will be v + u and v - u. Finally using the Product relation, we will form the equation - v² - u² = P, calulating the value of u and substituting back to the roots equation and we are done."
                 },
                 {
                     "title": "Discriminant", 
-                    "content": "It might possible that the given equation has no real solution at all. we can determine that using discriminant of a quadratic equation. The discriminant (D) is defined as b² - 4ac. If D > 0, the equation has 2 real solutions, if D = 0, the equation has only one real solution and if D < 0, the equation has no real solutions."
+                    "content": "It might possible that the given equation has no real solution at all. we can determine that using discriminant of a quadratic equation. The discriminant (D) is defined as b² - 4ac. If D > 0, the equation has 2 real solutions, if D = 0, the equation has only one real solution and if D < 0, the equation has no real solutions. NOTE: If the discriminant is 0, the roots are just -b/2a."
                 }
             ],
             "formulae": [
@@ -56,28 +64,43 @@
                     "title": "Discriminant",
                     "plain_text": "D = b² - 4ac",
                     "latex_code": "\\Delta = b^2 - 4ac"
+                },
+                {
+                    "title": "Sum and product of roots",
+                    "plain_text": "Sum = -b/a; Product = c/a",
+                    "latex_code": "Sum = -b/a\\Product = c/a"
                 }
             ],
             "learning_sources": [
                 {
-                    "title": "Math is fun",
-                    "type": "Website",
-                    "link": "https://www.mathisfun.com/algebra/quadratic-equation.html"
-                },
-                {
-                    "title": "Mr Jensen maths",
+                    "title": "Basics of quadratic by Mr Jensen Maths",
                     "type": "Youtube",
                     "link": "https://youtu.be/SGUP6BkA870?si=KwvTBL3jdo5IF0xq"
+                },
+                {
+                    "title": "Completing the square by BPRP Maths",
+                    "type": "Youtube",
+                    "link": "https://www.youtube.com/watch?v=HJayHvPf1fo"
+                },
+                {
+                    "title": "Po-Shen-Lo method by Brain Station",
+                    "type": "Youtube",
+                    "link": "https://www.youtube.com/watch?v=RaeYXizfZWo"
+                },
+                {
+                    "title": "Quadratics visualized by Math Is Fun",
+                    "type": "Website",
+                    "link": "https://www.mathisfun.com/algebra/quadratic-equation.html"
                 }
             ],
             "source_images": [
                 {
                     "title": "Graph of a quadratic",
-                    "link": "https://textimgs.s3.amazonaws.com/boundless-algebra/trygx7sythwhphxv8rg3.jpe#fixme"
+                    "link": "https://2012books.lardbucket.org/books/advanced-algebra/section_09/9d42e34d8294dfb85c5491c48840be45.png"
                 },
                 {
-                    "title": "Geometric meaning of a quadratic",
-                    "link": "https://i.ytimg.com/vi/OZlsB68NuzM/maxresdefault.jpg"
+                    "title": "Completing the square visualized",
+                    "link": "https://www.onlinemath4all.com/images/completingthesquare3.png"
                 }
             ]
         }

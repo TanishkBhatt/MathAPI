@@ -1,7 +1,7 @@
 {
     "data": [
         {
-            "_id": "algebra-quadratic-equation",
+            "topic_id": "algebra-quadratic-equation",
             "name": "Quadratic Equations",
             "branch": "Algebra",
             "difficulty": "Intermediate",

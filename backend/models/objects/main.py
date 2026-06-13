@@ -3,7 +3,7 @@ from typing import List
 from backend.models.objects.helpers import *
 
 class Topic(BaseModel):
-    _id: str
+    topic_id: str
     name: str
     branch: Branch
     difficulty: Difficulty
