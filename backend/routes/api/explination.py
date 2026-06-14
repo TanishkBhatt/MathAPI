@@ -6,15 +6,15 @@ from backend.utils.database import get_db
 from backend.controllers.api.explination import explain_topic
 
 app = APIRouter(
-    prefix="/api",
-    tags=["API"]
+    prefix="/api/v1",
+    tags=["Get API"]
 )
 
 @app.get(
-    "/explination/{topic_name}",
+    "/explination",
     response_model=ExplinationResponse,
     status_code=status.HTTP_200_OK
 )
 
-def explain(topic_name: str, db: MongoClient = Depends(get_db)) -> dict[str, Any]:
-    return explain_topic(db, topic_name)
+def explain(topic_id: str, db: MongoClient = Depends(get_db)) -> dict[str, Any]:
+    return explain_topic(db, topic_id)

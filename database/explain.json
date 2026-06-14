@@ -1,7 +1,8 @@
 {
     "data": [
         {
-            "topic_id": "algebra-quadratic-equation",
+            "topic_id": "quadratic-equation",
+            "topic_name": "Quadratic Equation",
             "definition": "A quadratic equation is an equation which contains the square of the unknown quantity, but no higher power, or an equation of second degree.",
             "origin": "Originated nearly 4,000 years ago in ancient Babylon to solve practical land division and agriculural problems. Later evolved through Indian and Islamic algebric breakthroughs before Rene Descartes fromulized the modern formula and notation in 17th century Europe, transforming how we solve for unknown variable today.",
             "applications": [
@@ -14,7 +15,7 @@
             "explination": [
                 {
                     "title": "General Form", 
-                    "content": "The general form for a quadratic equation is : ax² + bx + c = 0, where x is the unknown quantity, a, b, c belongs to real number and a not equal to 0."
+                    "content": "The general form for a quadratic equation is : ax^2 + bx + c = 0, where x is the unknown quantity, a, b, c belongs to real number and a not equal to 0."
                 },
                 {
                     "title": "Degree and Solutions", 
@@ -22,7 +23,7 @@
                 },
                 {
                     "title": "Graph of a quadratic", 
-                    "content": "If you plot a quadratic function y = ax² + bx + c in a 2D plane, you will find out that its graph is of parabolic shape with following components: x-intercepts (roots), y-intercept, vertex (minima/ maxima) and the line of symetry. If (the coefficient of x²) a > 0, it's a upward opening parabola else if a < 0, it's downward opening parabola."
+                    "content": "If you plot a quadratic function y = ax^2 + bx + c in a 2D plane, you will find out that its graph is of parabolic shape with following components: x-intercepts (roots), y-intercept, vertex (minima/ maxima) and the line of symetry. If (the coefficient of x^2) a > 0, it's a upward opening parabola else if a < 0, it's downward opening parabola."
                 },
                 {
                     "title": "Solutions", 
@@ -34,35 +35,35 @@
                 },
                 {
                     "title": "Completing the square", 
-                    "content": "It's the most ancient way to solve a general quadratic equation of any pattern. The main concept includes visualizing the equation as a literal square and rectangilar pieces and finding the missing portion to complete the square and find the solutions. For example, we have the equation x² + 14x = 32, so we attempt to make the L.H.S. a perfect square i.e. (x + 7)² = 81, then taking square root both sides and subtracting 7 we get x = 2, -16."
+                    "content": "It's the most ancient way to solve a general quadratic equation of any pattern. The main concept includes visualizing the equation as a literal square and rectangilar pieces and finding the missing portion to complete the square and find the solutions. For example, we have the equation x^2 + 14x = 32, so we attempt to make the L.H.S. a perfect square i.e. (x + 7)^2 = 81, then taking square root both sides and subtracting 7 we get x = 2, -16."
                 },
                 {
                     "title": "Quadratic Formula", 
-                    "content": "Most common way to solve q quadratic is using the quadratic formula given by Indian mathematician Shridharacharya i.e. x = -b ± √b² - 4ac / 2a, where a, b, c are the coefficients from the general form. That's basically a generalised extent to completing the square method."
+                    "content": "Most common way to solve q quadratic is using the quadratic formula given by Indian mathematician Shridharacharya i.e. x = -b + sqrt(b^2 - 4ac) / 2a & -b - sqrt(b^2 - 4ac) / 2a, where a, b, c are the coefficients from the general form. That's basically a generalised extent to completing the square method."
                 },
                 {
                     "title": "Po-Shen-Lo method of solving", 
-                    "content": "It's the most unique way of solving a quadratic. First we calculate the sum and product of roots by given relation: Sum of roots = -b/a, Product of roots = c/a. And we know that the vertex of a parabola is the mid point of the roots, thus v = Sum of roots/ 2 or v = -b/2a. Then as the distance btw both the roots and the L.O.S. is constant let it 'u'. Now, the roots will be v + u and v - u. Finally using the Product relation, we will form the equation - v² - u² = P, calulating the value of u and substituting back to the roots equation and we are done."
+                    "content": "It's the most unique way of solving a quadratic. First we calculate the sum and product of roots by given relation: Sum of roots = -b/a, Product of roots = c/a. And we know that the vertex of a parabola is the mid point of the roots, thus v = Sum of roots/ 2 or v = -b/2a. Then as the distance btw both the roots and the L.O.S. is constant let it 'u'. Now, the roots will be v + u and v - u. Finally using the Product relation, we will form the equation : v^2 - u^2 = P, calulating the value of u and substituting back to the roots equation and we are done."
                 },
                 {
                     "title": "Discriminant", 
-                    "content": "It might possible that the given equation has no real solution at all. we can determine that using discriminant of a quadratic equation. The discriminant (D) is defined as b² - 4ac. If D > 0, the equation has 2 real solutions, if D = 0, the equation has only one real solution and if D < 0, the equation has no real solutions. NOTE: If the discriminant is 0, the roots are just -b/2a."
+                    "content": "It might possible that the given equation has no real solution at all. we can determine that using discriminant of a quadratic equation. The discriminant (D) is defined as b^2 - 4ac. If D > 0, the equation has 2 real solutions, if D = 0, the equation has only one real solution and if D < 0, the equation has no real solutions. NOTE: If the discriminant is 0, the roots are just -b/2a."
                 }
             ],
             "formulae": [
                 {   
                     "title": "General form",
-                    "plain_text": "ax² + bx + c = 0",
+                    "plain_text": "ax^2 + bx + c = 0",
                     "latex_code": "ax^2 + bx + c = 0"
                 },
                 {
                     "title": "Quadratic formula",
-                    "plain_text": "x = -b ± √b² - 4ac / 2a",
+                    "plain_text": "x = -b + sqrt(b^2 - 4ac) / 2a & -b - sqrt(b^2 - 4ac) / 2a",
                     "latex_code": "x = \frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}"
                 },
                 {
                     "title": "Discriminant",
-                    "plain_text": "D = b² - 4ac",
+                    "plain_text": "D = b^2 - 4ac",
                     "latex_code": "\\Delta = b^2 - 4ac"
                 },
                 {

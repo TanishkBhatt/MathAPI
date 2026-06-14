@@ -7,15 +7,15 @@ from backend.utils.database import get_db
 from backend.controllers.api.questions import get_questions
 
 app = APIRouter(
-    prefix="/api",
-    tags=["API"]
+    prefix="/api/v1",
+    tags=["Get API"]
 )
 
 @app.get(
-    "/questions/{topic_name}",
+    "/questions",
     response_model=GetQuestionsResponse,
     status_code=status.HTTP_200_OK
 )
 
-def questions(topic_name: str, limit: int = Query(10, ge=1), difficulty: Difficulty | None = None, db: MongoClient = Depends(get_db)) -> dict[str, Any]:
-    return get_questions(db, topic_name, limit, difficulty)
+def questions(topic_id: str, limit: int = Query(10, ge=1), difficulty: Difficulty | None = None, db: MongoClient = Depends(get_db)) -> dict[str, Any]:
+    return get_questions(db, topic_id, limit, difficulty)

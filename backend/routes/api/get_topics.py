@@ -6,8 +6,8 @@ from backend.utils.database import get_db
 from backend.controllers.api.get_topics import get_topics
 
 app = APIRouter(
-    prefix="/api",
-    tags=["API"]
+    prefix="/api/v1",
+    tags=["Get API"]
 )
 
 @app.get(

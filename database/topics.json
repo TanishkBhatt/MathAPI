@@ -1,8 +1,8 @@
 {
     "data": [
         {
-            "topic_id": "algebra-quadratic-equation",
-            "name": "Quadratic Equations",
+            "topic_id": "quadratic-equation",
+            "topic_name": "Quadratic Equations",
             "branch": [
                 "Algebra"
             ],
