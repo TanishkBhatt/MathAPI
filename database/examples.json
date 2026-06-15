@@ -7,26 +7,26 @@
             "question_type": [
                 "Numerical"
             ],
-            "key_observation": "Middle term can be splitted and then factored.",
+            "key_observation": "Middle term can be split and then factored.",
             "concept_used": [
-                "Spliting the middle term",
+                "Splitting the middle term",
                 "Factorization"
             ],
             "steps": [
-                "Split the middle term into two terms, as there sum remains 5 (coefficient of x) and product will give 6 (the constant term)",
+                "Split the middle term into two terms, as their sum remains 5 (coefficient of x) and product will give 6 (the constant term)",
                 "The equation now will look like : x^2 - 2x - 3x + 6 = 0",
                 "Group first two and the last two terms, then factor out x and -3 : x(x - 2) - 3(x - 2)",
-                "Now as both of the terms contains a (x - 2). Factor it out : (x - 2)(x - 3)",
-                "Now their product is equal to 0, than individual of them will be equal to zero. (x - 2 = 0) => x = 2 and (x - 3 = 0) => x = 3.",
-                "Hence, 2 and 3 are the values which satisfies the given equation."
+                "Now as both of the terms contain a (x - 2). Factor it out : (x - 2)(x - 3)",
+                "Now their product is equal to 0, so individual of them will be equal to zero. (x - 2 = 0) => x = 2 and (x - 3 = 0) => x = 3.",
+                "Hence, 2 and 3 are the values which satisfy the given equation."
             ],
             "formulae_used": [],
             "answer": "2 & 3",
-            "interpretation": "2 and 3 are the values that satisfies the given equation : x^2 - 5x + 6 = 0"
+            "interpretation": "2 and 3 are the values that satisfy the given equation : x^2 - 5x + 6 = 0"
         },
         {
             "topic_id": "quadratic-equation",
-            "question": "If the altitude of a right angle triangle is 7 units less than its base, and the hypotenous is of 13 units, find the area of the triangle (in sq. units).",
+            "question": "If the altitude of a right angle triangle is 7 units less than its base, and the hypotenuse is of 13 units, find the area of the triangle (in sq. units).",
             "difficulty": "Beginner",
             "question_type": [
                 "Word Problem"
@@ -38,11 +38,11 @@
             ],
             "steps": [
                 "Let the base be x, then the altitude is x - 7.",
-                "Now using the pythagorean theorem (b^2 + p^2 = h^2): x^2 + (x - 7)^2 = 13^2",
+                "Now using the Pythagorean theorem (b^2 + p^2 = h^2): x^2 + (x - 7)^2 = 13^2",
                 "Simplify and you will get the equation: x^2 - 7x - 60 = 0",
-                "Solve the equation by any method, you will get 12, -5 as its roots, but as side can't be negetive hence we will consider only 12 as the base.",
+                "Solve the equation by any method, you will get 12, -5 as its roots, but as side can't be negative hence we will consider only 12 as the base.",
                 "Now we have the base = 12 units, so the altitude = 12 - 7 = 5 units.",
-                "Finally calculating the area : A = 1/2 * b * h => A = 30 sq. units"
+                "Finally calculating the area : A = 1/2 * b * h => A = 30 sq. units."
             ],
             "formulae_used": [
                 {   
@@ -61,7 +61,7 @@
         },
         {
             "topic_id": "quadratic-equation",
-            "question": "If the equation : x^2 - 2(k + 1)x + k^2 + 1 = 0 has real roots, show that one roots can never be zero,",
+            "question": "If the equation : x^2 - 2(k + 1)x + k^2 + 1 = 0 has real roots, show that one root can never be zero.",
             "difficulty": "Intermediate",
             "question_type": [
                 "Conceptual",
@@ -75,14 +75,14 @@
             ],
             "steps": [
                 "Using the concept of discriminant : b^2 - 4ac >= 0 for having a real solution.",
-                "Substituting values of a, b and c, simplifing further we get k >= 0",
+                "Substituting values of a, b and c, simplifying further we get k >= 0",
                 "Now as the product of roots is c/a, here k^2 + 1, and k >= 0, then k^2 + 1 must be greater than 0.",
-                "Now, let us assume one root to be 0. Then the product of roots will became 0 and eventually k^2 + 1 becomes zero.",
+                "Now, let us assume one root to be 0. Then the product of roots will become 0 and eventually k^2 + 1 becomes zero.",
                 "It contradicts the fact that k^2 + 1 > 0. Therefore, for any value of k, neither root can be zero."
             ],
             "formulae_used": [
                 {   
-                    "title": "Dicriminant",
+                    "title": "Discriminant",
                     "plain_text": "b^2 - 4ac",
                     "latex_code": "b^2 - 4ac"
                 },
@@ -93,65 +93,61 @@
                 }
             ],
             "answer": "Proved.",
-            "interpretation": "For any value of k, neither of the root can be zero."
+            "interpretation": "For any value of k, neither of the roots can be zero."
         },
         {
             "topic_id": "quadratic-equation",
-            "question": "",
-            "difficulty": "",
+            "question": "The speed of a boat in still water is 15 km/h. It can go 30 km upstream and return downstream to the original point in 4 hours 30 minutes. Find the speed of the stream.",
+            "difficulty": "Intermediate",
             "question_type": [
-                ""
+                "Word Problem"
             ],
-            "key_observation": "",
+            "key_observation": "Net speed in upstream and downstream is the sum and difference of boat's and stream's speeds respectively.",
             "concept_used": [
-                ""
+                "Motion",
+                "Understanding of quadratics"
             ],
             "steps": [
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
+                "Let the speed of the stream be x, then net speed in upstream and downstream are 15 - x and 15 + x respectively.",
+                "In upstream case : speed = 15 - x, distance = 30, time = t1",
+                "In downstream case : speed = 15 + x, distance = 30, time = t2",
+                "Calculating t1 and t2 : t1 = 30/(15 - x), t2 = 30/(15 + x)",
+                "As given total time is 4 and a half hour, t1 + t2 = 9/2",
+                "Forming final equation : 30/(15 - x) + 30/(15 + x) = 9/2 => 9x^2 = 225 => x^2 = 25 => x = 5, -5",
+                "As speed cannot be negative, x cannot equal -5. Thus, the speed of the stream is 5 km/h"
             ],
             "formulae_used": [
                 {   
-                    "title": "",
-                    "plain_text": "",
-                    "latex_code": ""
+                    "title": "Speed formula",
+                    "plain_text": "Speed = Distance / Time",
+                    "latex_code": "Speed = \\frac{Distance}{Time}"
                 }
             ],
-            "answer": "",
-            "interpretation": ""
+            "answer": "5 km/h",
+            "interpretation": "The speed of the stream is 5 km/h."
         },
         {
             "topic_id": "quadratic-equation",
-            "question": "",
-            "difficulty": "",
+            "question": "Two water taps together can fill a tank in 15/8 hours. The tap with longer diameter takes 2 hours less than the other tap to fill the tank separately. Find the time in which each tap can fill the tank separately.",
+            "difficulty": "Intermediate",
             "question_type": [
-                ""
+                "Word Problem"
             ],
-            "key_observation": "",
+            "key_observation": "Assume the work done in filling the tank to be 1 unit.",
             "concept_used": [
-                ""
+                "Understanding of quadratics"
             ],
             "steps": [
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
+                "Let the time taken by the smaller tap to fill the tank be x (in hours), then the time taken by the other tank will be x - 2.",
+                "Work done by tap 1 in x hours = 1 unit. Thus, Work done by tap 1 in 1 hour = 1/x unit. Eventually, Work done by tap 1 in 15/8 hours = 15/8x",
+                "Work done by tap 2 in x - 2 hours = 1 unit. Thus, Work done by tap 2 in 1 hour = 1/(x - 2) unit. Eventually, Work done by tap 2 in 15/8 hours = 15/8(x - 2) unit.",
+                "Collectively they do 1 unit work in 15/8 hours. Thus, 15/8x + 15/8(x - 2) = 1",
+                "Solving the equation : 15/8x + 15/8(x - 2) = 1 => 1/x + 1/(x - 2) = 8/15 => 4x^2 - 23x + 15 = 0 => x = 5, 0.75",
+                "As the larger tap takes 2 hours less, so taking 0.75 as answer will contradict this situation. Thus, time taken by the smaller tap = 5 hours and by the larger tap = 3 hours."
             ],
-            "formulae_used": [
-                {   
-                    "title": "",
-                    "plain_text": "",
-                    "latex_code": ""
-                }
-            ],
-            "answer": "",
-            "interpretation": ""
+            "formulae_used": [],
+            "answer": "5 hours, 3 hours",
+            "interpretation": "The time taken by the smaller tap is 5 hours and by the larger tap is 3 hours."
         }
     ]
 }

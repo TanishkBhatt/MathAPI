@@ -13,13 +13,13 @@
                 "C": "2 & -16/3",
                 "D": "2 only"
             },
-            "hint": "The linear term can be splitted and hence factored.",
+            "hint": "The linear term can be split and hence factored.",
             "answer": "C",
             "solution_sources": []
         },
         {
             "topic_id": "quadratic-equation",
-            "question": "Solve for x; 3/(x - 2) - 2/(x + 1) = 5/4 where x doesn't belongs to {2, -1}",
+            "question": "Solve for x; 3/(x - 2) - 2/(x + 1) = 5/4 where x doesn't belong to {2, -1}",
             "difficulty": "Beginner",
             "question_type": [
                 "Numerical"
@@ -30,13 +30,13 @@
                 "C": "4 & -3",
                 "D": "5 & -2"
             },
-            "hint": "Cross multiply both sides, convert it to the standered form and hence use the quadratic formula.",
+            "hint": "Cross multiply both sides, convert it to the standard form and hence use the quadratic formula.",
             "answer": "A",
             "solution_sources": []
         },
         {
             "topic_id": "quadratic-equation",
-            "question": "The diffrence of the reciprocals of two consecutive odd positive numbers is 2/675; find the smaller number.",
+            "question": "The difference of the reciprocals of two consecutive odd positive numbers is 2/675; find the smaller number.",
             "difficulty": "Beginner",
             "question_type": [
                 "Word Problem"
@@ -80,15 +80,15 @@
                 "A": "k > 6",
                 "B": "k > 4",
                 "C": "k > 16",
-                "D": "No positive value for k can make the equation has 2 dictinct real roots."
+                "D": "No positive value for k can make the equation have 2 distinct real roots."
             },
-            "hint": "Apply the conditions of discriminant for having two real disticnt solutions.",
+            "hint": "Apply the conditions of discriminant for having two real distinct solutions.",
             "answer": "B",
             "solution_sources": []
         },
         {
             "topic_id": "quadratic-equation",
-            "question": "If a, b, c are in an arithmetic progression, and the euqation ax^2 + bx + c = 0 has 2 as it's one root, fint the other root.",
+            "question": "If a, b, c are in an arithmetic progression, and the equation ax^2 + bx + c = 0 has 2 as its one root, find the other root.",
             "difficulty": "Intermediate",
             "question_type": [
                 "Conceptual",
@@ -100,7 +100,7 @@
                 "C": "-5/4",
                 "D": "The equation will have only one root."
             },
-            "hint": "Apply the basis meaning of an A.P. and hence try forming relations between roots and coefficients.",
+            "hint": "Apply the basic meaning of an A.P. and hence try forming relations between roots and coefficients.",
             "answer": "C",
             "solution_sources": []
         },
@@ -117,7 +117,7 @@
                 "C": "70",
                 "D": "90"
             },
-            "hint": "Let the number of sheeps be x, try forming euqations according to the question and hence solve the quadratic. NOTE: Be aware of double answer.",
+            "hint": "Let the number of sheep be x, try forming equations according to the question and hence solve the quadratic. NOTE: Be aware of double answer.",
             "answer": "D",
             "solution_sources": []
         },
@@ -134,7 +134,7 @@
                 "C": "4 km/h",
                 "D": "5.5 km/h"
             },
-            "hint": "Let the ordinary speed be x, try forming euqations according to the question and hence solve the quadratic. NOTE: Be aware of double answer.",
+            "hint": "Let the ordinary speed be x, try forming equations according to the question and hence solve the quadratic. NOTE: Be aware of double answer.",
             "answer": "A",
             "solution_sources": []
         },
@@ -169,263 +169,8 @@
                 "C": "80",
                 "D": "100"
             },
-            "hint": "Let the number of arrows be x, try forming euqations according to the question and hence solve the quadratic. NOTE: Be aware of double answer.",
+            "hint": "Let the number of arrows be x, try forming equations according to the question and hence solve the quadratic. NOTE: Be aware of double answer.",
             "answer": "D",
-            "solution_sources": []
-        },
-        {
-            "topic_id": "quadratic-equation",
-            "question": "",
-            "difficulty": "",
-            "question_type": [
-                ""
-            ],
-            "options": {
-                "A": "",
-                "B": "",
-                "C": "",
-                "D": ""
-            },
-            "hint": "",
-            "answer": "",
-            "solution_sources": []
-        },
-        {
-            "topic_id": "quadratic-equation",
-            "question": "",
-            "difficulty": "",
-            "question_type": [
-                ""
-            ],
-            "options": {
-                "A": "",
-                "B": "",
-                "C": "",
-                "D": ""
-            },
-            "hint": "",
-            "answer": "",
-            "solution_sources": []
-        },
-        {
-            "topic_id": "quadratic-equation",
-            "question": "",
-            "difficulty": "",
-            "question_type": [
-                ""
-            ],
-            "options": {
-                "A": "",
-                "B": "",
-                "C": "",
-                "D": ""
-            },
-            "hint": "",
-            "answer": "",
-            "solution_sources": []
-        },
-        {
-            "topic_id": "quadratic-equation",
-            "question": "",
-            "difficulty": "",
-            "question_type": [
-                ""
-            ],
-            "options": {
-                "A": "",
-                "B": "",
-                "C": "",
-                "D": ""
-            },
-            "hint": "",
-            "answer": "",
-            "solution_sources": []
-        },
-        {
-            "topic_id": "quadratic-equation",
-            "question": "",
-            "difficulty": "",
-            "question_type": [
-                ""
-            ],
-            "options": {
-                "A": "",
-                "B": "",
-                "C": "",
-                "D": ""
-            },
-            "hint": "",
-            "answer": "",
-            "solution_sources": []
-        },
-        {
-            "topic_id": "quadratic-equation",
-            "question": "",
-            "difficulty": "",
-            "question_type": [
-                ""
-            ],
-            "options": {
-                "A": "",
-                "B": "",
-                "C": "",
-                "D": ""
-            },
-            "hint": "",
-            "answer": "",
-            "solution_sources": []
-        },
-        {
-            "topic_id": "quadratic-equation",
-            "question": "",
-            "difficulty": "",
-            "question_type": [
-                ""
-            ],
-            "options": {
-                "A": "",
-                "B": "",
-                "C": "",
-                "D": ""
-            },
-            "hint": "",
-            "answer": "",
-            "solution_sources": []
-        },
-        {
-            "topic_id": "quadratic-equation",
-            "question": "",
-            "difficulty": "",
-            "question_type": [
-                ""
-            ],
-            "options": {
-                "A": "",
-                "B": "",
-                "C": "",
-                "D": ""
-            },
-            "hint": "",
-            "answer": "",
-            "solution_sources": []
-        },
-        {
-            "topic_id": "quadratic-equation",
-            "question": "",
-            "difficulty": "",
-            "question_type": [
-                ""
-            ],
-            "options": {
-                "A": "",
-                "B": "",
-                "C": "",
-                "D": ""
-            },
-            "hint": "",
-            "answer": "",
-            "solution_sources": []
-        },
-        {
-            "topic_id": "quadratic-equation",
-            "question": "",
-            "difficulty": "",
-            "question_type": [
-                ""
-            ],
-            "options": {
-                "A": "",
-                "B": "",
-                "C": "",
-                "D": ""
-            },
-            "hint": "",
-            "answer": "",
-            "solution_sources": []
-        },
-        {
-            "topic_id": "quadratic-equation",
-            "question": "",
-            "difficulty": "",
-            "question_type": [
-                ""
-            ],
-            "options": {
-                "A": "",
-                "B": "",
-                "C": "",
-                "D": ""
-            },
-            "hint": "",
-            "answer": "",
-            "solution_sources": []
-        },
-        {
-            "topic_id": "quadratic-equation",
-            "question": "",
-            "difficulty": "",
-            "question_type": [
-                ""
-            ],
-            "options": {
-                "A": "",
-                "B": "",
-                "C": "",
-                "D": ""
-            },
-            "hint": "",
-            "answer": "",
-            "solution_sources": []
-        },
-        {
-            "topic_id": "quadratic-equation",
-            "question": "",
-            "difficulty": "",
-            "question_type": [
-                ""
-            ],
-            "options": {
-                "A": "",
-                "B": "",
-                "C": "",
-                "D": ""
-            },
-            "hint": "",
-            "answer": "",
-            "solution_sources": []
-        },
-        {
-            "topic_id": "quadratic-equation",
-            "question": "",
-            "difficulty": "",
-            "question_type": [
-                ""
-            ],
-            "options": {
-                "A": "",
-                "B": "",
-                "C": "",
-                "D": ""
-            },
-            "hint": "",
-            "answer": "",
-            "solution_sources": []
-        },
-        {
-            "topic_id": "quadratic-equation",
-            "question": "",
-            "difficulty": "",
-            "question_type": [
-                ""
-            ],
-            "options": {
-                "A": "",
-                "B": "",
-                "C": "",
-                "D": ""
-            },
-            "hint": "",
-            "answer": "",
             "solution_sources": []
         }
     ]
