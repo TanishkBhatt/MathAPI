@@ -6,6 +6,7 @@ from backend.routes import (
 from backend.routes.api import (
     get_topics,
     explination,
+    examples,
     questions
 )
 
@@ -18,4 +19,5 @@ app.include_router(auth.app)
 
 app.include_router(get_topics.app)
 app.include_router(explination.app)
+app.include_router(examples.app)
 app.include_router(questions.app)

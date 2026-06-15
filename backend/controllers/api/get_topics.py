@@ -3,11 +3,11 @@ from pymongo import MongoClient
 from typing import List, Dict, Any
 from backend.utils.database import get_documents
 
-def get_topics(db: MongoClient) -> Dict[str, Any]:
+def get_topics(database: MongoClient) -> Dict[str, Any]:
     # RETRIEVING ALL TOPICS
     try:
         topics: List[Dict[str, Any]] = get_documents(
-            db,
+            database,
             "datasets",
             "topics"
         )
@@ -23,18 +23,26 @@ def get_topics(db: MongoClient) -> Dict[str, Any]:
         
         try:
             explain_data = get_documents(
-                db,
+                database,
                 "datasets",
                 "explain",
                 {"topic_id": topic_id}
             )
 
+            examples_data = get_documents(
+                database,
+                "datasets",
+                "examples",
+                {"topic_id": topic_id}
+            )
+
             questions_data = get_documents(
-                db,
+                database,
                 "datasets",
                 "questions",
                 {"topic_id": topic_id}
             ) 
+
         except Exception as e:
             raise HTTPException(
                 status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -42,6 +50,7 @@ def get_topics(db: MongoClient) -> Dict[str, Any]:
             )
 
         topic["learning_sources_available"] = len(explain_data[0]["learning_sources"])
+        topic["examples_available"] = len(examples_data)
         topic["questions_available"] = len(questions_data)
     
     # RETURN OBJECT

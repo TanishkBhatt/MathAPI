@@ -13,7 +13,7 @@
                 "C": "2 & -16/3",
                 "D": "2 only"
             },
-            "hint": "Compare the equation with the standered form and hence use the quadratic formula.",
+            "hint": "The linear term can be splitted and hence factored.",
             "answer": "C",
             "solution_sources": []
         },
@@ -71,7 +71,7 @@
         {
             "topic_id": "quadratic-equation",
             "question": "Find the positive values of k for which the given equation will have two distinct real roots: x^2 + kx + 4 = 0",
-            "difficulty": "Intermediate",
+            "difficulty": "Beginner",
             "question_type": [
                 "Conceptual",
                 "Numerical"
@@ -152,7 +152,7 @@
                 "C": "2",
                 "D": "-2"
             },
-            "hint": "Try forming relation btw roots and coefficients and hence calculate the minima using the vertex.",
+            "hint": "Try forming relation between roots and coefficients and hence calculate the minima using the vertex.",
             "answer": "B",
             "solution_sources": []
         },
@@ -171,6 +171,261 @@
             },
             "hint": "Let the number of arrows be x, try forming euqations according to the question and hence solve the quadratic. NOTE: Be aware of double answer.",
             "answer": "D",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "",
+            "difficulty": "",
+            "question_type": [
+                ""
+            ],
+            "options": {
+                "A": "",
+                "B": "",
+                "C": "",
+                "D": ""
+            },
+            "hint": "",
+            "answer": "",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "",
+            "difficulty": "",
+            "question_type": [
+                ""
+            ],
+            "options": {
+                "A": "",
+                "B": "",
+                "C": "",
+                "D": ""
+            },
+            "hint": "",
+            "answer": "",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "",
+            "difficulty": "",
+            "question_type": [
+                ""
+            ],
+            "options": {
+                "A": "",
+                "B": "",
+                "C": "",
+                "D": ""
+            },
+            "hint": "",
+            "answer": "",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "",
+            "difficulty": "",
+            "question_type": [
+                ""
+            ],
+            "options": {
+                "A": "",
+                "B": "",
+                "C": "",
+                "D": ""
+            },
+            "hint": "",
+            "answer": "",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "",
+            "difficulty": "",
+            "question_type": [
+                ""
+            ],
+            "options": {
+                "A": "",
+                "B": "",
+                "C": "",
+                "D": ""
+            },
+            "hint": "",
+            "answer": "",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "",
+            "difficulty": "",
+            "question_type": [
+                ""
+            ],
+            "options": {
+                "A": "",
+                "B": "",
+                "C": "",
+                "D": ""
+            },
+            "hint": "",
+            "answer": "",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "",
+            "difficulty": "",
+            "question_type": [
+                ""
+            ],
+            "options": {
+                "A": "",
+                "B": "",
+                "C": "",
+                "D": ""
+            },
+            "hint": "",
+            "answer": "",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "",
+            "difficulty": "",
+            "question_type": [
+                ""
+            ],
+            "options": {
+                "A": "",
+                "B": "",
+                "C": "",
+                "D": ""
+            },
+            "hint": "",
+            "answer": "",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "",
+            "difficulty": "",
+            "question_type": [
+                ""
+            ],
+            "options": {
+                "A": "",
+                "B": "",
+                "C": "",
+                "D": ""
+            },
+            "hint": "",
+            "answer": "",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "",
+            "difficulty": "",
+            "question_type": [
+                ""
+            ],
+            "options": {
+                "A": "",
+                "B": "",
+                "C": "",
+                "D": ""
+            },
+            "hint": "",
+            "answer": "",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "",
+            "difficulty": "",
+            "question_type": [
+                ""
+            ],
+            "options": {
+                "A": "",
+                "B": "",
+                "C": "",
+                "D": ""
+            },
+            "hint": "",
+            "answer": "",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "",
+            "difficulty": "",
+            "question_type": [
+                ""
+            ],
+            "options": {
+                "A": "",
+                "B": "",
+                "C": "",
+                "D": ""
+            },
+            "hint": "",
+            "answer": "",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "",
+            "difficulty": "",
+            "question_type": [
+                ""
+            ],
+            "options": {
+                "A": "",
+                "B": "",
+                "C": "",
+                "D": ""
+            },
+            "hint": "",
+            "answer": "",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "",
+            "difficulty": "",
+            "question_type": [
+                ""
+            ],
+            "options": {
+                "A": "",
+                "B": "",
+                "C": "",
+                "D": ""
+            },
+            "hint": "",
+            "answer": "",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "",
+            "difficulty": "",
+            "question_type": [
+                ""
+            ],
+            "options": {
+                "A": "",
+                "B": "",
+                "C": "",
+                "D": ""
+            },
+            "hint": "",
+            "answer": "",
             "solution_sources": []
         }
     ]

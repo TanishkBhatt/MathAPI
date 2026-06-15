@@ -16,5 +16,5 @@ app = APIRouter(
     status_code=status.HTTP_200_OK
 )
 
-def explain(topic_id: str, db: MongoClient = Depends(get_db)) -> dict[str, Any]:
-    return explain_topic(db, topic_id)
+def explain(topic_id: str, include_examples: bool = True, include_questions: bool = True, db: MongoClient = Depends(get_db)) -> dict[str, Any]:
+    return explain_topic(db, topic_id, include_examples, include_questions)

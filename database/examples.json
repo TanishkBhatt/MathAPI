@@ -4,12 +4,9 @@
             "topic_id": "quadratic-equation",
             "question": "Solve x^2 - 5x + 6 = 0",
             "difficulty": "Beginner",
-            "options": {
-                "A": "2 & 3",
-                "B": "2 & -3",
-                "C": "1 & 2",
-                "D": "2 only"
-            },
+            "question_type": [
+                "Numerical"
+            ],
             "key_observation": "Middle term can be splitted and then factored.",
             "concept_used": [
                 "Spliting the middle term",
@@ -24,19 +21,16 @@
                 "Hence, 2 and 3 are the values which satisfies the given equation."
             ],
             "formulae_used": [],
-            "answer": "A",
+            "answer": "2 & 3",
             "interpretation": "2 and 3 are the values that satisfies the given equation : x^2 - 5x + 6 = 0"
         },
         {
             "topic_id": "quadratic-equation",
             "question": "If the altitude of a right angle triangle is 7 units less than its base, and the hypotenous is of 13 units, find the area of the triangle (in sq. units).",
-            "difficulty": "Intermediate",
-            "options": {
-                "A": "36",
-                "B": "40",
-                "C": "30",
-                "D": "25"
-            },
+            "difficulty": "Beginner",
+            "question_type": [
+                "Word Problem"
+            ],
             "key_observation": "Special property of right angle triangles can be used.",
             "concept_used": [
                 "Pythagorean Theorem",
@@ -62,8 +56,102 @@
                     "latex_code": "A = \\frac{1}{2} \\cdot b \\cdot h"
                 }
             ],
-            "answer": "C",
+            "answer": "A = 30 sq. units",
             "interpretation": "The base and altitude of triangle is 12 units and 5 units respectively, hence the area is 30 sq. units."
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "If the equation : x^2 - 2(k + 1)x + k^2 + 1 = 0 has real roots, show that one roots can never be zero,",
+            "difficulty": "Intermediate",
+            "question_type": [
+                "Conceptual",
+                "To Prove",
+                "High Order Thinking Skills"
+            ],
+            "key_observation": "The method of contradiction can be used.",
+            "concept_used": [
+                "Discriminant",
+                "Product of roots"
+            ],
+            "steps": [
+                "Using the concept of discriminant : b^2 - 4ac >= 0 for having a real solution.",
+                "Substituting values of a, b and c, simplifing further we get k >= 0",
+                "Now as the product of roots is c/a, here k^2 + 1, and k >= 0, then k^2 + 1 must be greater than 0.",
+                "Now, let us assume one root to be 0. Then the product of roots will became 0 and eventually k^2 + 1 becomes zero.",
+                "It contradicts the fact that k^2 + 1 > 0. Therefore, for any value of k, neither root can be zero."
+            ],
+            "formulae_used": [
+                {   
+                    "title": "Dicriminant",
+                    "plain_text": "b^2 - 4ac",
+                    "latex_code": "b^2 - 4ac"
+                },
+                {   
+                    "title": "Product of roots",
+                    "plain_text": "Product = c/a",
+                    "latex_code": "Product = c/a"
+                }
+            ],
+            "answer": "Proved.",
+            "interpretation": "For any value of k, neither of the root can be zero."
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "",
+            "difficulty": "",
+            "question_type": [
+                ""
+            ],
+            "key_observation": "",
+            "concept_used": [
+                ""
+            ],
+            "steps": [
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            ],
+            "formulae_used": [
+                {   
+                    "title": "",
+                    "plain_text": "",
+                    "latex_code": ""
+                }
+            ],
+            "answer": "",
+            "interpretation": ""
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "",
+            "difficulty": "",
+            "question_type": [
+                ""
+            ],
+            "key_observation": "",
+            "concept_used": [
+                ""
+            ],
+            "steps": [
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            ],
+            "formulae_used": [
+                {   
+                    "title": "",
+                    "plain_text": "",
+                    "latex_code": ""
+                }
+            ],
+            "answer": "",
+            "interpretation": ""
         }
     ]
 }

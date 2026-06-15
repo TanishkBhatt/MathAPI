@@ -15,23 +15,23 @@
             "explination": [
                 {
                     "title": "General Form", 
-                    "content": "The general form for a quadratic equation is : ax^2 + bx + c = 0, where x is the unknown quantity, a, b, c belongs to real number and a not equal to 0."
+                    "content": "The general form for a quadratic equation is : ax^2 + bx + c = 0, where x is the unknown quantity, a, b, c belongs to real numbers and a not equal to 0 (as it will became linear though)."
                 },
                 {
                     "title": "Degree and Solutions", 
-                    "content": "As the degree of a quadratic equation is 2, and it must have at most 2 solutions. (values of the unknown quantity that satisfies the equation)"
+                    "content": "As the degree (highest power of the unknown value) of a quadratic equation is 2, it must have at most 2 real solutions. (values of the unknown quantity that satisfies the equation)"
                 },
                 {
                     "title": "Graph of a quadratic", 
-                    "content": "If you plot a quadratic function y = ax^2 + bx + c in a 2D plane, you will find out that its graph is of parabolic shape with following components: x-intercepts (roots), y-intercept, vertex (minima/ maxima) and the line of symetry. If (the coefficient of x^2) a > 0, it's a upward opening parabola else if a < 0, it's downward opening parabola."
+                    "content": "If you plot a quadratic function y = ax^2 + bx + c in a 2D plane, you will find out that its graph is of parabolic shape with following components: x-intercepts (the roots), y-intercept, a vertex (minima/ maxima) and the line of symmetry. If (the coefficient of x^2) a > 0, it's a upward opening parabola else if a < 0, it's downward opening parabola."
                 },
                 {
                     "title": "Solutions", 
                     "content": "A solution refers to the values for x that satisfies the given equation, for solving such equations there are many ways like, Factorization, Completing the square, using the Quadratic formula, Po-Shen-Loh method, etc."
                 },
                 {
-                    "title": "Factorization", 
-                    "content": "The most fundamental way of solving a quadratic is by factoring the given expression into two factors that are equal to 0 and then individually equating them equal to 0 and solving the linear equation."
+                    "title": "Factorization - splitting the middle trem", 
+                    "content": "If a quadratic equation can be expressed in form of ax^2 + (a + b)x + b, it's middle term can be splitted into ax + bx and then first and last two terms can be grouped and factored to get a product of two linear terms, eventually after solving those linear equations we will get its roots."
                 },
                 {
                     "title": "Completing the square", 
@@ -43,7 +43,7 @@
                 },
                 {
                     "title": "Po-Shen-Lo method of solving", 
-                    "content": "It's the most unique way of solving a quadratic. First we calculate the sum and product of roots by given relation: Sum of roots = -b/a, Product of roots = c/a. And we know that the vertex of a parabola is the mid point of the roots, thus v = Sum of roots/ 2 or v = -b/2a. Then as the distance btw both the roots and the L.O.S. is constant let it 'u'. Now, the roots will be v + u and v - u. Finally using the Product relation, we will form the equation : v^2 - u^2 = P, calulating the value of u and substituting back to the roots equation and we are done."
+                    "content": "It's the most unique way of solving a quadratic. First we calculate the sum and product of roots by given relation: Sum of roots = -b/a, Product of roots = c/a. And we know that the vertex of a parabola is the mid point of the roots, thus v = Sum of roots/2 or v = -b/2a. Then as the distance between both the roots and the L.O.S. is constant let it 'u'. Now, the roots will be v + u and v - u. Finally using the Product relation, we will form the equation : v^2 - u^2 = P, calulating the value of u and substituting back to the roots equation and we are done."
                 },
                 {
                     "title": "Discriminant", 
@@ -70,6 +70,11 @@
                     "title": "Sum and product of roots",
                     "plain_text": "Sum = -b/a\nProduct = c/a",
                     "latex_code": "Sum = -b/a\\Product = c/a"
+                },
+                {
+                    "title": "Forming equation using sum and product of roots",
+                    "plain_text": "k[x^2 - Sx + P]",
+                    "latex_code": "k[x^2 - Sx + P]"
                 }
             ],
             "learning_sources": [
@@ -77,6 +82,11 @@
                     "title": "Basics of quadratic by Mr Jensen Maths",
                     "type": "Youtube",
                     "link": "https://youtu.be/SGUP6BkA870?si=KwvTBL3jdo5IF0xq"
+                },
+                {
+                    "title": "Factorization by The Organic Chemistry Tutor",
+                    "type": "Youtube",
+                    "link": "https://youtu.be/qeByhTF8WEw?si=vPB7SpbfDCHUUTsg"
                 },
                 {
                     "title": "Completing the square by BPRP Maths",

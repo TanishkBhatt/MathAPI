@@ -15,5 +15,5 @@ app = APIRouter(
 def home() -> dict[str, Any]:
     return {
         "success": True,
-        "message": "MathAPI - Web Services Connected Successfully"
+        "message": "MathAPI - API Services Connected Successfully"
     }
