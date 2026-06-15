@@ -1,1 +1,1 @@
-# MathAPI - Web Services
+# MathAPI - API Services
