@@ -19,6 +19,7 @@ class Question(BaseModel):
     difficulty: Difficulty
     question_type: List[QuestionType]
     options: Options
+    expected_time_limit: str
     hint: str|None
     answer: Answer
     solution_sources: List[SolutionSource]

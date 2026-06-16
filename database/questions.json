@@ -13,6 +13,7 @@
                 "C": "2 & -16/3",
                 "D": "2 only"
             },
+            "expected_time_limit": "2 min",
             "hint": "The linear term can be split and hence factored.",
             "answer": "C",
             "solution_sources": []
@@ -30,6 +31,7 @@
                 "C": "4 & -3",
                 "D": "5 & -2"
             },
+            "expected_time_limit": "4 min",
             "hint": "Cross multiply both sides, convert it to the standard form and hence use the quadratic formula.",
             "answer": "A",
             "solution_sources": []
@@ -47,6 +49,7 @@
                 "C": "27",
                 "D": "29"
             },
+            "expected_time_limit": "4 min",
             "hint": "Let the numbers be x and x + 2 and try forming equations according to the question. NOTE: Be aware of the question's demand.",
             "answer": "B",
             "solution_sources": []
@@ -64,6 +67,7 @@
                 "C": "16",
                 "D": "18"
             },
+            "expected_time_limit": "4 min",
             "hint": "Use the relation between the roots and the coefficients of a quadratic.",
             "answer": "A",
             "solution_sources": []
@@ -82,6 +86,7 @@
                 "C": "k > 16",
                 "D": "No positive value for k can make the equation have 2 distinct real roots."
             },
+            "expected_time_limit": "4 min",
             "hint": "Apply the conditions of discriminant for having two real distinct solutions.",
             "answer": "B",
             "solution_sources": []
@@ -100,6 +105,7 @@
                 "C": "-5/4",
                 "D": "The equation will have only one root."
             },
+            "expected_time_limit": "8 min",
             "hint": "Apply the basic meaning of an A.P. and hence try forming relations between roots and coefficients.",
             "answer": "C",
             "solution_sources": []
@@ -117,6 +123,7 @@
                 "C": "70",
                 "D": "90"
             },
+            "expected_time_limit": "10 min",
             "hint": "Let the number of sheep be x, try forming equations according to the question and hence solve the quadratic. NOTE: Be aware of double answer.",
             "answer": "D",
             "solution_sources": []
@@ -134,6 +141,7 @@
                 "C": "4 km/h",
                 "D": "5.5 km/h"
             },
+            "expected_time_limit": "10 min",
             "hint": "Let the ordinary speed be x, try forming equations according to the question and hence solve the quadratic. NOTE: Be aware of double answer.",
             "answer": "A",
             "solution_sources": []
@@ -152,6 +160,7 @@
                 "C": "2",
                 "D": "-2"
             },
+            "expected_time_limit": "7 min",
             "hint": "Try forming relation between roots and coefficients and hence calculate the minima using the vertex.",
             "answer": "B",
             "solution_sources": []
@@ -169,6 +178,7 @@
                 "C": "80",
                 "D": "100"
             },
+            "expected_time_limit": "10 min",
             "hint": "Let the number of arrows be x, try forming equations according to the question and hence solve the quadratic. NOTE: Be aware of double answer.",
             "answer": "D",
             "solution_sources": []
