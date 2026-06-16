@@ -17,5 +17,5 @@ app = APIRouter(
     status_code=status.HTTP_200_OK
 )
 
-def questions(topic_id: str, limit: int = Query(10, ge=1), difficulty: List[Difficulty] | None = None, db: MongoClient = Depends(get_db)) -> dict[str, Any]:
+def questions(topic_id: str, limit: int = Query(10, ge=1), difficulty: Difficulty|None = None, db: MongoClient = Depends(get_db)) -> dict[str, Any]:
     return get_questions(db, topic_id, limit, difficulty)

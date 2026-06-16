@@ -57,5 +57,6 @@ def get_topics(database: MongoClient) -> Dict[str, Any]:
     return {
         "success": True,
         "message": "Data Successfully Retrieved",
+        "total_topics": len(topics),
         "topics": topics
     }
