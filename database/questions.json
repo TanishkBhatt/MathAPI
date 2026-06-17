@@ -97,7 +97,7 @@
             "difficulty": "Intermediate",
             "question_type": [
                 "Conceptual",
-                "High Order Thinking Skills"
+                "Higher Order Thinking Skills"
             ],
             "options": {
                 "A": "-2",
@@ -123,7 +123,7 @@
                 "C": "70",
                 "D": "90"
             },
-            "expected_time_limit": "10 min",
+            "expected_time_limit": "8 min",
             "hint": "Let the number of sheep be x, try forming equations according to the question and hence solve the quadratic. NOTE: Be aware of double answer.",
             "answer": "D",
             "solution_sources": []
@@ -141,7 +141,7 @@
                 "C": "4 km/h",
                 "D": "5.5 km/h"
             },
-            "expected_time_limit": "10 min",
+            "expected_time_limit": "8 min",
             "hint": "Let the ordinary speed be x, try forming equations according to the question and hence solve the quadratic. NOTE: Be aware of double answer.",
             "answer": "A",
             "solution_sources": []
@@ -152,7 +152,7 @@
             "difficulty": "Intermediate",
             "question_type": [
                 "Numerical",
-                "High Order Thinking Skills"
+                "Higher Order Thinking Skills"
             ],
             "options": {
                 "A": "1",
@@ -160,7 +160,7 @@
                 "C": "2",
                 "D": "-2"
             },
-            "expected_time_limit": "7 min",
+            "expected_time_limit": "6 min",
             "hint": "Try forming relation between roots and coefficients and hence calculate the minima using the vertex.",
             "answer": "B",
             "solution_sources": []
@@ -178,9 +178,105 @@
                 "C": "80",
                 "D": "100"
             },
-            "expected_time_limit": "10 min",
+            "expected_time_limit": "8 min",
             "hint": "Let the number of arrows be x, try forming equations according to the question and hence solve the quadratic. NOTE: Be aware of double answer.",
             "answer": "D",
+            "solution_sources": []
+        },
+        {   
+            "topic_id": "quadratic-equation",
+            "question": "Find the least positive value of k for which the given equation will have integer roots : x^2 - kx + 36 = 0",
+            "difficulty": "Intermediate",
+            "question_type": [
+                "Conceptual",
+                "Numerical"
+            ],
+            "options": {
+                "A": "6",
+                "B": "12",
+                "C": "10",
+                "D": "D.N.E."
+            },
+            "expected_time_limit": "5 min",
+            "hint": "For integer roots, the discriminant must be a perfect square.",
+            "answer": "B",
+            "solution_sources": []
+        },
+        {   
+            "topic_id": "quadratic-equation",
+            "question": "If x^2 - px + q = 0 has roots alpha and beta, and x^2 -qx + p = 0 has roots alpha^2 and beta^2, find the number of possible ordered pairs (p, q).",
+            "difficulty": "Advanced",
+            "question_type": [
+                "Conceptual",
+                "Numerical",
+                "Higher Order Thinking Skills"
+            ],
+            "options": {
+                "A": "0",
+                "B": "1",
+                "C": "2",
+                "D": "3"
+            },
+            "expected_time_limit": "10 min",
+            "hint": "Extend the idea of Vieta's theorem and try forming some equations.",
+            "answer": "C",
+            "solution_sources": []
+        },
+        {   
+            "topic_id": "quadratic-equation",
+            "question": "A rectange has an area of 96 cm^2, if both its length and breath are increased by 4 cm, then the area becomes 160 cm^2. Find its dimensions.",
+            "difficulty": "Intermediate",
+            "question_type": [
+                "Word Problem"
+            ],
+            "options": {
+                "A": "16 cm, 6 cm",
+                "B": "12 cm, 8 cm",
+                "C": "24 cm, 4 cm",
+                "D": "D.N.E."
+            },
+            "expected_time_limit": "5 min",
+            "hint": "Let the dimensions be x and y, try forming equations and proceed further.",
+            "answer": "D",
+            "solution_sources": []
+        },
+        {   
+            "topic_id": "quadratic-equation",
+            "question": "For what values of k do both roots of x^2 - kx + 8 = 0 lies between 0 and 4?",
+            "difficulty": "Advanced",
+            "question_type": [
+                "Conceptual",
+                "Numerical",
+                "Higher Order Thinking Skills"
+            ],
+            "options": {
+                "A": "from 4 to 6",
+                "B": "from sqrt(2) to 6",
+                "C": "from 4 sqrt(2) to 6 sqrt(2)",
+                "D": "from 4 sqrt(2) to 6"
+            },
+            "expected_time_limit": "10 min",
+            "hint": "Extend the idea of Vieta's theorem and apply concept of vertex of a parabola in it.",
+            "answer": "D",
+            "solution_sources": []
+        },
+        {   
+            "topic_id": "quadratic-equation",
+            "question": "A ball is thrown upwards from ground level. Its height after t seconds is : h(t) = -5t^2 + 30t. Find the time when it will return to ground and the maximum height it reached.",
+            "difficulty": "Intermediate",
+            "question_type": [
+                "Case Based",
+                "Higher Order Thinking Skills"
+            ],
+            "options": {
+                "A": "10 seconds, 45 meter",
+                "B": "10 seconds, 90 meter",
+                "C": "6 seconds, 45 meter",
+                "D": "6 seconds, 90 meter"
+            },
+            "expected_time_limit": "5 min",
+            "hint": "To calculate the time it return just calculate h(0) and use the concept of vertex in second part.",
+            "answer": "C",
             "solution_sources": []
         }
     ]

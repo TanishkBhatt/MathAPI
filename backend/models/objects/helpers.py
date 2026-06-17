@@ -16,13 +16,11 @@ class Branch(Enum):
     relations_functions = "Relations and Functions"
     introductory_linear_algebra = "Introductory Linear Algebra"
     introductory_calculas = "Introductory Calculas"
-    none = ""   # FOR TESTING PURPOSE
 
 class Difficulty(Enum):
     beginner = "Beginner"
     intermediate = "Intermediate"
     advanced = "Advanced"
-    none = ""   # FOR TESTING PURPOSE
 
 class Options(BaseModel):
     A: str
@@ -35,7 +33,6 @@ class Answer(Enum):
     b = "B"
     c = "C"
     d = "D"
-    none = ""   # FOR TESTING PURPOSE
 
 class QuestionType(Enum):
     conceptual = "Conceptual"
@@ -43,8 +40,7 @@ class QuestionType(Enum):
     to_prove = "To Prove"
     word_problem = "Word Problem"
     case_based = "Case Based"
-    hots = "High Order Thinking Skills"
-    none = ""   # FOR TESTING PURPOSE
+    hots = "Higher Order Thinking Skills"
 
 class Example(BaseModel):
     question: str

@@ -42,6 +42,10 @@
                     "content": "Most common way to solve a quadratic is using the quadratic formula given by Indian mathematician Shridharacharya i.e. x = -b + sqrt(b^2 - 4ac) / 2a & -b - sqrt(b^2 - 4ac) / 2a, where a, b, c are the coefficients from the general form. That's basically a generalized extension to the completing the square method."
                 },
                 {
+                    "title": "Vieta's theorem",
+                    "content": "It states that the sum of roots of a quadratic equation is -(coefficient of x)/ coefficent of x^2 i.e. -b/a. And the product of roots is constant term / coefficient of x^2 i.e. c/a. It also extends for higher degree polynomials or equations, no matter if real roots exists or not."
+                },
+                {
                     "title": "Po-Shen-Lo method of solving",
                     "content": "It's the most unique way of solving a quadratic. First we calculate the sum and product of roots by given relation: Sum of roots = -b/a, Product of roots = c/a. And we know that the vertex of a parabola is the midpoint of the roots, thus v = Sum of roots/2 or v = -b/2a. Then as the distance between both the roots and the L.O.S. is constant let it be 'u'. Now, the roots will be v + u and v - u. Finally using the Product relation, we will form the equation : v^2 - u^2 = P, calculating the value of u and substituting back to the roots equation and we are done."
                 },
@@ -67,12 +71,12 @@
                     "latex_code": "\\Delta = b^2 - 4ac"
                 },
                 {
-                    "title": "Sum and product of roots",
+                    "title": "Vieta's theorem",
                     "plain_text": "Sum = -b/a\nProduct = c/a",
                     "latex_code": "Sum = -b/a\nProduct = c/a"
                 },
                 {
-                    "title": "Forming equation using sum and product of roots",
+                    "title": "Forming equation using Vieta's theorem",
                     "plain_text": "k[x^2 - Sx + P]",
                     "latex_code": "k[x^2 - Sx + P]"
                 }
