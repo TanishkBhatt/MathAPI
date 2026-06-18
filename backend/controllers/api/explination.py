@@ -5,7 +5,7 @@ from random import sample
 from backend.utils.database import get_documents
 
 def explain_topic(database: MongoClient, topic_id: str, include_examples: bool, include_questions: bool) -> Dict[str, Any]:
-    # RETRIVEING EXPLINATION WITH FILTER
+    # RETRIVEING EXPLINATION
     try:
         explinations: List[Dict[str, Any]] = get_documents(
             database,
@@ -19,14 +19,14 @@ def explain_topic(database: MongoClient, topic_id: str, include_examples: bool, 
             detail=f"Database connection error - {str(e)}"
         )
     
-    explination = explinations[0]
-    
     # VALIDATING IS TOPIC_ID VALID OR NOT
-    if not explination:
+    if not explinations:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Topic with id - {topic_id} not found."
         )
+    
+    explination = explinations[0]
     
     # ADDING EXAMPLES
     if include_examples:
@@ -37,7 +37,7 @@ def explain_topic(database: MongoClient, topic_id: str, include_examples: bool, 
                 "examples",
                 {"topic_id": topic_id}
             )
-            explination["examples"] = sample(examples, 2)
+            explination["examples"] = sample(examples, min(2, len(examples)))
         except Exception as e:
             raise HTTPException(
                 status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -55,7 +55,7 @@ def explain_topic(database: MongoClient, topic_id: str, include_examples: bool, 
                 "questions",
                 {"topic_id": topic_id}
             )
-            explination["try_yourself_questions"] = sample(questions, 3)
+            explination["try_yourself_questions"] = sample(questions, min(3, len(questions)))
         except Exception as e:
             raise HTTPException(
                 status_code=status.HTTP_503_SERVICE_UNAVAILABLE,

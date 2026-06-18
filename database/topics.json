@@ -15,6 +15,16 @@
                 "Polynomials",
                 "Cubic Equations",
                 "Conic Sections"
+            ],
+            "sub_topics": [
+                "What is a quadratic",
+                "Graph and solutions of a quadratic",
+                "Factorization method of solving",
+                "Completing the square method of solving",
+                "Po-Shen-Lo method of solving",
+                "Quadratic formula",
+                "Discriminant",
+                "Vieta's theorem"
             ]
         }
     ]

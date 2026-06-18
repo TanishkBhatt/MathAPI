@@ -20,7 +20,7 @@
         },
         {
             "topic_id": "quadratic-equation",
-            "question": "Solve for x; 3/(x - 2) - 2/(x + 1) = 5/4 where x doesn't belong to {2, -1}",
+            "question": "Solve for x: 3/(x - 2) - 2/(x + 1) = 5/4 where x does not belong to {2, -1}",
             "difficulty": "Beginner",
             "question_type": [
                 "Numerical"
@@ -50,7 +50,7 @@
                 "D": "29"
             },
             "expected_time_limit": "4 min",
-            "hint": "Let the numbers be x and x + 2 and try forming equations according to the question. NOTE: Be aware of the question's demand.",
+            "hint": "Let the numbers be x and x + 2 and try forming equations according to the question. NOTE: Read the question carefully.",
             "answer": "B",
             "solution_sources": []
         },
@@ -87,7 +87,7 @@
                 "D": "No positive value for k can make the equation have 2 distinct real roots."
             },
             "expected_time_limit": "4 min",
-            "hint": "Apply the conditions of discriminant for having two real distinct solutions.",
+            "hint": "Apply the conditions of the discriminant to have two distinct real solutions.",
             "answer": "B",
             "solution_sources": []
         },
@@ -195,7 +195,7 @@
                 "A": "6",
                 "B": "12",
                 "C": "10",
-                "D": "D.N.E."
+                "D": "Does Not Exist"
             },
             "expected_time_limit": "5 min",
             "hint": "For integer roots, the discriminant must be a perfect square.",
@@ -224,7 +224,7 @@
         },
         {   
             "topic_id": "quadratic-equation",
-            "question": "A rectange has an area of 96 cm^2, if both its length and breath are increased by 4 cm, then the area becomes 160 cm^2. Find its dimensions.",
+            "question": "A rectangle has an area of 96 cm^2. If both its length and breadth are increased by 4 cm, then the area becomes 160 cm^2. Find its dimensions.",
             "difficulty": "Intermediate",
             "question_type": [
                 "Word Problem"
@@ -233,7 +233,7 @@
                 "A": "16 cm, 6 cm",
                 "B": "12 cm, 8 cm",
                 "C": "24 cm, 4 cm",
-                "D": "D.N.E."
+                "D": "Does Not Exist"
             },
             "expected_time_limit": "5 min",
             "hint": "Let the dimensions be x and y, try forming equations and proceed further.",
@@ -242,7 +242,7 @@
         },
         {   
             "topic_id": "quadratic-equation",
-            "question": "For what values of k do both roots of x^2 - kx + 8 = 0 lies between 0 and 4?",
+            "question": "For what values of k do both roots of x^2 - kx + 8 = 0 lie between 0 and 4?",
             "difficulty": "Advanced",
             "question_type": [
                 "Conceptual",
@@ -262,7 +262,7 @@
         },
         {   
             "topic_id": "quadratic-equation",
-            "question": "A ball is thrown upwards from ground level. Its height after t seconds is : h(t) = -5t^2 + 30t. Find the time when it will return to ground and the maximum height it reached.",
+            "question": "A ball is thrown upwards from ground level. Its height after t seconds is: h(t) = -5t^2 + 30t. Find the time when it returns to the ground and the maximum height it reaches.",
             "difficulty": "Intermediate",
             "question_type": [
                 "Case Based",
@@ -275,7 +275,7 @@
                 "D": "6 seconds, 90 meter"
             },
             "expected_time_limit": "5 min",
-            "hint": "To calculate the time it return just calculate h(0) and use the concept of vertex in second part.",
+            "hint": "To find the time it returns to the ground, set h(t) = 0 and use the concept of the vertex for the second part.",
             "answer": "C",
             "solution_sources": []
         }

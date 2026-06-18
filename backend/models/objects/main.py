@@ -9,6 +9,7 @@ class Topic(BaseModel):
     difficulty: Difficulty
     prerequisites: List[str]
     related_topics: List[str]
+    sub_topics: List[str]
     examples_available: int
     questions_available: int
     learning_sources_available: int

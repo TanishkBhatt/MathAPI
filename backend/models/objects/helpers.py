@@ -9,13 +9,13 @@ class Branch(Enum):
     geometry = "Geometry"
     mensuration = "Mensuration"
     coordinate_geometry = "Coordinate Geometry"
-    trigonmetry = "Trigonmetry"
+    trigonometry = "Trigonometry"
     combinatorics = "Combinatorics"
     probability = "Probability"
     statistics = "Statistics"
     relations_functions = "Relations and Functions"
     introductory_linear_algebra = "Introductory Linear Algebra"
-    introductory_calculas = "Introductory Calculas"
+    introductory_calculus = "Introductory Calculus"
 
 class Difficulty(Enum):
     beginner = "Beginner"
@@ -49,6 +49,7 @@ class Example(BaseModel):
     key_observation: str
     concept_used: List[str]
     formulae_used: List[Dict[str, str]]
+    steps: List[str]
     answer: str
     interpretation: str
 

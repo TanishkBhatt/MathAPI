@@ -19,39 +19,39 @@
                 },
                 {
                     "title": "Degree and Solutions",
-                    "content": "As the degree (highest power of the unknown value) of a quadratic equation is 2, it must have at most 2 real solutions. (values of the unknown quantity that satisfy the equation)"
+                    "content": "As the degree (highest power of the unknown value) of a quadratic equation is 2, it must have at most 2 real solutions (values of the unknown quantity that satisfy the equation)."
                 },
                 {
                     "title": "Graph of a quadratic",
-                    "content": "If you plot a quadratic function y = ax^2 + bx + c in a 2D plane, you will find out that its graph is of parabolic shape with following components: x-intercepts (the roots), y-intercept, a vertex (minima/maxima) and the line of symmetry. If (the coefficient of x^2) a > 0, it's an upward opening parabola else if a < 0, it's a downward opening parabola."
+                    "content": "If you plot a quadratic function y = ax^2 + bx + c in a 2D plane, you will find that its graph is of parabolic shape with the following components: x-intercepts (the roots), y-intercept, a vertex (minima/maxima) and the line of symmetry. If (the coefficient of x^2) a > 0, it is an upward opening parabola; if a < 0, it is a downward opening parabola."
                 },
                 {
                     "title": "Solutions",
-                    "content": "A solution refers to the values for x that satisfy the given equation, for solving such equations there are many ways like, Factorization, Completing the square, using the Quadratic formula, Po-Shen-Loh method, etc."
+                    "content": "A solution refers to the values for x that satisfy the given equation. For solving such equations there are many ways, such as factorization, completing the square, using the quadratic formula, the Po-Shen-Lo method, etc."
                 },
                 {
                     "title": "Factorization - splitting the middle term",
-                    "content": "If a quadratic equation can be expressed in form of ax^2 + (a + b)x + b, its middle term can be split into ax + bx and then first and last two terms can be grouped and factored to get a product of two linear terms, eventually after solving those linear equations we will get its roots."
+                    "content": "If a quadratic equation can be expressed in the form of ax^2 + (a + b)x + b, its middle term can be split into ax + bx and then the first and last two terms can be grouped and factored to get a product of two linear terms. Eventually after solving those linear equations we will get its roots."
                 },
                 {
                     "title": "Completing the square",
-                    "content": "It's the most ancient way to solve a general quadratic equation of any pattern. The main concept includes visualizing the equation as a literal square and rectangular pieces and finding the missing portion to complete the square and find the solutions. For example, we have the equation x^2 + 14x = 32, so we attempt to make the L.H.S. a perfect square i.e. (x + 7)^2 = 81, then taking square root both sides and subtracting 7 we get x = 2, -16."
+                    "content": "It is the most ancient way to solve a general quadratic equation of any pattern. The main concept includes visualizing the equation as a literal square and rectangular pieces and finding the missing portion to complete the square and find the solutions. For example, we have the equation x^2 + 14x = 32, so we attempt to make the LHS a perfect square i.e. (x + 7)^2 = 81, then taking the square root of both sides and subtracting 7 we get x = 2, -16."
                 },
                 {
                     "title": "Quadratic Formula",
-                    "content": "Most common way to solve a quadratic is using the quadratic formula given by Indian mathematician Shridharacharya i.e. x = -b + sqrt(b^2 - 4ac) / 2a & -b - sqrt(b^2 - 4ac) / 2a, where a, b, c are the coefficients from the general form. That's basically a generalized extension to the completing the square method."
+                    "content": "The most common way to solve a quadratic is using the quadratic formula given by the Indian mathematician Sridharacharya i.e. x = -b + sqrt(b^2 - 4ac) / 2a & -b - sqrt(b^2 - 4ac) / 2a, where a, b, c are the coefficients from the general form. That is basically a generalized extension of the completing the square method."
                 },
                 {
                     "title": "Vieta's theorem",
-                    "content": "It states that the sum of roots of a quadratic equation is -(coefficient of x)/ coefficent of x^2 i.e. -b/a. And the product of roots is constant term / coefficient of x^2 i.e. c/a. It also extends for higher degree polynomials or equations, no matter if real roots exists or not."
-                },
-                {
-                    "title": "Po-Shen-Lo method of solving",
-                    "content": "It's the most unique way of solving a quadratic. First we calculate the sum and product of roots by given relation: Sum of roots = -b/a, Product of roots = c/a. And we know that the vertex of a parabola is the midpoint of the roots, thus v = Sum of roots/2 or v = -b/2a. Then as the distance between both the roots and the L.O.S. is constant let it be 'u'. Now, the roots will be v + u and v - u. Finally using the Product relation, we will form the equation : v^2 - u^2 = P, calculating the value of u and substituting back to the roots equation and we are done."
+                    "content": "It states that the sum of roots of a quadratic equation is -(coefficient of x) / coefficient of x^2 i.e. -b/a. And the product of roots is constant term / coefficient of x^2 i.e. c/a. It also extends to higher degree polynomials or equations, no matter if real roots exist or not."
                 },
                 {
                     "title": "Discriminant",
-                    "content": "It is possible that the given equation has no real solution at all. We can determine that using the discriminant of a quadratic equation. The discriminant (D) is defined as b^2 - 4ac. If D > 0, the equation has 2 real solutions, if D = 0, the equation has only one real solution and if D < 0, the equation has no real solutions. NOTE: If the discriminant is 0, the roots are just -b/2a."
+                    "content": "It is possible that the given equation has no real solution at all. We can determine that using the discriminant of a quadratic equation. The discriminant (D) is defined as b^2 - 4ac. If D > 0, the equation has 2 real solutions; if D = 0, the equation has only one real solution; and if D < 0, the equation has no real solutions. NOTE: If the discriminant is 0, the roots are just -b/2a."
+                },
+                {
+                    "title": "Po-Shen-Lo method of solving",
+                    "content": "It is a unique way of solving a quadratic. First we calculate the sum and product of roots by the given relation: sum of roots = -b/a, product of roots = c/a. And we know that the vertex of a parabola is the midpoint of the roots, thus v = sum of roots/2 or v = -b/2a. Then as the distance between both the roots and the line of symmetry is constant, let it be 'u'. Now, the roots will be v + u and v - u. Finally, using the product relation, we will form the equation: v^2 - u^2 = P, calculate the value of u and substitute it back to the roots equation and we are done."
                 }
             ],
             "formulae": [
