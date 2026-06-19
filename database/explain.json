@@ -71,6 +71,11 @@
                     "latex_code": "\\Delta = b^2 - 4ac"
                 },
                 {
+                    "title": "Vertex of a parabola",
+                    "plain_text": "V = (-b/2a, -D/4a)",
+                    "latex_code": "V = (\\frac{-b}{2a}, \\frac{-D}{4a})"
+                },
+                {
                     "title": "Vieta's theorem",
                     "plain_text": "Sum = -b/a\nProduct = c/a",
                     "latex_code": "Sum = -b/a\nProduct = c/a"
@@ -83,7 +88,7 @@
             ],
             "learning_sources": [
                 {
-                    "title": "Basics of quadratic by Mr Jensen Maths",
+                    "title": "Must known about quadratics by Mr Jensen Maths",
                     "type": "Youtube",
                     "link": "https://youtu.be/SGUP6BkA870?si=KwvTBL3jdo5IF0xq"
                 },

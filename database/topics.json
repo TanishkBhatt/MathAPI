@@ -8,23 +8,24 @@
             ],
             "difficulty": "Intermediate",
             "prerequisites": [
-                "Linear Equations",
-                "Factorization"
+                "Solving linear equations",
+                "Factorization techniques",
+                "Basics of polynomial functions"
             ],
             "related_topics": [
                 "Polynomials",
-                "Cubic Equations",
+                "Relations and Functions",
                 "Conic Sections"
             ],
             "sub_topics": [
-                "What is a quadratic",
-                "Graph and solutions of a quadratic",
-                "Factorization method of solving",
-                "Completing the square method of solving",
-                "Po-Shen-Lo method of solving",
-                "Quadratic formula",
+                "What is a Quadratic Equation",
+                "Graph and Solutions of a Quadratic",
+                "Factorization Method of Solving",
+                "Completing the Square Method of Solving",
+                "Po-Shen-Lo Method of Solving",
+                "Quadratic Formula",
                 "Discriminant",
-                "Vieta's theorem"
+                "Vieta's Theorem"
             ]
         }
     ]

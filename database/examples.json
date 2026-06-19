@@ -45,12 +45,12 @@
                 "Finally calculating the area : A = 1/2 * b * h => A = 30 sq. units."
             ],
             "formulae_used": [
-                {   
+                {
                     "title": "Pythagorean Theorem",
                     "plain_text": "b^2 + p^2 = h^2",
                     "latex_code": "b^2 + p^2 = h^2"
                 },
-                {   
+                {
                     "title": "Area of Triangle",
                     "plain_text": "A = 1/2 * b * h",
                     "latex_code": "A = \\frac{1}{2} \\cdot b \\cdot h"
@@ -81,12 +81,12 @@
                 "It contradicts the fact that k^2 + 1 > 0. Therefore, for any value of k, neither root can be zero."
             ],
             "formulae_used": [
-                {   
+                {
                     "title": "Discriminant",
                     "plain_text": "b^2 - 4ac",
                     "latex_code": "b^2 - 4ac"
                 },
-                {   
+                {
                     "title": "Product of roots",
                     "plain_text": "Product = c/a",
                     "latex_code": "Product = c/a"
@@ -117,7 +117,7 @@
                 "As speed cannot be negative, x cannot equal -5. Thus, the speed of the stream is 5 km/h"
             ],
             "formulae_used": [
-                {   
+                {
                     "title": "Speed formula",
                     "plain_text": "Speed = Distance / Time",
                     "latex_code": "Speed = \\frac{Distance}{Time}"

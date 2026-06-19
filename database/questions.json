@@ -20,6 +20,24 @@
         },
         {
             "topic_id": "quadratic-equation",
+            "question": "Find the minima of the quadratic function x^2 - 4x + 3.",
+            "difficulty": "Beginner",
+            "question_type": [
+                "Numerical"
+            ],
+            "options": {
+                "A": "(2, 1)",
+                "B": "(1, 2)",
+                "C": "(2, -1)",
+                "D": "(-1, 2)"
+            },
+            "expected_time_limit": "4 min",
+            "hint": "Use the following relation : Vertex of a parabola = (-b/2a, -D/4a)",
+            "answer": "C",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
             "question": "Solve for x: 3/(x - 2) - 2/(x + 1) = 5/4 where x does not belong to {2, -1}",
             "difficulty": "Beginner",
             "question_type": [
@@ -183,7 +201,7 @@
             "answer": "D",
             "solution_sources": []
         },
-        {   
+        {
             "topic_id": "quadratic-equation",
             "question": "Find the least positive value of k for which the given equation will have integer roots : x^2 - kx + 36 = 0",
             "difficulty": "Intermediate",
@@ -202,7 +220,7 @@
             "answer": "B",
             "solution_sources": []
         },
-        {   
+        {
             "topic_id": "quadratic-equation",
             "question": "If x^2 - px + q = 0 has roots alpha and beta, and x^2 -qx + p = 0 has roots alpha^2 and beta^2, find the number of possible ordered pairs (p, q).",
             "difficulty": "Advanced",
@@ -222,7 +240,7 @@
             "answer": "C",
             "solution_sources": []
         },
-        {   
+        {
             "topic_id": "quadratic-equation",
             "question": "A rectangle has an area of 96 cm^2. If both its length and breadth are increased by 4 cm, then the area becomes 160 cm^2. Find its dimensions.",
             "difficulty": "Intermediate",
@@ -240,7 +258,7 @@
             "answer": "D",
             "solution_sources": []
         },
-        {   
+        {
             "topic_id": "quadratic-equation",
             "question": "For what values of k do both roots of x^2 - kx + 8 = 0 lie between 0 and 4?",
             "difficulty": "Advanced",
@@ -260,7 +278,7 @@
             "answer": "D",
             "solution_sources": []
         },
-        {   
+        {
             "topic_id": "quadratic-equation",
             "question": "A ball is thrown upwards from ground level. Its height after t seconds is: h(t) = -5t^2 + 30t. Find the time when it returns to the ground and the maximum height it reaches.",
             "difficulty": "Intermediate",
@@ -277,6 +295,179 @@
             "expected_time_limit": "5 min",
             "hint": "To find the time it returns to the ground, set h(t) = 0 and use the concept of the vertex for the second part.",
             "answer": "C",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "If 2 and 6 are the roots of quadratic equation ax^2 + bx + c = 0, then the quadratic equation, whose roots are 1/(2a + b) and 1/(6a + b) is:",
+            "difficulty": "Intermediate",
+            "question_type": [
+                "Numerical",
+                "Higher Order Thinking Skills"
+            ],
+            "options": {
+                "A": "x^2 + 8x + 12 = 0",
+                "B": "2x^2 + 11x + 12 = 0",
+                "C": "4x^2 + 14x + 12 = 0",
+                "D": "x^2 + 10x + 12 = 0"
+            },
+            "expected_time_limit": "5 min",
+            "hint": "Try forming equations using Vieta's theorem of sum and product, hence approach to the answer.",
+            "answer": "A",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "A ladder leans against a wall. The foot of the ladder is 6 m from the wall, if the ladder slips down by 2 m, the foot moves 3 m further away from the wall. Find the length of the ladder (approx).",
+            "difficulty": "Intermediate",
+            "question_type": [
+                "Numerical",
+                "Word Problem",
+                "Higher Order Thinking Skills"
+            ],
+            "options": {
+                "A": "13.2 m",
+                "B": "13.4 m",
+                "C": "13.6 m",
+                "D": "13.8 m"
+            },
+            "expected_time_limit": "7 min",
+            "hint": "Observe the right angle triangle formed between the ladder and the wall, hence use the Pythagorean theorem to reach the answer.",
+            "answer": "C",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "For what values of k does x^2 + 2(k - 1)x + k^2 - 4 = 0 have roots of opposite signs?",
+            "difficulty": "Advanced",
+            "question_type": [
+                "Numerical",
+                "Higher Order Thinking Skills"
+            ],
+            "options": {
+                "A": "-3 < k < 2",
+                "B": "-2 < k < 2",
+                "C": "0 < k < 2",
+                "D": "1 < k < 2"
+            },
+            "expected_time_limit": "8 min",
+            "hint": "Extend the concept of discriminant and try forming equations and inequalities to reach the answer.",
+            "answer": "B",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "A shopkeeper sells x items per day. His daily profit (in $) is approximate P(x) = -x^2 + 40x - 300. What's the maximum possible profit he can gain?",
+            "difficulty": "Intermediate",
+            "question_type": [
+                "Word Problem",
+                "Conceptual"
+            ],
+            "options": {
+                "A": "$ 100",
+                "B": "$ 200",
+                "C": "$ 300",
+                "D": "$ 400"
+            },
+            "expected_time_limit": "5 min",
+            "hint": "Recall the graph of a quadratic and role of its vertex.",
+            "answer": "A",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "Find all values of k such that the roots of x^2 + kx + 5 = 0 differ by exactly 4.",
+            "difficulty": "Intermediate",
+            "question_type": [
+                "Numerical",
+                "Higher Order Thinking Skills"
+            ],
+            "options": {
+                "A": "6 and -6",
+                "B": "6 only",
+                "C": "-6 only",
+                "D": "Never"
+            },
+            "expected_time_limit": "5 min",
+            "hint": "Application of the identity - (a + b)^2 - (a - b)^2 = 4ab",
+            "answer": "A",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "If the roots of x^3 - 6x^2 + 11x - k = 0 are in an arithmetic progression. Find the value of k.",
+            "difficulty": "Intermediate",
+            "question_type": [
+                "Numerical",
+                "Conceptual",
+                "Higher Order Thinking Skills"
+            ],
+            "options": {
+                "A": "0",
+                "B": "2",
+                "C": "4",
+                "D": "6"
+            },
+            "expected_time_limit": "8 min",
+            "hint": "Use the fundamental of A.P. and try forming equations using Vieta's theorem.",
+            "answer": "D",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "The equations x^2 + 3x + k = 0 and x^2 + kx + 6 = 0 have a common root. Find all possible values of k.",
+            "difficulty": "Advanced",
+            "question_type": [
+                "Numerical",
+                "Conceptual",
+                "Higher Order Thinking Skills"
+            ],
+            "options": {
+                "A": "3, 4, 5",
+                "B": "3, -5, 6",
+                "C": "3, 5, -6",
+                "D": "Does Not Exist"
+            },
+            "expected_time_limit": "10 min",
+            "hint": "Use the method of Eliminations and Substitutions.",
+            "answer": "C",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "Two trains start simultaneously from two stations 210 km apart and move towards each other. One train travels 5 km/h faster than the other. They meet after 3 hours. Find their speeds (in km/h).",
+            "difficulty": "Intermediate",
+            "question_type": [
+                "Word Problem"
+            ],
+            "options": {
+                "A": "32.5, 37.5",
+                "B": "32, 37",
+                "C": "38.5, 43.5",
+                "D": "Does Not Exist"
+            },
+            "expected_time_limit": "7 min",
+            "hint": "Let the speed of train 1 be x, then the speed of train 2 will be x + 5, solve further.",
+            "answer": "A",
+            "solution_sources": []
+        },
+        {
+            "topic_id": "quadratic-equation",
+            "question": "During a sports meet, an athlete throws a javelin. The height of the javelin (in meters) at time t seconds is given by the quadratic function: h(t) = -5t^2 + 14t + 3. Calculate the time it takes for the javelin to reach its maximum height.",
+            "difficulty": "Intermediate",
+            "question_type": [
+                "Case Based",
+                "Conceptual"
+            ],
+            "options": {
+                "A": "1 second",
+                "B": "1.4 seconds",
+                "C": "1.8 seconds",
+                "D": "2 seconds"
+            },
+            "expected_time_limit": "5 min",
+            "hint": "The maximum height occurs at the vertex (maxima here), where t = -b/2a.",
+            "answer": "B",
             "solution_sources": []
         }
     ]
