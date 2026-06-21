@@ -37,7 +37,7 @@ def explain_topic(database: MongoClient, topic_id: str, include_examples: bool, 
                 "examples",
                 {"topic_id": topic_id}
             )
-            explination["examples"] = sample(examples, min(2, len(examples)))
+            explination["examples"] = examples[:2] if examples else []
         except Exception as e:
             raise HTTPException(
                 status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -55,7 +55,7 @@ def explain_topic(database: MongoClient, topic_id: str, include_examples: bool, 
                 "questions",
                 {"topic_id": topic_id}
             )
-            explination["try_yourself_questions"] = sample(questions, min(3, len(questions)))
+            explination["try_yourself_questions"] = sample(questions[:10], 3) if questions else []
         except Exception as e:
             raise HTTPException(
                 status_code=status.HTTP_503_SERVICE_UNAVAILABLE,

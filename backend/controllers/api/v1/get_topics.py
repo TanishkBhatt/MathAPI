@@ -49,7 +49,7 @@ def get_topics(database: MongoClient) -> Dict[str, Any]:
                 detail=f"Database connection error - {str(e)}"
             )
 
-        topic["learning_sources_available"] = len(explain_data[0]["learning_sources"]) if explain_data else 0
+        topic["learning_sources_available"] = len(explain_data[0].get("learning_sources", [])) if explain_data else 0
         topic["examples_available"] = len(examples_data)
         topic["questions_available"] = len(questions_data)
     

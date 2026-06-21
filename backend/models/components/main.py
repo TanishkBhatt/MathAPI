@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from typing import List
-from backend.models.objects.helpers import *
+from backend.models.components.helpers import *
 
 class Topic(BaseModel):
     topic_id: str

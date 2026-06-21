@@ -7,14 +7,15 @@ _client = MongoClient(settings.DB_CONNECTION_URL)
 def get_db() -> MongoClient:
     return _client
 
-def get_documents(db_conn: MongoClient, db_name: str, coll_name: str, filter: dict[str, str] = {}) -> List[Dict[str, Any]]:
+def get_documents(db_conn: MongoClient, db_name: str, coll_name: str, filter_query: dict[str, str] | None = None) -> List[Dict[str, Any]]:
     client = db_conn
     db = client[db_name]
     coll = db[coll_name]
 
-    data: List[Dict[str, Any]] = list(coll.find(filter))
+    query = filter_query or {}
+    data: List[Dict[str, Any]] = list(coll.find(query))
 
     for doc in data:
-        del doc["_id"]
+        doc.pop("_id", None)
 
     return data

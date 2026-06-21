@@ -1,42 +1,42 @@
 # MathAPI All Topics
 
-- NUMBER SYSTEM
-- DIVISIBILITY AND FACTORS
-- MODULAR ARITHMETIC
-- LINEAR EQUATIONS
-- SYSTEM OF LINEAR EQUATIONS
-- QUADRATIC EQUATIONS
-- POLYNOMIALS
-- ALGEBRIC IDENTITIES
-- INEQUALITIES
-- SEQUENCES AND SERIES
-- PROGRESSIONS
-- RELATIONS AND FUNCTIONS
-- COMPAIRING QUANTITIES
-- EXPONENTS AND LOGARITHMS
-- SET THEORY
-- LINES AND ANGLES
-- TRIANGLES
-- QUADRILATERALS
-- CIRCLES
-- COORDINATE GEOMETRY IN PLANE
-- COORDINATE GEOMETRY IN SPACE
-- CONIC SECTIONS
-- MENSURATION
-- SURFACE AREA AND VOLUMES
-- TRIGNOMETRIC RATIOS
-- TRIGNOMETRIC IDENTITIES
-- HEIGHTS AND DISTANCES
-- INVERSE TRIGNOMETRY
-- STATISTICS
-- PROBABILITY
-- PNERMUTATIONS AND COMBINATIONS
-- BINOMIAL THEOREM
-- LIMITS
-- DIFFRENTIATION
-- INTEGRATION
-- DIFFRENTIAL EQUATIONS
-- COMPLEX NUMBERS
-- VECTORS
-- METRICES AND DETERMINENTS
-- MATHEMATICAL REASONNING
+- Number System
+- Divisibility and Factors
+- Modular Arithmetic
+- Linear Equations
+- System of Linear Equations
+- Quadratic Equations
+- Polynomials
+- Algebraic Identities
+- Inequalities
+- Sequences and Series
+- Progressions
+- Relations and Functions
+- Comparing Quantities
+- Exponents and Logarithms
+- Set Theory
+- Lines and Angles
+- Triangles
+- Quadrilaterals
+- Circles
+- Coordinate Geometry in Plane
+- Coordinate Geometry in Space
+- Conic Sections
+- Mensuration
+- Surface Areas and Volumes
+- Trigonometric Ratios
+- Trigonometric Identities
+- Heights and Distances
+- Inverse Trigonometry
+- Statistics
+- Probability
+- Permutations and Combinations
+- Binomial Theorem
+- Limits
+- Differentiation
+- Integration
+- Differential Equations
+- Complex Numbers
+- Vectors
+- Matrices and Determinants
+- Mathematical Reasoning
