@@ -1,4 +1,4 @@
-from fastapi import HTTPException, status, Request
+from fastapi import HTTPException, status
 from pymongo import MongoClient
 from typing import Any, List, Dict
 from random import sample
@@ -6,11 +6,9 @@ from backend.models.components.helpers import Difficulty, QuestionType
 from backend.utils.database import get_documents
 from backend.utils.config import settings
 
-def get_questions(request: Request, database: MongoClient, topic_id: str, limit: int, difficulty: Difficulty|None, question_type: QuestionType|None) -> Dict[str, Any]:
-    # VERIFIYING HEADERS
+def get_questions(auth_token: str|None, database: MongoClient, topic_id: str, limit: int, difficulty: Difficulty|None, question_type: QuestionType|None) -> Dict[str, Any]:
+    # VERIFIYING AUTH TOKEN
     authenticate = False
-    auth_token: str = request.headers.get("auth_token", "")
-
     if auth_token == settings.AUTH_TOKEN:
         authenticate = True
 

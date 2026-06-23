@@ -1,18 +1,15 @@
-from fastapi import HTTPException, status, Request
+from fastapi import HTTPException, status
 from pymongo import MongoClient
 from typing import Any, List, Dict
 from random import sample
 from backend.utils.database import get_documents
 from backend.utils.config import settings
 
-def get_examples(request: Request, database: MongoClient, topic_id: str, limit: int) -> Dict[str, Any]:
-    # VERIFIYING HEADERS
-    auth_token: str = request.headers.get("auth_token", "")
-
+def get_examples(auth_token: str|None, database: MongoClient, topic_id: str, limit: int) -> Dict[str, Any]:
+    # VERIFIYING AUTH TOKEN
+    authenticate = False
     if auth_token == settings.AUTH_TOKEN:
         authenticate = True
-    else:
-        authenticate = False
 
     # RETRIEVING DATA
     try:
