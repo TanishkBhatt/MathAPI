@@ -3,13 +3,6 @@ from typing import Any
 from enum import Enum
 from backend.models.components.main import Example, Question
 
-class ContributionType(Enum):
-    example = "Example"
-    question = "Question"
-
-class ExampleContributionSchema(Example):
-    pass
-
 class QuestionContributionSchema(Question):
     pass
 

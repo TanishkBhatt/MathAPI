@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status, Depends, Query, Body
 from typing import Any
 from pymongo import MongoClient
-from backend.models.contribute import ContributionType, ContributionResponse, ExampleContributionSchema, QuestionContributionSchema
+from backend.models.contribute import ContributionResponse, QuestionContributionSchema
 from backend.utils.database import get_db
 from backend.controllers.contribute import contribution
 
@@ -11,7 +11,7 @@ app = APIRouter(
 )
 
 @app.post(
-    "/contribute",
+    "/contribute-question",
     response_model=ContributionResponse,
     status_code=status.HTTP_201_CREATED,
     summary="Contribute New Content (Admin Only)",
@@ -19,18 +19,15 @@ app = APIRouter(
     response_description="Confirmation message indicating the type of contribution that was successfully added."
 )
 def contribute(
-    contribution_type: ContributionType = Query(
-        ...,
-        description="Type of content being contributed. Valid values: `Example` or `Question`."
-    ),
+    
     admin_token: str = Query(
         ...,
         description="Admin authorization token. Must match the server-configured `ADMIN_TOKEN` environment variable."
     ),
-    data: ExampleContributionSchema | QuestionContributionSchema = Body(
+    data: QuestionContributionSchema = Body(
         ...,
-        description="The content data to be contributed. Must conform to either the Example or Question schema depending on the selected `contribution_type`."
+        description="The content data to be contributed."
     ),
     db: MongoClient = Depends(get_db)
 ) -> dict[str, Any]:
-    return contribution(db, admin_token, contribution_type, data)
+    return contribution(db, admin_token, data)

@@ -1,11 +1,11 @@
 from fastapi import HTTPException, status
 from pymongo import MongoClient
 from typing import Any, Dict, List
-from backend.models.contribute import ContributionType, ExampleContributionSchema, QuestionContributionSchema
+from backend.models.contribute import QuestionContributionSchema
 from backend.utils.config import settings
 from backend.utils.database import import_data
 
-def contribution(database: MongoClient, admin_token: str, contribution_type: ContributionType, request_data: ExampleContributionSchema | QuestionContributionSchema) -> Dict[str, Any]:
+def contribution(database: MongoClient, admin_token: str, request_data: QuestionContributionSchema) -> Dict[str, Any]:
     # VALIDATING ADMIN_TOKEN
     if admin_token != settings.ADMIN_TOKEN:
         raise HTTPException(
@@ -21,13 +21,12 @@ def contribution(database: MongoClient, admin_token: str, contribution_type: Con
         for i in range(len(data["question_type"])):
             data["question_type"][i] = data["question_type"][i].value
 
-        if contribution_type.value == "Question":
-            data["answer"] = data["answer"].value
+        data["answer"] = data["answer"].value
 
         import_data(
             database,
             "datasets",
-            contribution_type.value.lower(),
+            "questions",
             data
         )
     except ConnectionError as e:
@@ -39,5 +38,5 @@ def contribution(database: MongoClient, admin_token: str, contribution_type: Con
     # RETURN OBJECT
     return {
         "success": True,
-        "message": f"{contribution_type.value} Contribution Successful"
+        "message": "Question Contribution Successful"
     }
