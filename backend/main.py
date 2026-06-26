@@ -1,11 +1,12 @@
 from fastapi import FastAPI
 from backend.routes import (
     home,
-    auth
+    auth,
+    contribute
 )
 from backend.routes.api.v1 import (
     get_topics,
-    explination,
+    explanation,
     examples,
     questions
 )
@@ -23,6 +24,10 @@ tags_metadata = [
     {
         "name": "Get API",
         "description": "Core data retrieval endpoints for mathematics topics, explanations, examples, and practice questions. Authenticated access unlocks higher rate limits and additional filtering capabilities."
+    },
+    {
+        "name": "Contribute",
+        "description": "Admin-only endpoints for contributing new content (examples and questions) to the database. Requires a valid `admin_token` for authorization."
     }
 ]
 
@@ -42,8 +47,9 @@ app = FastAPI(
 # INCLUDING ROUTERS
 app.include_router(home.app)
 app.include_router(auth.app)
+app.include_router(contribute.app)
 
 app.include_router(get_topics.app)
-app.include_router(explination.app)
+app.include_router(explanation.app)
 app.include_router(examples.app)
 app.include_router(questions.app)

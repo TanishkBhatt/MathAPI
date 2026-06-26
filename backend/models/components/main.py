@@ -1,6 +1,18 @@
 from pydantic import BaseModel
 from typing import List
-from backend.models.components.helpers import *
+from backend.models.components.helpers import (
+    Branch,
+    Difficulty,
+    Options,
+    Answer,
+    QuestionType,
+    Example,
+    Explanation,
+    Formula,
+    LearningSource,
+    SolutionSource,
+    SourceImage
+)
 
 class Topic(BaseModel):
     topic_id: str
@@ -21,7 +33,7 @@ class Question(BaseModel):
     question_type: List[QuestionType]
     options: Options
     expected_time_limit: str
-    hint: str|None
+    hint: str | None
     answer: Answer
     solution_sources: List[SolutionSource]
 
@@ -30,7 +42,7 @@ class Explain(BaseModel):
     definition: str
     origin: str
     applications: List[str]
-    explination: List[Explination]
+    explanation: List[Explanation]
     formulae: List[Formula]
     examples: List[Example]
     try_yourself_questions: List[Question]

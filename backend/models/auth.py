@@ -4,9 +4,13 @@ from typing import Any
 class AuthRequest(BaseModel):
     username: str
     email: EmailStr
-    password: str = Field(..., min_length=6, max_length=10)
+
+class APIKeyData(BaseModel):
+    username: str
+    api_key: str
+    expiry: int|None
 
 class AuthResponse(BaseModel):
     success: bool
     message: str
-    auth_token: dict[str, Any]
+    api_key_data: APIKeyData

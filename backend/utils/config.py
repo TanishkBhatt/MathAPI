@@ -4,7 +4,7 @@ from functools import lru_cache
 # BASE SETTINGS
 class Settings(BaseSettings):
     DB_CONNECTION_URL: str
-    AUTH_TOKEN: str
+    ADMIN_TOKEN: str
 
     model_config = SettingsConfigDict(
         env_file="backend/.env",

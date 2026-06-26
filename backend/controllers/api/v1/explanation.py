@@ -5,9 +5,8 @@ from random import sample
 from backend.utils.database import get_documents
 
 def explain_topic(database: MongoClient, topic_id: str, include_examples: bool, include_questions: bool) -> Dict[str, Any]:
-    # RETRIVEING EXPLINATION
     try:
-        explinations: List[Dict[str, Any]] = get_documents(
+        explanations: List[Dict[str, Any]] = get_documents(
             database,
             "datasets",
             "explain",
@@ -18,17 +17,15 @@ def explain_topic(database: MongoClient, topic_id: str, include_examples: bool, 
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail=f"Database connection error - {str(e)}"
         )
-    
-    # VALIDATING IS TOPIC_ID VALID OR NOT
-    if not explinations:
+
+    if not explanations:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Topic with id - {topic_id} not found."
         )
-    
-    explination = explinations[0]
-    
-    # ADDING EXAMPLES
+
+    explanation = explanations[0]
+
     if include_examples:
         try:
             examples: List[Dict[str, Any]] = get_documents(
@@ -37,16 +34,15 @@ def explain_topic(database: MongoClient, topic_id: str, include_examples: bool, 
                 "examples",
                 {"topic_id": topic_id}
             )
-            explination["examples"] = examples[:2] if examples else []
+            explanation["examples"] = examples[:2] if examples else []
         except Exception as e:
             raise HTTPException(
                 status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
                 detail=f"Database connection error - {str(e)}"
             )
     else:
-        explination["examples"] = []
-    
-    # ADDING TRY_YOURSELF_QUESTIONS
+        explanation["examples"] = []
+
     if include_questions:
         try:
             questions: List[Dict[str, Any]] = get_documents(
@@ -55,18 +51,17 @@ def explain_topic(database: MongoClient, topic_id: str, include_examples: bool, 
                 "questions",
                 {"topic_id": topic_id}
             )
-            explination["try_yourself_questions"] = sample(questions[:10], 3) if questions else []
+            explanation["try_yourself_questions"] = sample(questions[:10], 3) if questions else []
         except Exception as e:
             raise HTTPException(
                 status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
                 detail=f"Database connection error - {str(e)}"
             )
     else:
-        explination["try_yourself_questions"] = []
+        explanation["try_yourself_questions"] = []
 
-    # RETURN OBJECT
     return {
         "success": True,
         "message": "Data Successfully Retrieved",
-        "explination": explination
+        "explanation": explanation
     }

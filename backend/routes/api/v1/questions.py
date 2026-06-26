@@ -16,11 +16,11 @@ app = APIRouter(
     response_model=GetQuestionsResponse,
     status_code=status.HTTP_200_OK,
     summary="Get Practice Questions",
-    description="Retrieves multiple-choice practice questions for a specific mathematics topic. Supports optional filtering by difficulty level and question type. Authenticated requests (with a valid `auth_token` param) can set a custom limit and apply filters; unauthenticated requests are limited to a maximum of 10 questions with no filtering capability.",
+    description="Retrieves multiple-choice practice questions for a specific mathematics topic. Supports optional filtering by difficulty level and question type. Authenticated requests (with a valid `api_key` param) can set a custom limit and apply filters; unauthenticated requests are limited to a maximum of 10 questions with no filtering capability.",
     response_description="List of multiple-choice questions with options, difficulty metadata, expected time limits, hints, and solution sources."
 )
 def questions(
-    auth_token: str|None = None,
+    api_key: str|None = None,
     topic_id: str = Query(
         ...,
         description="Unique identifier of the mathematics topic to retrieve questions for. Must match a valid `topic_id` from the `/get-topics` endpoint.",
@@ -41,4 +41,4 @@ def questions(
     ),
     db: MongoClient = Depends(get_db)
 ) -> dict[str, Any]:
-    return get_questions(auth_token, db, topic_id, limit, difficulty, question_type)
+    return get_questions(api_key, db, topic_id, limit, difficulty, question_type)

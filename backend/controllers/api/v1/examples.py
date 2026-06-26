@@ -3,13 +3,19 @@ from pymongo import MongoClient
 from typing import Any, List, Dict
 from random import sample
 from backend.utils.database import get_documents
-from backend.utils.config import settings
+from backend.utils.helpers import verify_api_key
 
-def get_examples(auth_token: str|None, database: MongoClient, topic_id: str, limit: int) -> Dict[str, Any]:
+def get_examples(api_key: str|None, database: MongoClient, topic_id: str, limit: int) -> Dict[str, Any]:
     # VERIFIYING AUTH TOKEN
-    authenticate = False
-    if auth_token == settings.AUTH_TOKEN:
-        authenticate = True
+    authenticate: bool = False
+    if api_key:
+        try:
+            authenticate = verify_api_key(
+                database,
+                api_key
+            )
+        except Exception:
+            pass
 
     # RETRIEVING DATA
     try:

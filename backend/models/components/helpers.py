@@ -43,6 +43,7 @@ class QuestionType(Enum):
     hots = "Higher Order Thinking Skills"
 
 class Example(BaseModel):
+    topic_id: str
     question: str
     difficulty: Difficulty
     question_type: List[QuestionType]
@@ -53,7 +54,7 @@ class Example(BaseModel):
     answer: str
     interpretation: str
 
-class Explination(BaseModel):
+class Explanation(BaseModel):
     title: str
     content: str
 
