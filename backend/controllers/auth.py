@@ -30,7 +30,7 @@ def authenticate_user(database: MongoClient, auth_data: AuthRequest) -> Dict[str
         if value in all_users_value:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"Invalid '{field}' Input, It Already Exists."
+                detail=f"Invalid '{field}' Input, It Already Exists"
             )
     
     # GENERATING API_KEY

@@ -25,17 +25,17 @@ def get_examples(api_key: str|None, database: MongoClient, topic_id: str, limit:
             "examples",
             {"topic_id": topic_id}
         )
-    except Exception as e:
+    except ConnectionError as e:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail=f"Database connection error - {str(e)}"
+            detail=f"{str(e)}"
         )
     
     # VALIDATING IS TOPIC_ID VALID OR NOT
     if not examples:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Topic with id - {topic_id} not found."
+            detail=f"Topic With ID - '{topic_id}' Not Found"
         )
     
     # APPLYING LIMITS

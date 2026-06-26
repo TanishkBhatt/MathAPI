@@ -31,7 +31,7 @@ tags_metadata = [
     }
 ]
 
-description = "A RESTful API service designed for students and developers pursuing mathematics and related fields. Provides structured access to topic explanations, step-by-step worked examples, and practice questions of topics across various branches."
+description = "A RESTful API service designed for students and developers pursuing mathematics and related fields. Provides structured access to topic explanations, step-by-step worked examples, and practice questions of topics across various branches of elementary mathematics."
 
 # INITIALIZING THE APP
 app = FastAPI(

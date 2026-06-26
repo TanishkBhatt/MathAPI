@@ -11,10 +11,10 @@ def get_topics(database: MongoClient) -> Dict[str, Any]:
             "datasets",
             "topics"
         )
-    except Exception as e:
+    except ConnectionError as e:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail=f"Database connection error - {str(e)}"
+            detail=f"{str(e)}"
         )
     
     # RETRIEVING ALL TOPICS METADATA - QUESTIONS AVAILABLE AND LEARNING SOURCES AVAILABLE
@@ -43,10 +43,10 @@ def get_topics(database: MongoClient) -> Dict[str, Any]:
                 {"topic_id": topic_id}
             ) 
 
-        except Exception as e:
+        except ConnectionError as e:
             raise HTTPException(
                 status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-                detail=f"Database connection error - {str(e)}"
+                detail=f"{str(e)}"
             )
 
         topic["learning_sources_available"] = len(explain_data[0].get("learning_sources", [])) if explain_data else 0

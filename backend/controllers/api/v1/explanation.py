@@ -5,6 +5,7 @@ from random import sample
 from backend.utils.database import get_documents
 
 def explain_topic(database: MongoClient, topic_id: str, include_examples: bool, include_questions: bool) -> Dict[str, Any]:
+    # RETRIVEING DATA
     try:
         explanations: List[Dict[str, Any]] = get_documents(
             database,
@@ -12,20 +13,22 @@ def explain_topic(database: MongoClient, topic_id: str, include_examples: bool, 
             "explain",
             {"topic_id": topic_id}
         )
-    except Exception as e:
+    except ConnectionError as e:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail=f"Database connection error - {str(e)}"
+            detail=f"{str(e)}"
         )
 
+    # VALIDATING IS THE TOPIC_ID VALID
     if not explanations:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Topic with id - {topic_id} not found."
+            detail=f"Topic With ID - '{topic_id}' Not Found"
         )
 
     explanation = explanations[0]
 
+    # EXAMPLES AND QUESTIONS INCLUSION
     if include_examples:
         try:
             examples: List[Dict[str, Any]] = get_documents(
@@ -35,10 +38,10 @@ def explain_topic(database: MongoClient, topic_id: str, include_examples: bool, 
                 {"topic_id": topic_id}
             )
             explanation["examples"] = examples[:2] if examples else []
-        except Exception as e:
+        except ConnectionError as e:
             raise HTTPException(
                 status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-                detail=f"Database connection error - {str(e)}"
+                detail=f"{str(e)}"
             )
     else:
         explanation["examples"] = []
@@ -52,14 +55,15 @@ def explain_topic(database: MongoClient, topic_id: str, include_examples: bool, 
                 {"topic_id": topic_id}
             )
             explanation["try_yourself_questions"] = sample(questions[:10], 3) if questions else []
-        except Exception as e:
+        except ConnectionError as e:
             raise HTTPException(
                 status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-                detail=f"Database connection error - {str(e)}"
+                detail=f"{str(e)}"
             )
     else:
         explanation["try_yourself_questions"] = []
 
+    # RETURN OBJECT
     return {
         "success": True,
         "message": "Data Successfully Retrieved",
