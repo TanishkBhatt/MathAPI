@@ -3,8 +3,26 @@ from pymongo import MongoClient
 from typing import List, Dict, Any
 from random import sample
 from backend.utils.database import get_documents
+from backend.utils.helpers import verify_api_key
 
-def explain_topic(database: MongoClient, topic_id: str, include_examples: bool, include_questions: bool) -> Dict[str, Any]:
+def explain_topic(database: MongoClient, api_key: str|None, topic_id: str, include_examples: bool, include_questions: bool) -> Dict[str, Any]:
+    # VERIFIYING API KEY
+    authenticate: bool = False
+    if api_key:
+        try:
+            authenticate = verify_api_key(
+                database,
+                api_key
+            )
+        except Exception:
+            pass
+    
+    if not authenticate:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Unauthorized Access"
+        )
+    
     # RETRIVEING DATA
     try:
         explanations: List[Dict[str, Any]] = get_documents(

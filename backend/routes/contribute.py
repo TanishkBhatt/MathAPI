@@ -15,7 +15,7 @@ app = APIRouter(
     response_model=ContributionResponse,
     status_code=status.HTTP_201_CREATED,
     summary="Contribute New Content (Admin Only)",
-    description="Allows an admin to contribute new examples or practice questions to the database. Requires a valid `admin_token` (configured in the server environment) for authorization. The `contribution_type` parameter determines whether an Example or Question is being submitted, and the request body must match the corresponding schema.",
+    description="Allows an admin to contribute new examples or practice questions to the database. Requires a valid `admin_token` (configured in the server environment) for authorization.",
     response_description="Confirmation message indicating the type of contribution that was successfully added."
 )
 def contribute(

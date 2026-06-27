@@ -41,4 +41,4 @@ def questions(
     ),
     db: MongoClient = Depends(get_db)
 ) -> dict[str, Any]:
-    return get_questions(api_key, db, topic_id, limit, difficulty, question_type)
+    return get_questions(db, api_key, topic_id, limit, difficulty, question_type)

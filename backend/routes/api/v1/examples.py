@@ -15,7 +15,7 @@ app = APIRouter(
     response_model=GetExamplesResponse,
     status_code=status.HTTP_200_OK,
     summary="Get Worked Examples",
-    description="Fetches step-by-step worked examples for a specific mathematics topic. Each example includes the question, key observation, concepts and formulae used, detailed solution steps, final answer, and interpretation. Authenticated requests (with a valid `api_key` param) can request up to any number of examples; unauthenticated requests are limited to a maximum of 2 examples.",
+    description="Fetches step-by-step worked examples for a specific mathematics topic. Each example includes the question, key observation, concepts and formulae used, detailed solution steps, final answer, and interpretation.",
     response_description="List of worked examples with full step-by-step solutions and explanations."
 )
 def examples(
@@ -28,8 +28,8 @@ def examples(
     limit: int = Query(
         2,
         ge=1,
-        description="Maximum number of examples to return. Authenticated users can set this to any positive integer; unauthenticated requests are capped at 2 regardless of this value."
+        description="Maximum number of examples to return."
     ),
     db: MongoClient = Depends(get_db)
 ) -> dict[str, Any]:
-    return get_examples(api_key, db, topic_id, limit)
+    return get_examples(db, api_key, topic_id, limit)

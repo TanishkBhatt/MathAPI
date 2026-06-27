@@ -8,37 +8,38 @@ from backend.routes.api.v1 import (
     get_topics,
     explanation,
     examples,
-    questions
+    questions,
+    formulae
 )
 
 # DOCS METADATA TAGS
 tags_metadata = [
     {
         "name": "Home",
-        "description": "Health check and service status endpoints for verifying API connectivity."
+        "description": "Health check and connectivity verification endpoint."
     },
     {
         "name": "Auth",
-        "description": "Authentication endpoints for obtaining and managing API access tokens."
-    },
-    {
-        "name": "Get API",
-        "description": "Core data retrieval endpoints for mathematics topics, explanations, examples, and practice questions. Authenticated access unlocks higher rate limits and additional filtering capabilities."
+        "description": "Authentication endpoints for obtaining the API key."
     },
     {
         "name": "Contribute",
-        "description": "Admin-only endpoints for contributing new content (examples and questions) to the database. Requires a valid `admin_token` for authorization."
+        "description": "Admin-only endpoints for contributing new content (questions) to the database. Requires a valid `admin_token`."
+    },
+    {
+        "name": "Get API",
+        "description": "Core data retrieval endpoints for serving mathematical assets. Requires a valid `api_key`."
     }
 ]
 
-description = "A RESTful API service designed for students and developers pursuing mathematics and related fields. Provides structured access to topic explanations, step-by-step worked examples, and practice questions of topics across various branches of elementary mathematics."
+description = "A `RESTful API Services` designed for students and developers pursuing mathematics and related fields. Provides structured access to topic explanations, step-by-step worked examples, practice questions and concise formulae sheets of topics across various branches mathematics."
 
 # INITIALIZING THE APP
 app = FastAPI(
     title="MathAPI",
     description=description,
     version="1.0.0",
-    summary="Mathematics Education API",
+    summary="Mathematics Education API Services",
     openapi_tags=tags_metadata,
     docs_url="/docs",
     redoc_url="/redoc"
@@ -53,3 +54,4 @@ app.include_router(get_topics.app)
 app.include_router(explanation.app)
 app.include_router(examples.app)
 app.include_router(questions.app)
+app.include_router(formulae.app)

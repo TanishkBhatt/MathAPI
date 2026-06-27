@@ -6,6 +6,7 @@ from backend.utils.config import settings
 _client = MongoClient(settings.DB_CONNECTION_URL)
 
 def get_db() -> MongoClient:
+    """GET DATABASE CONNECTION"""
     try:
         return _client
     except Exception as e:
@@ -15,6 +16,7 @@ def get_db() -> MongoClient:
         )
 
 def get_documents(db_conn: MongoClient, db_name: str, coll_name: str, filter_query: dict[str, str] | None = None) -> List[Dict[str, Any]]:
+    """GET ALL DOCUMENTS FROM DATABASE"""
     client = db_conn
     db = client[db_name]
     coll = db[coll_name]
@@ -31,6 +33,7 @@ def get_documents(db_conn: MongoClient, db_name: str, coll_name: str, filter_que
     return data
 
 def get_all(all_data: List[Dict[str, Any]], field: str) -> set[str]:
+    """GET ALL VALUES OF A PARTICULAR FIELD"""
     all_values: set[str] = set()
 
     for data in all_data:
@@ -41,6 +44,7 @@ def get_all(all_data: List[Dict[str, Any]], field: str) -> set[str]:
     return all_values
 
 def import_data(db_conn: MongoClient, db_name: str, coll_name: str, data: Dict[str, Any]) -> None:
+    """IMPORTING DATA TO THE DATABASE"""
     client = db_conn
     db = client[db_name]
     coll = db[coll_name]

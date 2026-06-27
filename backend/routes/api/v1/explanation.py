@@ -19,6 +19,7 @@ app = APIRouter(
     response_description="Comprehensive explanation object with optional embedded examples and practice questions."
 )
 def explain(
+    api_key: str|None = None,
     topic_id: str = Query(
         ...,
         description="Unique identifier of the mathematics topic to retrieve. Must match a valid `topic_id` from the `/get-topics` endpoint.",
@@ -34,4 +35,4 @@ def explain(
     ),
     db: MongoClient = Depends(get_db)
 ) -> dict[str, Any]:
-    return explain_topic(db, topic_id, include_examples, include_questions)
+    return explain_topic(db, api_key, topic_id, include_examples, include_questions)

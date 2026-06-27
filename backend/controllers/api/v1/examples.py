@@ -5,8 +5,8 @@ from random import sample
 from backend.utils.database import get_documents
 from backend.utils.helpers import verify_api_key
 
-def get_examples(api_key: str|None, database: MongoClient, topic_id: str, limit: int) -> Dict[str, Any]:
-    # VERIFIYING AUTH TOKEN
+def get_examples(database: MongoClient, api_key: str|None, topic_id: str, limit: int) -> Dict[str, Any]:
+    # VERIFIYING API KEY
     authenticate: bool = False
     if api_key:
         try:
@@ -16,7 +16,13 @@ def get_examples(api_key: str|None, database: MongoClient, topic_id: str, limit:
             )
         except Exception:
             pass
-
+    
+    if not authenticate:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Unauthorized Access"
+        )
+    
     # RETRIEVING DATA
     try:
         examples: List[Dict[str, Any]] = get_documents(
@@ -39,10 +45,7 @@ def get_examples(api_key: str|None, database: MongoClient, topic_id: str, limit:
         )
     
     # APPLYING LIMITS
-    if authenticate:
-        examples = sample(examples, min(limit, len(examples)))
-    else:
-        examples = sample(examples[:2], 2)
+    examples = sample(examples, min(limit, len(examples)))
     
     # RETURN OBJECT
     return {
