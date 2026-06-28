@@ -15,7 +15,7 @@ app = APIRouter(
     response_model=GetExamplesResponse,
     status_code=status.HTTP_200_OK,
     summary="Get Worked Examples",
-    description="Fetches step-by-step worked examples for a specific mathematics topic. Each example includes the question, key observation, concepts and formulae used, detailed solution steps, final answer, and interpretation.",
+    description="Fetches step-by-step worked examples for a specific mathematics topic. Each example includes the question, key observation, concepts and formulae used, detailed solution steps, final answer, and interpretation. Requires a valid `api_key` for access.",
     response_description="List of worked examples with full step-by-step solutions and explanations."
 )
 def examples(

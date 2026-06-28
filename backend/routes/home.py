@@ -21,7 +21,7 @@ def home() -> dict[str, Any]:
         "help": {
             "get_started": "Go to our documentation, then go to the POST auth/ route, submit your details and get an api_key.",
             "explore_routes": "We have currently a total of 5 routes serving topics, explanations, worked examples, practice questions and formulae sheets respectivly.",
-            "contribution": "You can contribute a question through POST contribute/ route via a protected admin_token."
+            "contribution": "You can contribute a question through POST /contribute-question route via a protected admin_token."
         },
         "docs": "https://mathapi.vercel.app/docs",
         "repo": "https://github.com/TanishkBhatt/MathAPI",

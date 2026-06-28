@@ -16,7 +16,7 @@ app = APIRouter(
     response_model=GetQuestionsResponse,
     status_code=status.HTTP_200_OK,
     summary="Get Practice Questions",
-    description="Retrieves multiple-choice practice questions for a specific mathematics topic. Supports optional filtering by difficulty level and question type. Authenticated requests (with a valid `api_key` param) can set a custom limit and apply filters; unauthenticated requests are limited to a maximum of 10 questions with no filtering capability.",
+    description="Retrieves multiple-choice practice questions for a specific mathematics topic. Supports optional filtering by difficulty level and question type. Requires a valid `api_key` for access.",
     response_description="List of multiple-choice questions with options, difficulty metadata, expected time limits, hints, and solution sources."
 )
 def questions(
@@ -29,15 +29,15 @@ def questions(
         limit: int = Query(
             10,
             ge=1,
-            description="Maximum number of questions to return. Authenticated users can set this to any positive integer; unauthenticated requests are capped at 10 regardless of this value."
+            description="Maximum number of questions to return. Requires a valid `api_key` to use."
         ),
         difficulty: Difficulty | None = Query(
             None,
-            description="Filter questions by difficulty level. Only available for authenticated requests. Valid values: `Beginner`, `Intermediate`, `Advanced`."
+            description="Filter questions by difficulty level. Valid values: `Beginner`, `Intermediate`, `Advanced`."
         ),
         question_type: QuestionType | None = Query(
             None,
-            description="Filter questions by type category. Only available for authenticated requests. Valid values: `Conceptual`, `Numerical`, `To Prove`, `Word Problem`, `Case Based`, `Higher Order Thinking Skills`."
+            description="Filter questions by type category. Valid values: `Conceptual`, `Numerical`, `To Prove`, `Word Problem`, `Case Based`, `Higher Order Thinking Skills`."
         ),
         database: MongoClient = Depends(get_db)
     ) -> dict[str, Any]:

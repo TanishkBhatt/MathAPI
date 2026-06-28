@@ -10,13 +10,19 @@ def authenticate_user(
         auth_data: AuthRequest
     ) -> Dict[str, Any]:
 
-    # CHECKING IS AUTH_DETAILS ARE UNIQUE OR NOT
+    # CHECKING IS USERNAME AND EMAIL ARE UNIQUE OR NOT
     try:
         user: List[Dict[str, Any]] = get_documents(
             database,
             "auth",
             "users",
             {"username": auth_data.username}
+        )
+        email_user: List[Dict[str, Any]] = get_documents(
+            database,
+            "auth",
+            "users",
+            {"email": auth_data.email}
         )
     except ConnectionError as e:
         raise HTTPException(
@@ -27,7 +33,13 @@ def authenticate_user(
     if len(user) > 0:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Invalid AuthRequest Input, This 'username' Exists."
+            detail=f"Invalid AuthRequest Input, This 'username' Already Exists."
+        )
+    
+    if len(email_user) > 0:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Invalid AuthRequest Input, This 'email' Already Exists."
         )
     
     # GENERATING API_KEY

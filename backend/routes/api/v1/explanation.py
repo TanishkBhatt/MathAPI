@@ -15,7 +15,7 @@ app = APIRouter(
     response_model=ExplanationResponse,
     status_code=status.HTTP_200_OK,
     summary="Get Topic Explanation",
-    description="Retrieves a detailed explanation for a specific mathematics topic by its unique topic ID. The response includes the definition, origin, real-world applications, step-by-step explanation sections, relevant formulae, and linked learning sources. Optionally includes up to 2 worked examples and up to 3 practice questions.",
+    description="Retrieves a detailed explanation for a specific mathematics topic by its unique topic ID. The response includes the definition, origin, real-world applications, step-by-step explanation sections, relevant formulae, and linked learning sources. Optionally includes up to 2 worked examples and up to 3 practice questions. Requires a valid `api_key` for access.",
     response_description="Comprehensive explanation object with optional embedded examples and practice questions."
 )
 def explain(

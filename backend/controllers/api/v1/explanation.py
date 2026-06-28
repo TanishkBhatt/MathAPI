@@ -98,7 +98,7 @@ def explain_topic(
                 "questions",
                 {"topic_id": topic_id}
             )
-            explanation["try_yourself_questions"] = sample(questions[:10], 3) if questions else []
+            explanation["try_yourself_questions"] = sample(questions, min(3, len(questions))) if questions else []
         except ConnectionError as e:
             raise HTTPException(
                 status_code=status.HTTP_503_SERVICE_UNAVAILABLE,

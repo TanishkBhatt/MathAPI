@@ -79,7 +79,7 @@ def get_topics(
             )
 
         topic["learning_sources_available"] = len(sources_data[0].get("learning_sources", [])) if sources_data else 0
-        topic["formulae_available"] = len(formulae_data[0].get("formulae", [])) if sources_data else 0
+        topic["formulae_available"] = len(formulae_data[0].get("formulae", [])) if formulae_data else 0
         topic["examples_available"] = len(examples_data)
         topic["questions_available"] = len(questions_data)
     
