@@ -29,10 +29,10 @@ def get_formulae(
 
     # RETRIEVING DATA
     try:
-        explanation: List[Dict[str, Any]] = get_documents(
+        formulae_data: List[Dict[str, Any]] = get_documents(
             database,
             "datasets",
-            "explain",
+            "formulae",
             {"topic_id": topic_id}
         )
     except ConnectionError as e:
@@ -42,14 +42,12 @@ def get_formulae(
         )
 
     # VALIDATING IS TOPIC_ID VALID OR NOT
-    if not explanation:
+    formulae: List[Dict[str, Any]] = formulae_data[0]["formulae"] if formulae_data else []
+    if not formulae:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Topic With ID - '{topic_id}' Not Found"
         )
-    
-    # EXTRACTING FORMULAE
-    formulae: List[Dict[str, Any]] = explanation[0].get("formulae", [])
 
     # RETURN OBJECT
     return {

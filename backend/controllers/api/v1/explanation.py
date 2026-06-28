@@ -9,8 +9,10 @@ def explain_topic(
         database: MongoClient, 
         api_key: str|None, 
         topic_id: str, 
+        include_formulae: bool, 
         include_examples: bool, 
-        include_questions: bool
+        include_questions: bool,
+        include_sources: bool
     ) -> Dict[str, Any]:
     
     # VERIFIYING API KEY
@@ -53,7 +55,24 @@ def explain_topic(
 
     explanation = explanations[0]
 
-    # EXAMPLES AND QUESTIONS INCLUSION
+    # FORMULAE, EXAMPLES, QUESTIONS LEARNING SOURCES INCLUSION
+    if include_formulae:
+        try:
+            formulae: List[Dict[str, Any]] = get_documents(
+                database,
+                "datasets",
+                "formulae",
+                {"topic_id": topic_id}
+            )
+            explanation["formulae"] = formulae[0]["formulae"] if formulae else []
+        except ConnectionError as e:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail=f"{str(e)}"
+            )
+    else:
+        explanation["formulae"] = []
+
     if include_examples:
         try:
             examples: List[Dict[str, Any]] = get_documents(
@@ -87,6 +106,25 @@ def explain_topic(
             )
     else:
         explanation["try_yourself_questions"] = []
+
+    if include_sources:
+        try:
+            source_data: List[Dict[str, Any]] = get_documents(
+                database,
+                "datasets",
+                "sources",
+                {"topic_id": topic_id}
+            )
+            explanation["learning_sources"] = source_data[0]["learning_sources"] if source_data else []
+            explanation["source_images"] = source_data[0]["source_images"] if source_data else []
+        except ConnectionError as e:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail=f"{str(e)}"
+            )
+    else:
+        explanation["learning_sources"] = []
+        explanation["source_images"] = []
 
     # RETURN OBJECT
     return {

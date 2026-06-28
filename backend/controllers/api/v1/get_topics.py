@@ -39,15 +39,22 @@ def get_topics(
             detail=f"{str(e)}"
         )
     
-    # RETRIEVING ALL TOPICS METADATA - QUESTIONS AVAILABLE AND LEARNING SOURCES AVAILABLE
+    # RETRIEVING ALL TOPICS METADATA
     for topic in topics:
         topic_id = topic["topic_id"]
         
         try:
-            explain_data = get_documents(
+            formulae_data = get_documents(
                 database,
                 "datasets",
-                "explain",
+                "formulae",
+                {"topic_id": topic_id}
+            )
+
+            sources_data = get_documents(
+                database,
+                "datasets",
+                "sources",
                 {"topic_id": topic_id}
             )
 
@@ -71,7 +78,8 @@ def get_topics(
                 detail=f"{str(e)}"
             )
 
-        topic["learning_sources_available"] = len(explain_data[0].get("learning_sources", [])) if explain_data else 0
+        topic["learning_sources_available"] = len(sources_data[0].get("learning_sources", [])) if sources_data else 0
+        topic["formulae_available"] = len(formulae_data[0].get("formulae", [])) if sources_data else 0
         topic["examples_available"] = len(examples_data)
         topic["questions_available"] = len(questions_data)
     

@@ -22,6 +22,7 @@ class Topic(BaseModel):
     prerequisites: List[str]
     related_topics: List[str]
     sub_topics: List[str]
+    formulae_available: int
     examples_available: int
     questions_available: int
     learning_sources_available: int
@@ -38,7 +39,6 @@ class Question(BaseModel):
     solution_sources: List[SolutionSource]
 
 class Explain(BaseModel):
-    topic_name: str
     definition: str
     origin: str
     applications: List[str]

@@ -25,14 +25,22 @@ def explain(
             description="Unique identifier of the mathematics topic to retrieve. Must match a valid `topic_id` from the `/get-topics` endpoint.",
             examples=["quadratic-equation"]
         ),
+        include_formulae: bool = Query(
+            True,
+            description="Whether to include all formulae related to that topic in the response."
+        ),
         include_examples: bool = Query(
             True,
-            description="Whether to include up to 2 worked examples for the topic in the response."
+            description="Whether to include 2 worked examples for the topic in the response."
         ),
         include_questions: bool = Query(
             True,
-            description="Whether to include up to 3 practice questions for the topic in the response."
+            description="Whether to include 3 practice questions for the topic in the response."
+        ),
+        include_sources: bool = Query(
+            True,
+            description="Whether to include learning and image sources for the topic in the response."
         ),
         database: MongoClient = Depends(get_db)
     ) -> dict[str, Any]:
-    return explain_topic(database, api_key, topic_id, include_examples, include_questions)
+    return explain_topic(database, api_key, topic_id, include_formulae, include_examples, include_questions, include_sources)
