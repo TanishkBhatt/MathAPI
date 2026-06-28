@@ -18,5 +18,8 @@ app = APIRouter(
     description="Fetches a comprehensive list of all mathematics topics available in the database. Each topic includes metadata such as difficulty level, branch classification, prerequisites, related topics, sub-topics, and counts of available learning resources (explanations, examples, and questions).",
     response_description="Paginated list of all topics with detailed metadata and resource availability counts."
 )
-def get_all_topics(api_key: str|None = None, db: MongoClient = Depends(get_db)) -> dict[str, Any]:
-    return get_topics(db, api_key)
+def get_all_topics(
+        api_key: str|None = None, 
+        database: MongoClient = Depends(get_db)
+    ) -> dict[str, Any]:
+    return get_topics(database, api_key)

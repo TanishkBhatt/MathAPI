@@ -16,7 +16,7 @@ from backend.routes.api.v1 import (
 tags_metadata = [
     {
         "name": "Home",
-        "description": "Health check and connectivity verification endpoint."
+        "description": "Health check and help route."
     },
     {
         "name": "Auth",

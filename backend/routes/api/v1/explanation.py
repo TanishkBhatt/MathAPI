@@ -20,19 +20,19 @@ app = APIRouter(
 )
 def explain(
     api_key: str|None = None,
-    topic_id: str = Query(
-        ...,
-        description="Unique identifier of the mathematics topic to retrieve. Must match a valid `topic_id` from the `/get-topics` endpoint.",
-        examples=["quadratic-equation"]
-    ),
-    include_examples: bool = Query(
-        True,
-        description="Whether to include up to 2 worked examples for the topic in the response."
-    ),
-    include_questions: bool = Query(
-        True,
-        description="Whether to include up to 3 practice questions for the topic in the response."
-    ),
-    db: MongoClient = Depends(get_db)
-) -> dict[str, Any]:
-    return explain_topic(db, api_key, topic_id, include_examples, include_questions)
+        topic_id: str = Query(
+            ...,
+            description="Unique identifier of the mathematics topic to retrieve. Must match a valid `topic_id` from the `/get-topics` endpoint.",
+            examples=["quadratic-equation"]
+        ),
+        include_examples: bool = Query(
+            True,
+            description="Whether to include up to 2 worked examples for the topic in the response."
+        ),
+        include_questions: bool = Query(
+            True,
+            description="Whether to include up to 3 practice questions for the topic in the response."
+        ),
+        database: MongoClient = Depends(get_db)
+    ) -> dict[str, Any]:
+    return explain_topic(database, api_key, topic_id, include_examples, include_questions)

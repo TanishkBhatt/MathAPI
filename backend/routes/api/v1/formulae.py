@@ -19,12 +19,12 @@ app = APIRouter(
     response_description="List of all formulae of a particular topic."
 )
 def examples(
-    api_key: str|None = None,
-    topic_id: str = Query(
-        ...,
-        description="Unique identifier of the mathematics topic to retrieve examples for. Must match a valid `topic_id` from the `/get-topics` endpoint.",
-        examples=["quadratic-equation"]
-    ),
-    db: MongoClient = Depends(get_db)
-) -> dict[str, Any]:
-    return get_formulae(db, api_key, topic_id)
+        api_key: str|None = None,
+        topic_id: str = Query(
+            ...,
+            description="Unique identifier of the mathematics topic to retrieve examples for. Must match a valid `topic_id` from the `/get-topics` endpoint.",
+            examples=["quadratic-equation"]
+        ),
+        database: MongoClient = Depends(get_db)
+    ) -> dict[str, Any]:
+    return get_formulae(database, api_key, topic_id)

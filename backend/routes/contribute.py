@@ -19,7 +19,6 @@ app = APIRouter(
     response_description="Confirmation message indicating the type of contribution that was successfully added."
 )
 def contribute(
-    
     admin_token: str = Query(
         ...,
         description="Admin authorization token. Must match the server-configured `ADMIN_TOKEN` environment variable."
@@ -28,6 +27,6 @@ def contribute(
         ...,
         description="The content data to be contributed."
     ),
-    db: MongoClient = Depends(get_db)
+    database: MongoClient = Depends(get_db)
 ) -> dict[str, Any]:
-    return contribution(db, admin_token, data)
+    return contribution(database, admin_token, data)

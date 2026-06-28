@@ -5,7 +5,14 @@ from random import sample
 from backend.utils.database import get_documents
 from backend.utils.helpers import verify_api_key
 
-def explain_topic(database: MongoClient, api_key: str|None, topic_id: str, include_examples: bool, include_questions: bool) -> Dict[str, Any]:
+def explain_topic(
+        database: MongoClient, 
+        api_key: str|None, 
+        topic_id: str, 
+        include_examples: bool, 
+        include_questions: bool
+    ) -> Dict[str, Any]:
+    
     # VERIFIYING API KEY
     authenticate: bool = False
     if api_key:

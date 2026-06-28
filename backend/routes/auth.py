@@ -18,5 +18,8 @@ app = APIRouter(
     description="Registers a new user with a unique username and email address, then returns a generated API key. The API key is required for authenticated access to higher rate limits and additional filtering capabilities on the GET endpoints. Username and email must be unique — duplicates are rejected with a 400 error.",
     response_description="Registration confirmation with the generated API key, username, and optional expiry information."
 )
-def auth(data: AuthRequest, db: MongoClient = Depends(get_db)) -> dict[str, Any]:
-    return authenticate_user(db, data)
+def auth(
+        data: AuthRequest, 
+        database: MongoClient = Depends(get_db)
+    ) -> dict[str, Any]:
+    return authenticate_user(database, data)

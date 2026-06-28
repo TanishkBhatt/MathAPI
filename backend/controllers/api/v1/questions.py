@@ -6,7 +6,15 @@ from backend.models.components.helpers import Difficulty, QuestionType
 from backend.utils.database import get_documents
 from backend.utils.helpers import verify_api_key
 
-def get_questions(database: MongoClient, api_key: str|None, topic_id: str, limit: int, difficulty: Difficulty|None, question_type: QuestionType|None) -> Dict[str, Any]:
+def get_questions(
+        database: MongoClient, 
+        api_key: str|None, 
+        topic_id: str, 
+        limit: int, 
+        difficulty: Difficulty|None, 
+        question_type: QuestionType|None
+    ) -> Dict[str, Any]:
+    
     # VERIFIYING API KEY
     authenticate: bool = False
     if api_key:

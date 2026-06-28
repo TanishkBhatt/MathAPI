@@ -20,25 +20,25 @@ app = APIRouter(
     response_description="List of multiple-choice questions with options, difficulty metadata, expected time limits, hints, and solution sources."
 )
 def questions(
-    api_key: str|None = None,
-    topic_id: str = Query(
-        ...,
-        description="Unique identifier of the mathematics topic to retrieve questions for. Must match a valid `topic_id` from the `/get-topics` endpoint.",
-        examples=["quadratic-equation"]
-    ),
-    limit: int = Query(
-        10,
-        ge=1,
-        description="Maximum number of questions to return. Authenticated users can set this to any positive integer; unauthenticated requests are capped at 10 regardless of this value."
-    ),
-    difficulty: Difficulty | None = Query(
-        None,
-        description="Filter questions by difficulty level. Only available for authenticated requests. Valid values: `Beginner`, `Intermediate`, `Advanced`."
-    ),
-    question_type: QuestionType | None = Query(
-        None,
-        description="Filter questions by type category. Only available for authenticated requests. Valid values: `Conceptual`, `Numerical`, `To Prove`, `Word Problem`, `Case Based`, `Higher Order Thinking Skills`."
-    ),
-    db: MongoClient = Depends(get_db)
-) -> dict[str, Any]:
-    return get_questions(db, api_key, topic_id, limit, difficulty, question_type)
+        api_key: str|None = None,
+        topic_id: str = Query(
+            ...,
+            description="Unique identifier of the mathematics topic to retrieve questions for. Must match a valid `topic_id` from the `/get-topics` endpoint.",
+            examples=["quadratic-equation"]
+        ),
+        limit: int = Query(
+            10,
+            ge=1,
+            description="Maximum number of questions to return. Authenticated users can set this to any positive integer; unauthenticated requests are capped at 10 regardless of this value."
+        ),
+        difficulty: Difficulty | None = Query(
+            None,
+            description="Filter questions by difficulty level. Only available for authenticated requests. Valid values: `Beginner`, `Intermediate`, `Advanced`."
+        ),
+        question_type: QuestionType | None = Query(
+            None,
+            description="Filter questions by type category. Only available for authenticated requests. Valid values: `Conceptual`, `Numerical`, `To Prove`, `Word Problem`, `Case Based`, `Higher Order Thinking Skills`."
+        ),
+        database: MongoClient = Depends(get_db)
+    ) -> dict[str, Any]:
+    return get_questions(database, api_key, topic_id, limit, difficulty, question_type)

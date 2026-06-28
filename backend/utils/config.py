@@ -3,7 +3,6 @@ from functools import lru_cache
 
 # BASE SETTINGS
 class Settings(BaseSettings):
-    """ENV VARIABLES SETTINGS"""
     DB_CONNECTION_URL: str
     ADMIN_TOKEN: str
 

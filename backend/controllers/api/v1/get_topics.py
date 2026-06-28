@@ -4,7 +4,11 @@ from typing import List, Dict, Any
 from backend.utils.database import get_documents
 from backend.utils.helpers import verify_api_key
 
-def get_topics(database: MongoClient, api_key: str|None) -> Dict[str, Any]:
+def get_topics(
+        database: MongoClient, 
+        api_key: str|None
+    ) -> Dict[str, Any]:
+    
     # VERIFIYING API KEY
     authenticate: bool = False
     if api_key:

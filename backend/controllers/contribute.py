@@ -1,11 +1,16 @@
 from fastapi import HTTPException, status
 from pymongo import MongoClient
-from typing import Any, Dict, List
+from typing import Any, Dict
 from backend.models.contribute import QuestionContributionSchema
 from backend.utils.config import settings
 from backend.utils.database import import_data
 
-def contribution(database: MongoClient, admin_token: str, request_data: QuestionContributionSchema) -> Dict[str, Any]:
+def contribution(
+        database: MongoClient, 
+        admin_token: str, 
+        request_data: QuestionContributionSchema
+    ) -> Dict[str, Any]:
+
     # VALIDATING ADMIN_TOKEN
     if admin_token != settings.ADMIN_TOKEN:
         raise HTTPException(

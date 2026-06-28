@@ -4,7 +4,12 @@ from typing import Any, List, Dict
 from backend.utils.database import get_documents
 from backend.utils.helpers import verify_api_key
 
-def get_formulae(database: MongoClient, api_key: str|None, topic_id: str) -> Dict[str, Any]:
+def get_formulae(
+        database: MongoClient, 
+        api_key: str|None, 
+        topic_id: str
+    ) -> Dict[str, Any]:
+    
     # VERIFIYING API KEY
     authenticate: bool = False
     if api_key:

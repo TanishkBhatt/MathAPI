@@ -19,17 +19,17 @@ app = APIRouter(
     response_description="List of worked examples with full step-by-step solutions and explanations."
 )
 def examples(
-    api_key: str|None = None,
-    topic_id: str = Query(
-        ...,
-        description="Unique identifier of the mathematics topic to retrieve examples for. Must match a valid `topic_id` from the `/get-topics` endpoint.",
-        examples=["quadratic-equation"]
-    ),
-    limit: int = Query(
-        2,
-        ge=1,
-        description="Maximum number of examples to return."
-    ),
-    db: MongoClient = Depends(get_db)
-) -> dict[str, Any]:
-    return get_examples(db, api_key, topic_id, limit)
+        api_key: str|None = None,
+        topic_id: str = Query(
+            ...,
+            description="Unique identifier of the mathematics topic to retrieve examples for. Must match a valid `topic_id` from the `/get-topics` endpoint.",
+            examples=["quadratic-equation"]
+        ),
+        limit: int = Query(
+            2,
+            ge=1,
+            description="Maximum number of examples to return."
+        ),
+        database: MongoClient = Depends(get_db)
+    ) -> dict[str, Any]:
+    return get_examples(database, api_key, topic_id, limit)
