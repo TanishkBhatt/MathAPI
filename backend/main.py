@@ -1,15 +1,20 @@
 from fastapi import FastAPI
 from backend.routes import (
-    home,
-    auth,
-    contribute
+    home
+)
+from backend.routes.auth import (
+    auth
 )
 from backend.routes.api.v1 import (
-    get_topics,
     explanation,
     examples,
     questions,
-    formulae
+    formulae,
+    topics
+)
+from backend.routes.contribute import (
+    question,
+    example
 )
 
 # DOCS METADATA TAGS
@@ -48,10 +53,12 @@ app = FastAPI(
 # INCLUDING ROUTERS
 app.include_router(home.app)
 app.include_router(auth.app)
-app.include_router(contribute.app)
 
-app.include_router(get_topics.app)
+app.include_router(topics.app)
 app.include_router(explanation.app)
 app.include_router(examples.app)
 app.include_router(questions.app)
 app.include_router(formulae.app)
+
+app.include_router(question.app)
+app.include_router(example.app)

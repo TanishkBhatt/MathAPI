@@ -8,7 +8,6 @@ class AuthRequest(BaseModel):
 class APIKeyData(BaseModel):
     username: str
     api_key: str
-    expiry: int|None
 
 class AuthResponse(BaseModel):
     success: bool

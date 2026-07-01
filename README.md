@@ -13,20 +13,28 @@
 
 ### Topic Catalog
 Browse all available mathematics topics with metadata including difficulty level, branch classification, prerequisites, and related topics.
+
 ### Detailed Explanations
 Get in-depth topic explanations covering definitions, origins, real-world applications, and step-by-step breakdowns.
+
 ### Worked Examples
 Access fully solved examples with key observations, concept mappings, formula references, and solution interpretations.
+
 ### Practice Questions
 Retrieve multiple-choice questions with difficulty and type filters to test your understanding.
+
 ### Formula Sheets
 Fetch concise formula collections for any topic in both plain text and LaTeX format.
+
 ### API Key Authentication
 Register with a username and email to receive a unique API key for authenticated access.
+
 ### Admin Contribution
-Authorized admins can contribute new questions directly to the database.
+Authorized admins can contribute new questions and examples directly to the database.
+
 ### Rich Metadata
 Each topic response includes counts of available explanations, examples, questions, formulae, and learning sources.
+
 ### Interactive Docs
 Full Swagger UI at `/docs` and ReDoc at `/redoc`.
 
@@ -38,12 +46,13 @@ Full Swagger UI at `/docs` and ReDoc at `/redoc`.
 |--------|----------|-------------|:---:|
 | `GET` | `/` | API health check with service info and quick-start guide | ❌ |
 | `POST` | `/auth` | Register with username + email, receive an API key | ❌ |
-| `GET` | `/api/v1/get-topics` | List all topics with metadata and resource counts | ✅ |
+| `GET` | `/api/v1/topics` | List all topics with metadata and resource counts | ✅ |
 | `GET` | `/api/v1/explanation` | Get topic explanation with optional formulae, examples, questions, sources | ✅ |
 | `GET` | `/api/v1/examples` | Get worked examples for a topic | ✅ |
 | `GET` | `/api/v1/questions` | Get practice questions with optional difficulty & type filters | ✅ |
 | `GET` | `/api/v1/formulae` | Get all formulae for a topic (plain text + LaTeX) | ✅ |
-| `POST` | `/contribute-question` | Admin-only — contribute a new question to the database | ✅ (admin_token) |
+| `POST` | `/contribute/question` | Admin-only — contribute a new question to the database | 👑 |
+| `POST` | `/contribute/example` | Admin-only — contribute a new example to the database | 👑 |
 
 ### Quick Start
 
@@ -54,7 +63,7 @@ curl -X POST "https://mathapi.vercel.app/auth" \
   -d '{"username": "your_username", "email": "your@email.com"}'
 
 # Use the API key to access topics
-curl -X "https://mathapi.vercel.app/api/v1/get-topics?api_key=YOUR_API_KEY"
+curl -X "https://mathapi.vercel.app/api/v1/topics?api_key=YOUR_API_KEY"
 
 # Explore a specific topic
 curl -X "https://mathapi.vercel.app/api/v1/explanation?api_key=YOUR_API_KEY&topic_id=quadratic-equation"
@@ -70,28 +79,34 @@ MathAPI/
 │   ├── main.py                     # FastAPI app entry point
 │   ├── .env                        # Environment variables (not tracked) 
 │   ├── controllers/
-│   │   ├── auth.py                 # User registration logic
-│   │   ├── contribute.py           # Admin contribution logic
+│   │   └── auth/                   # User registration logic
+│   │       └── auth.py
+│   │   └── contribute/             # Admin contribution logic
+│   │       ├── question.py
+│   │       └── example.py
 │   │   └── api/
-│   │       └── v1/
-│   │           ├── get_topics.py   # Topic listing logic
-│   │           ├── explanation.py  # Topic explanation logic
-│   │           ├── examples.py     # Worked examples logic
-│   │           ├── questions.py    # Practice questions logic
-│   │           └── formulae.py     # Formulae retrieval logic
+│   │       └── v1/                 # Main Backend Logic
+│   │
 │   ├── models/
 │   │   ├── home.py                 # Home response schema
-│   │   ├── auth.py                 # Auth request/response schemas
-│   │   ├── contribute.py           # Contribution schemas
+│   │   └── auth/                   # Auth request/response schemas
+│   │       └── auth.py
+│   │   └── contribute/             # Contribution schemas
+│   │       ├── question.py
+│   │       └── example.py
 │   │   ├── api/
 │   │   │   └── v1/                 # API response Pydantic models
 │   │   └── components/
 │   │       ├── helpers.py          # Shared enums and base models
 │   │       └── main.py             # Composite models (Topic, Question, Explain)
+│   │
 │   ├── routes/
 │   │   ├── home.py                 # GET /
-│   │   ├── auth.py                 # POST /auth
-│   │   ├── contribute.py           # POST /contribute-question
+│   │   └── auth/
+│   │       └── auth.py             # POST /auth
+│   │   └── contribute/
+│   │       ├── question.py         # POST /contribute/question
+│   │       └── example.py          # POST /contribute/example
 │   │   └── api/
 │   │       └── v1/
 │   │           ├── get_topics.py   # GET /topics
@@ -99,10 +114,12 @@ MathAPI/
 │   │           ├── examples.py     # GET /examples
 │   │           ├── questions.py    # GET /questions
 │   │           └── formulae.py     # GET /formulae
+│   │
 │   └── utils/
 │       ├── config.py               # Settings from .env
 │       ├── database.py             # MongoDB connection & helpers
 │       └── helpers.py              # API key generation & verification
+│
 ├── requirements.txt                # Dependency management
 ├── vercel.json                     # Vercel deployment config
 └── README.md                       # Documentation
@@ -133,7 +150,7 @@ Found a bug or have a feature request? Open an issue on the [GitHub repository](
 Contribute questions directly to the database via the authenticated endpoint:
 
 ```bash
-curl -X POST "https://mathapi.vercel.app/contribute-question?admin_token=YOUR_ADMIN_TOKEN" \
+curl -X POST "https://mathapi.vercel.app/contribute/question?admin_token=YOUR_ADMIN_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
     "topic_id": "quadratic-equation",

@@ -1,9 +1,9 @@
 from fastapi import APIRouter, status, Depends
 from typing import Any
 from pymongo import MongoClient
-from backend.models.api.v1.get_topics import GetAllTopicsResponse
+from backend.models.api.v1.topics import GetAllTopicsResponse
 from backend.utils.database import get_db
-from backend.controllers.api.v1.get_topics import get_topics
+from backend.controllers.api.v1.topics import get_topics
 
 app = APIRouter(
     prefix="/api/v1",
@@ -11,7 +11,7 @@ app = APIRouter(
 )
 
 @app.get(
-    "/get-topics",
+    "/topics",
     response_model=GetAllTopicsResponse,
     status_code=status.HTTP_200_OK,
     summary="Retrieve All Available Topics",
