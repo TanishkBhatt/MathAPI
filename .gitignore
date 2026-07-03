@@ -19,6 +19,6 @@ uv.lock
 # Environment variables
 .env
 
-# Database and Testing
+# Local Database and Testing
 database/
 test/

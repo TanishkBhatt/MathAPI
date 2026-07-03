@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from backend.routes import (
     home
 )
@@ -17,6 +17,17 @@ from backend.routes.contribute import (
     example
 )
 
+from slowapi.middleware import SlowAPIMiddleware
+from slowapi.errors import RateLimitExceeded
+from slowapi.extension import _rate_limit_exceeded_handler
+from fastapi.responses import JSONResponse
+from slowapi.errors import RateLimitExceeded
+
+from backend.utils.limiter import (
+    limiter,
+    limiting_response
+)
+
 # DOCS METADATA TAGS
 tags_metadata = [
     {
@@ -33,7 +44,7 @@ tags_metadata = [
     },
     {
         "name": "Get API",
-        "description": "Core data retrieval endpoints for serving mathematical assets. Requires a valid `api_key`."
+        "description": "Core data retrieval endpoints for serving mathematical assets. Requires a valid `api_key` (100 requests per hour limit)"
     }
 ]
 
@@ -62,3 +73,16 @@ app.include_router(formulae.app)
 
 app.include_router(question.app)
 app.include_router(example.app)
+
+# APPLYING LIMITING
+app.state.limiter = limiter
+app.add_exception_handler(
+        RateLimitExceeded, 
+        _rate_limit_exceeded_handler    # type: ignore
+    )
+app.add_middleware(SlowAPIMiddleware)
+
+# CUSTOM LIMIT EXCEEDED HANDLER
+@app.exception_handler(RateLimitExceeded)
+async def custom_handler(request: Request, exc: RateLimitExceeded) -> JSONResponse:
+    return limiting_response()

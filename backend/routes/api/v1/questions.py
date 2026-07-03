@@ -1,10 +1,11 @@
-from fastapi import APIRouter, status, Depends, Query
+from fastapi import APIRouter, Request, status, Depends, Query
 from typing import Any, List
 from pymongo import MongoClient
 from backend.models.api.v1.questions import GetQuestionsResponse
 from backend.models.components.helpers import Difficulty, QuestionType
 from backend.utils.database import get_db
 from backend.controllers.api.v1.questions import get_questions
+from backend.utils.limiter import limiter
 
 app = APIRouter(
     prefix="/api/v1",
@@ -19,7 +20,11 @@ app = APIRouter(
     description="Retrieves multiple-choice practice questions for a specific mathematics topic. Supports optional filtering by difficulty level and question type. Requires a valid `api_key` for access.",
     response_description="List of multiple-choice questions with options, difficulty metadata, expected time limits, hints, and solution sources."
 )
+
+@limiter.limit("100/hour")
+
 def questions(
+        request: Request,
         api_key: str|None = None,
         topic_id: str = Query(
             ...,

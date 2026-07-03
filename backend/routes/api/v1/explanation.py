@@ -1,9 +1,10 @@
-from fastapi import APIRouter, status, Depends, Query
+from fastapi import APIRouter, Request, status, Depends, Query
 from typing import Any
 from pymongo import MongoClient
 from backend.models.api.v1.explanation import ExplanationResponse
 from backend.utils.database import get_db
 from backend.controllers.api.v1.explanation import explain_topic
+from backend.utils.limiter import limiter
 
 app = APIRouter(
     prefix="/api/v1",
@@ -18,8 +19,12 @@ app = APIRouter(
     description="Retrieves a detailed explanation for a specific mathematics topic by its unique topic ID. The response includes the definition, origin, real-world applications, step-by-step explanation sections, relevant formulae, and linked learning sources. Optionally includes up to 2 worked examples and up to 3 practice questions. Requires a valid `api_key` for access.",
     response_description="Comprehensive explanation object with optional embedded examples and practice questions."
 )
+
+@limiter.limit("100/hour")
+
 def explain(
-    api_key: str|None = None,
+        request: Request,
+        api_key: str|None = None,
         topic_id: str = Query(
             ...,
             description="Unique identifier of the mathematics topic to retrieve. Must match a valid `topic_id` from the `/get-topics` endpoint.",

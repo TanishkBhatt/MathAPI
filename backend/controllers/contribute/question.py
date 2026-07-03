@@ -2,7 +2,7 @@ from fastapi import HTTPException, status
 from pymongo import MongoClient
 from typing import Any, Dict, List
 from backend.models.contribute.question import QuestionContributionSchema
-from backend.utils.config import settings
+from backend.config import settings
 from backend.utils.database import get_documents, import_data
 
 def question_contribution(

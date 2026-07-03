@@ -1,9 +1,10 @@
-from fastapi import APIRouter, status, Depends, Query
+from fastapi import APIRouter, Request, status, Depends, Query
 from typing import Any
 from pymongo import MongoClient
 from backend.models.api.v1.examples import GetExamplesResponse
 from backend.utils.database import get_db
 from backend.controllers.api.v1.examples import get_examples
+from backend.utils.limiter import limiter
 
 app = APIRouter(
     prefix="/api/v1",
@@ -18,7 +19,11 @@ app = APIRouter(
     description="Fetches step-by-step worked examples for a specific mathematics topic. Each example includes the question, key observation, concepts and formulae used, detailed solution steps, final answer, and interpretation. Requires a valid `api_key` for access.",
     response_description="List of worked examples with full step-by-step solutions and explanations."
 )
+
+@limiter.limit("100/hour")
+
 def examples(
+        request: Request,
         api_key: str|None = None,
         topic_id: str = Query(
             ...,

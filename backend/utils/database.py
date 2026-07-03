@@ -1,12 +1,14 @@
 from pymongo import MongoClient
 from typing import List, Dict, Any
-from backend.utils.config import settings
+from backend.config import settings
 
 _client = MongoClient(settings.DB_CONNECTION_URL)
 
+# GET DATABASE CONNECTION
 def get_db() -> MongoClient:
     return _client
 
+# GET DOCUMENTS FROM DATABASE
 def get_documents(
         db_conn: MongoClient, 
         db_name: str, 
@@ -29,6 +31,7 @@ def get_documents(
 
     return data
 
+# INSERT DOCUMENT INTO DATABASE
 def import_data(
         db_conn: MongoClient, 
         db_name: str, 

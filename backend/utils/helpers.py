@@ -3,6 +3,7 @@ import secrets
 import time
 from pymongo import MongoClient
 
+# GENERATE API KEY
 def generate_api_key(
         username: str, 
         expiry: int | None
@@ -11,6 +12,7 @@ def generate_api_key(
     api_key: str = f"mathapi_key_{user_hash}_{secrets.token_urlsafe(24)}_exp={expiry}"
     return api_key
 
+# VERIFY API KEY
 def verify_api_key(
         db_conn: MongoClient, 
         api_key: str

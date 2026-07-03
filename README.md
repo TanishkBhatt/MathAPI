@@ -29,6 +29,9 @@ Fetch concise formula collections for any topic in both plain text and LaTeX for
 ### API Key Authentication
 Register with a username and email to receive a unique API key for authenticated access.
 
+### API Key Limiting
+A user can hit only 100 GET requests on Get API routes with an API Key per hour.
+
 ### Admin Contribution
 Authorized admins can contribute new questions and examples directly to the database.
 
@@ -78,6 +81,8 @@ MathAPI/
 ├── backend/
 │   ├── main.py                     # FastAPI app entry point
 │   ├── .env                        # Environment variables (not tracked) 
+│   ├── config.py                   # Environment variables settings
+│   │
 │   ├── controllers/
 │   │   └── auth/                   # User registration logic
 │   │       └── auth.py
@@ -115,13 +120,12 @@ MathAPI/
 │   │           ├── questions.py    # GET /questions
 │   │           └── formulae.py     # GET /formulae
 │   │
-│   └── utils/
-│       ├── config.py               # Settings from .env
-│       ├── database.py             # MongoDB connection & helpers
-│       └── helpers.py              # API key generation & verification
+│   └── utils/                      # Database, API Key and limiter functions
 │
-├── requirements.txt                # Dependency management
-├── vercel.json                     # Vercel deployment config
+├── pyproject.toml                  # UV based dependency management
+├── requirements.txt                # PIP based dependency management
+├── vercel.json                     # Deployment config
+├── .gitignore                      # Untracked files config
 └── README.md                       # Documentation
 ```
 
