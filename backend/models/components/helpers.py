@@ -1,5 +1,4 @@
 from pydantic import BaseModel
-from typing import List, Dict
 from enum import Enum
 
 class Branch(Enum):
@@ -7,13 +6,11 @@ class Branch(Enum):
     number_theory = "Number Theory"
     algebra = "Algebra"
     geometry = "Geometry"
-    mensuration = "Mensuration"
     coordinate_geometry = "Coordinate Geometry"
     trigonometry = "Trigonometry"
     combinatorics = "Combinatorics"
     probability = "Probability"
     statistics = "Statistics"
-    relations_functions = "Relations and Functions"
     introductory_linear_algebra = "Introductory Linear Algebra"
     introductory_calculus = "Introductory Calculus"
 
@@ -42,26 +39,13 @@ class QuestionType(Enum):
     case_based = "Case Based"
     hots = "Higher Order Thinking Skills"
 
-class Example(BaseModel):
-    topic_id: str
-    question: str
-    difficulty: Difficulty
-    question_type: List[QuestionType]
-    key_observation: str
-    concept_used: List[str]
-    formulae_used: List[Dict[str, str]]
-    steps: List[str]
-    answer: str
-    interpretation: str
-
 class Explanation(BaseModel):
     title: str
     content: str
 
 class Formula(BaseModel):
     title: str
-    plain_text: str
-    latex_code: str
+    code: str
 
 class LearningSource(BaseModel):
     title: str

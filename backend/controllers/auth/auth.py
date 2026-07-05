@@ -31,7 +31,7 @@ def authenticate_user(
     if user:
         return {
         "success": True,
-        "message": "This User Already Exists",
+        "message": "User Is Already Authenticated",
         "api_key_data": {
             "username": auth_data.username,
             "api_key": user["api_key"]

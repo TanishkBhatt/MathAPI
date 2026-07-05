@@ -54,8 +54,7 @@ Full Swagger UI at `/docs` and ReDoc at `/redoc`.
 | `GET` | `/api/v1/examples` | Get worked examples for a topic | ✅ |
 | `GET` | `/api/v1/questions` | Get practice questions with optional difficulty & type filters | ✅ |
 | `GET` | `/api/v1/formulae` | Get all formulae for a topic (plain text + LaTeX) | ✅ |
-| `POST` | `/contribute/question` | Admin-only — contribute a new question to the database | 👑 |
-| `POST` | `/contribute/example` | Admin-only — contribute a new example to the database | 👑 |
+| `POST` | `/contribute` | Admin-only — contribute a new question/example to the database | 👑 |
 
 ### Quick Start
 
@@ -87,8 +86,7 @@ MathAPI/
 │   │   └── auth/                   # User registration logic
 │   │       └── auth.py
 │   │   └── contribute/             # Admin contribution logic
-│   │       ├── question.py
-│   │       └── example.py
+│   │       └── contribute.py
 │   │   └── api/
 │   │       └── v1/                 # Main Backend Logic
 │   │
@@ -97,8 +95,7 @@ MathAPI/
 │   │   └── auth/                   # Auth request/response schemas
 │   │       └── auth.py
 │   │   └── contribute/             # Contribution schemas
-│   │       ├── question.py
-│   │       └── example.py
+│   │       └── contribute.py
 │   │   ├── api/
 │   │   │   └── v1/                 # API response Pydantic models
 │   │   └── components/
@@ -110,8 +107,7 @@ MathAPI/
 │   │   └── auth/
 │   │       └── auth.py             # POST /auth
 │   │   └── contribute/
-│   │       ├── question.py         # POST /contribute/question
-│   │       └── example.py          # POST /contribute/example
+│   │       └── contribute.py          # POST /contribute
 │   │   └── api/
 │   │       └── v1/
 │   │           ├── get_topics.py   # GET /topics
@@ -151,10 +147,10 @@ MathAPI/
 Found a bug or have a feature request? Open an issue on the [GitHub repository](https://github.com/TanishkBhatt/MathAPI).
 
 ### For Admins
-Contribute questions directly to the database via the authenticated endpoint:
+Contribute questions/examples directly to the database via the authenticated endpoint:
 
 ```bash
-curl -X POST "https://mathapi.vercel.app/contribute/question?admin_token=YOUR_ADMIN_TOKEN" \
+curl -X POST "https://mathapi.vercel.app/contribute?admin_token=YOUR_ADMIN_TOKEN&contribution_type=Question" \
   -H "Content-Type: application/json" \
   -d '{
     "topic_id": "quadratic-equation",

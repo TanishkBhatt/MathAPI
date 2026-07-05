@@ -1,14 +1,15 @@
 from fastapi import HTTPException, status
 from pymongo import MongoClient
 from typing import Any, Dict, List
-from backend.models.contribute.example import ExampleContributionSchema
+from backend.models.contribute.contribute import ContributionType, QuestionContributionSchema, ExampleContributionSchema
 from backend.config import settings
 from backend.utils.database import get_documents, import_data
 
-def example_contribution(
+def contribution(
         database: MongoClient, 
         admin_token: str, 
-        request_data: ExampleContributionSchema     # type: ignore
+        contribution_type: ContributionType,
+        request_data: Dict[str, Any]
     ) -> Dict[str, Any]:
 
     # VALIDATING ADMIN_TOKEN
@@ -24,7 +25,7 @@ def example_contribution(
             database,
             "datasets",
             "topics",
-            {"topic_id": request_data.topic_id}
+            {"topic_id": request_data["topic_id"]}
         )
     except ConnectionError as e:
         raise HTTPException(
@@ -35,21 +36,34 @@ def example_contribution(
     if not topic:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Topic With ID - '{request_data.topic_id}' Not Found"
+            detail=f"Topic With ID - '{request_data["topic_id"]}' Not Found"
         )
+
+    # VALIDATING THE CONTRIBUTION DATA
+    if contribution_type.value == "Question":
+        try:
+            QuestionContributionSchema(**request_data)
+        except Exception as e:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail=f"Invalid Question Contribution Data Schema"
+            )
+
+    if contribution_type.value == "Example":
+        try:
+            ExampleContributionSchema(**request_data)
+        except Exception as e:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail=f"Invalid Example Contribution Data Schema"
+            )
     
     # IMPORT DATA TO DATABASE
     try:
-        request_data: Dict[str, Any] = request_data.model_dump()
-        request_data["difficulty"] = request_data["difficulty"].value
-
-        for i in range(len(request_data["question_type"])):
-            request_data["question_type"][i] = request_data["question_type"][i].value
-
         import_data(
             database,
             "datasets",
-            "examples",
+            f"{contribution_type.value.lower()}s",
             request_data
         )
     except ConnectionError as e:
@@ -61,5 +75,5 @@ def example_contribution(
     # RETURN OBJECT
     return {
         "success": True,
-        "message": "Example Contribution Successful"
+        "message": f"{contribution_type.value} Contribution Successful"
     }

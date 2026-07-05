@@ -13,8 +13,7 @@ from backend.routes.api.v1 import (
     topics
 )
 from backend.routes.contribute import (
-    question,
-    example
+    contribute
 )
 
 from slowapi.middleware import SlowAPIMiddleware
@@ -40,7 +39,7 @@ tags_metadata = [
     },
     {
         "name": "Contribute",
-        "description": "Admin-only endpoints for contributing new content (questions) to the database. Requires a valid `admin_token`."
+        "description": "Admin-only endpoints for contributing new content (questions and examples) to the database. Requires a valid `admin_token`."
     },
     {
         "name": "Get API",
@@ -71,8 +70,7 @@ app.include_router(examples.app)
 app.include_router(questions.app)
 app.include_router(formulae.app)
 
-app.include_router(question.app)
-app.include_router(example.app)
+app.include_router(contribute.app)
 
 # APPLYING LIMITING
 app.state.limiter = limiter
