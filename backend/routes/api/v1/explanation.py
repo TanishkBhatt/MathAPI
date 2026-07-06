@@ -44,7 +44,7 @@ def explain(
         ),
         include_sources: bool = Query(
             True,
-            description="Whether to include learning and image sources for the topic in the response."
+            description="Whether to include learning sources for the topic in the response."
         ),
         database: MongoClient = Depends(get_db)
     ) -> dict[str, Any]:

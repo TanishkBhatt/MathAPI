@@ -29,7 +29,7 @@ def explain_topic(
     if not authenticate:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Unauthorized Access"
+            detail="Unauthorized Access - Valid API Key Required"
         )
     
     # RETRIVEING DATA
@@ -81,14 +81,14 @@ def explain_topic(
                 "examples",
                 {"topic_id": topic_id}
             )
-            explanation["examples"] = examples[:2] if examples else []
+            explanation["solved_examples"] = examples[:2] if examples else []
         except ConnectionError as e:
             raise HTTPException(
                 status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
                 detail=f"{str(e)}"
             )
     else:
-        explanation["examples"] = []
+        explanation["solved_examples"] = []
 
     if include_questions:
         try:
@@ -96,7 +96,10 @@ def explain_topic(
                 database,
                 "datasets",
                 "questions",
-                {"topic_id": topic_id}
+                {
+                    "topic_id": topic_id,
+                    "difficulty": "Beginner"
+                }
             )
             explanation["try_yourself_questions"] = sample(questions, min(3, len(questions))) if questions else []
         except ConnectionError as e:
@@ -116,7 +119,6 @@ def explain_topic(
                 {"topic_id": topic_id}
             )
             explanation["learning_sources"] = source_data[0]["learning_sources"] if source_data else []
-            explanation["source_images"] = source_data[0]["source_images"] if source_data else []
         except ConnectionError as e:
             raise HTTPException(
                 status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -124,7 +126,6 @@ def explain_topic(
             )
     else:
         explanation["learning_sources"] = []
-        explanation["source_images"] = []
 
     # RETURN OBJECT
     return {

@@ -23,7 +23,7 @@ def get_topics(
     if not authenticate:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Unauthorized Access"
+            detail="Unauthorized Access - Valid API Key Required"
         )
     
     # RETRIEVING ALL TOPICS

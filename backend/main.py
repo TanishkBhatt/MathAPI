@@ -10,7 +10,8 @@ from backend.routes.api.v1 import (
     examples,
     questions,
     formulae,
-    topics
+    topics,
+    sources
 )
 from backend.routes.contribute import (
     contribute
@@ -69,6 +70,7 @@ app.include_router(explanation.app)
 app.include_router(examples.app)
 app.include_router(questions.app)
 app.include_router(formulae.app)
+app.include_router(sources.app)
 
 app.include_router(contribute.app)
 

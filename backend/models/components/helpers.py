@@ -56,7 +56,3 @@ class SolutionSource(BaseModel):
     source: str
     type: str
     link: str
-
-class SourceImage(BaseModel):
-    title: str
-    link: str

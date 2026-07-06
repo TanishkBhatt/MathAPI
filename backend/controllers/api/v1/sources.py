@@ -4,7 +4,7 @@ from typing import Any, List, Dict
 from backend.utils.database import get_documents
 from backend.utils.helpers import verify_api_key
 
-def get_formulae(
+def get_sources(
         database: MongoClient, 
         api_key: str|None, 
         topic_id: str
@@ -29,10 +29,10 @@ def get_formulae(
 
     # RETRIEVING DATA
     try:
-        formulae_data: List[Dict[str, Any]] = get_documents(
+        sources_data: List[Dict[str, Any]] = get_documents(
             database,
             "datasets",
-            "formulae",
+            "sources",
             {"topic_id": topic_id}
         )
     except ConnectionError as e:
@@ -42,8 +42,8 @@ def get_formulae(
         )
 
     # VALIDATING IS TOPIC_ID VALID OR NOT
-    formulae: List[Dict[str, Any]] = formulae_data[0]["formulae"] if formulae_data else []
-    if not formulae:
+    learning_sources: List[Dict[str, Any]] = sources_data[0]["learning_sources"] if sources_data else []
+    if not learning_sources:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Topic With ID - '{topic_id}' Not Found"
@@ -53,6 +53,6 @@ def get_formulae(
     return {
         "success": True,
         "message": "Data Successfully Retrieved",
-        "total_formulae": len(formulae),
-        "formulae": formulae
+        "total_sources": len(learning_sources),
+        "learning_sources": learning_sources
     }

@@ -16,7 +16,7 @@ def contribution(
     if admin_token != settings.ADMIN_TOKEN:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Unauthorized Access"
+            detail="Unauthorized Access - Valid ADMIN_TOKEN Required"
         )
     
     # VALIDATING IS THE TOPIC_ID VALID
@@ -25,7 +25,7 @@ def contribution(
             database,
             "datasets",
             "topics",
-            {"topic_id": request_data["topic_id"]}
+            {"topic_id": request_data.get("topic_id", "Unknown")}
         )
     except ConnectionError as e:
         raise HTTPException(
@@ -36,7 +36,7 @@ def contribution(
     if not topic:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Topic With ID - '{request_data["topic_id"]}' Not Found"
+            detail=f"Topic With ID - '{request_data.get('topic_id', 'Unknown')}' Not Found"
         )
 
     # VALIDATING THE CONTRIBUTION DATA

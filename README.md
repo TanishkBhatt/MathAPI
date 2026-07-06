@@ -24,7 +24,13 @@ Access fully solved examples with key observations, concept mappings, formula re
 Retrieve multiple-choice questions with difficulty and type filters to test your understanding.
 
 ### Formula Sheets
-Fetch concise formula collections for any topic in both plain text and LaTeX format.
+Fetches concise formula collections for any topic in both plain text and LaTeX format.
+
+### Learning Sources
+Fetches selected learning sources (website/ youtube video) for that particular topic.
+
+### LaTeX Support
+All mathematical expressions are LaTeX coded for better rendering and user experience.
 
 ### API Key Authentication
 Register with a username and email to receive a unique API key for authenticated access.
@@ -34,9 +40,6 @@ A user can hit only 100 GET requests on Get API routes with an API Key per hour.
 
 ### Admin Contribution
 Authorized admins can contribute new questions and examples directly to the database.
-
-### Rich Metadata
-Each topic response includes counts of available explanations, examples, questions, formulae, and learning sources.
 
 ### Interactive Docs
 Full Swagger UI at `/docs` and ReDoc at `/redoc`.
@@ -50,10 +53,11 @@ Full Swagger UI at `/docs` and ReDoc at `/redoc`.
 | `GET` | `/` | API health check with service info and quick-start guide | ❌ |
 | `POST` | `/auth` | Register with username + email, receive an API key | ❌ |
 | `GET` | `/api/v1/topics` | List all topics with metadata and resource counts | ✅ |
-| `GET` | `/api/v1/explanation` | Get topic explanation with optional formulae, examples, questions, sources | ✅ |
+| `GET` | `/api/v1/explanation` | Get topic explanation with optional formulae, examples, questions, learning sources | ✅ |
 | `GET` | `/api/v1/examples` | Get worked examples for a topic | ✅ |
 | `GET` | `/api/v1/questions` | Get practice questions with optional difficulty & type filters | ✅ |
-| `GET` | `/api/v1/formulae` | Get all formulae for a topic (plain text + LaTeX) | ✅ |
+| `GET` | `/api/v1/formulae` | Get all formulae for a topic | ✅ |
+| `GET` | `/api/v1/sources` | Get all learning sources for a topic | ✅ |
 | `POST` | `/contribute` | Admin-only — contribute a new question/example to the database | 👑 |
 
 ### Quick Start
@@ -87,8 +91,7 @@ MathAPI/
 │   │       └── auth.py
 │   │   └── contribute/             # Admin contribution logic
 │   │       └── contribute.py
-│   │   └── api/
-│   │       └── v1/                 # Main Backend Logic
+│   │   └── api/v1/                 # Main Backend Logic
 │   │
 │   ├── models/
 │   │   ├── home.py                 # Home response schema
@@ -96,8 +99,7 @@ MathAPI/
 │   │       └── auth.py
 │   │   └── contribute/             # Contribution schemas
 │   │       └── contribute.py
-│   │   ├── api/
-│   │   │   └── v1/                 # API response Pydantic models
+│   │   ├── api/v1/                 # API response Pydantic models
 │   │   └── components/
 │   │       ├── helpers.py          # Shared enums and base models
 │   │       └── main.py             # Composite models (Topic, Question, Explain)
@@ -107,16 +109,16 @@ MathAPI/
 │   │   └── auth/
 │   │       └── auth.py             # POST /auth
 │   │   └── contribute/
-│   │       └── contribute.py          # POST /contribute
-│   │   └── api/
-│   │       └── v1/
+│   │       └── contribute.py       # POST /contribute
+│   │   └── api/v1/
 │   │           ├── get_topics.py   # GET /topics
 │   │           ├── explanation.py  # GET /explain
 │   │           ├── examples.py     # GET /examples
 │   │           ├── questions.py    # GET /questions
-│   │           └── formulae.py     # GET /formulae
+│   │           ├── formulae.py     # GET /formulae
+│   │           └── sources.py      # GET /sources
 │   │
-│   └── utils/                      # Database, API Key and limiter functions
+│   └── utils/                      # Database, API auth and limiter functions
 │
 ├── pyproject.toml                  # UV based dependency management
 ├── requirements.txt                # PIP based dependency management

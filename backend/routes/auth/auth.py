@@ -15,7 +15,7 @@ app = APIRouter(
     response_model=AuthResponse,
     status_code=status.HTTP_201_CREATED,
     summary="Register and Obtain API Key",
-    description="Registers a new user with a unique username and email address, then returns a generated API key. The API key is required for authenticated access to higher rate limits and additional filtering capabilities on the GET endpoints. Username and email must be unique — duplicates are rejected with a 400 error.",
+    description="Registers a new user with a unique username and email address, then returns a generated API key. The API key is required for authenticated access on the GET endpoints.",
     response_description="Registration confirmation with the generated API key, username, and optional expiry information."
 )
 def auth(

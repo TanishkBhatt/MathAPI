@@ -44,7 +44,6 @@ class Explain(BaseModel):
     applications: List[str]
     explanation: List[Explanation]
     formulae: List[Formula]
-    examples: List[Example]
+    solved_examples: List[Example]
     try_yourself_questions: List[Question]
     learning_sources: List[LearningSource]
-    source_images: List[SourceImage]
