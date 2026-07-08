@@ -6,9 +6,7 @@ from backend.utils.helpers import validate_api_key
 
 def get_topics(
         database: MongoClient,
-        api_key: str | None,
-        skip: int = 0,
-        limit: int = 20
+        api_key: str | None
     ) -> Dict[str, Any]:
     
     validate_api_key(database, api_key)
@@ -25,8 +23,6 @@ def get_topics(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail=f"{str(e)}"
         )
-    
-    total_topics = len(topics)
     
     # RETRIEVING ALL TOPICS METADATA
     for topic in topics:
@@ -72,15 +68,10 @@ def get_topics(
         topic["examples_available"] = len(examples_data)
         topic["questions_available"] = len(questions_data)
     
-    # APPLY PAGINATION
-    paginated_topics = topics[skip:skip + limit]
-    
     # RETURN OBJECT
     return {
         "success": True,
         "message": "Data Successfully Retrieved",
-        "total_topics": total_topics,
-        "page": skip // limit + 1,
-        "per_page": limit,
-        "topics": paginated_topics
+        "total_topics": len(topics),
+        "topics": topics
     }
