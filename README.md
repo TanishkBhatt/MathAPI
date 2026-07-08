@@ -71,12 +71,12 @@ Full Swagger UI at `/docs` and ReDoc at `/redoc`.
 
 ### Use the API key to access topics
 ```bash
-  curl -X "https://mathapi.vercel.app/api/v1/topics?api_key=YOUR_API_KEY"
+  curl "https://mathapi.vercel.app/api/v1/topics?api_key=YOUR_API_KEY"
 ```
 
 ### Explore a specific topic (includes optional Examples and Questions)
 ```bash
-  curl -X "https://mathapi.vercel.app/api/v1/explanation?api_key=YOUR_API_KEY&topic_id=quadratic-equation&include_examples=true&include_questions=true"
+  curl "https://mathapi.vercel.app/api/v1/explanation?api_key=YOUR_API_KEY&topic_id=quadratic-equation&include_examples=true&include_questions=true"
 ```
 
 ---

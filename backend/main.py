@@ -20,9 +20,7 @@ from backend.routes.contribute import (
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi.middleware import SlowAPIMiddleware
 from slowapi.errors import RateLimitExceeded
-from slowapi.extension import _rate_limit_exceeded_handler
 from fastapi.responses import JSONResponse
-from slowapi.errors import RateLimitExceeded
 
 from backend.utils.limiter import (
     limiter,
@@ -86,10 +84,6 @@ app.add_middleware(
 
 # APPLYING LIMITING
 app.state.limiter = limiter
-app.add_exception_handler(
-        RateLimitExceeded, 
-        _rate_limit_exceeded_handler    # type: ignore
-    )
 app.add_middleware(SlowAPIMiddleware)
 
 # CUSTOM LIMIT EXCEEDED HANDLER
