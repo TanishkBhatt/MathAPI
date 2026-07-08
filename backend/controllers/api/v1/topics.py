@@ -2,29 +2,16 @@ from fastapi import HTTPException, status
 from pymongo import MongoClient
 from typing import List, Dict, Any
 from backend.utils.database import get_documents
-from backend.utils.helpers import verify_api_key
+from backend.utils.helpers import validate_api_key
 
 def get_topics(
-        database: MongoClient, 
-        api_key: str|None
+        database: MongoClient,
+        api_key: str | None,
+        skip: int = 0,
+        limit: int = 20
     ) -> Dict[str, Any]:
     
-    # VERIFIYING API KEY
-    authenticate: bool = False
-    if api_key:
-        try:
-            authenticate = verify_api_key(
-                database,
-                api_key
-            )
-        except Exception:
-            pass
-    
-    if not authenticate:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Unauthorized Access - Valid API Key Required"
-        )
+    validate_api_key(database, api_key)
     
     # RETRIEVING ALL TOPICS
     try:
@@ -38,6 +25,8 @@ def get_topics(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail=f"{str(e)}"
         )
+    
+    total_topics = len(topics)
     
     # RETRIEVING ALL TOPICS METADATA
     for topic in topics:
@@ -83,10 +72,15 @@ def get_topics(
         topic["examples_available"] = len(examples_data)
         topic["questions_available"] = len(questions_data)
     
+    # APPLY PAGINATION
+    paginated_topics = topics[skip:skip + limit]
+    
     # RETURN OBJECT
     return {
         "success": True,
         "message": "Data Successfully Retrieved",
-        "total_topics": len(topics),
-        "topics": topics
+        "total_topics": total_topics,
+        "page": skip // limit + 1,
+        "per_page": limit,
+        "topics": paginated_topics
     }

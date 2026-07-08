@@ -62,17 +62,21 @@ Full Swagger UI at `/docs` and ReDoc at `/redoc`.
 
 ### Quick Start
 
+### Get your API key
 ```bash
-# Get your API key
-curl -X POST "https://mathapi.vercel.app/auth" \
-  -H "Content-Type: application/json" \
-  -d '{"username": "your_username", "email": "your@email.com"}'
+  curl -X POST "https://mathapi.vercel.app/auth" \
+    -H "Content-Type: application/json" \
+    -d '{"username": "your_username", "email": "your@email.com"}'
+```
 
-# Use the API key to access topics
-curl -X "https://mathapi.vercel.app/api/v1/topics?api_key=YOUR_API_KEY"
+### Use the API key to access topics
+```bash
+  curl -X "https://mathapi.vercel.app/api/v1/topics?api_key=YOUR_API_KEY"
+```
 
-# Explore a specific topic
-curl -X "https://mathapi.vercel.app/api/v1/explanation?api_key=YOUR_API_KEY&topic_id=quadratic-equation"
+### Explore a specific topic (includes optional Examples and Questions)
+```bash
+  curl -X "https://mathapi.vercel.app/api/v1/explanation?api_key=YOUR_API_KEY&topic_id=quadratic-equation&include_examples=true&include_questions=true"
 ```
 
 ---
@@ -137,9 +141,27 @@ MathAPI/
 | **Server** | [Uvicorn](https://www.uvicorn.org/) — ASGI server |
 | **Database** | [MongoDB](https://www.mongodb.com/) via [PyMongo](https://pymongo.readthedocs.io/) |
 | **Validation** | [Pydantic v2](https://docs.pydantic.dev/) — data validation & settings |
-| **Auth** | API key-based (SHA-256 hashed with **secrets.token_urlsafe**) |
+| **Auth** | API key-based (reusable FastAPI dependency) |
+| **Rate Limiting** | [SlowAPI](https://slowapi.readthedocs.io/) — 100 requests/hour per key |
 | **Deployment** | [Vercel](https://vercel.com/) — serverless Python functions |
 | **Environment** | Python 3.12+, managed with [uv](https://docs.astral.sh/uv/) |
+
+### Running Locally
+
+### Install dependencies
+```bash
+uv sync
+```
+
+### Start development server with hot reload
+```bash
+uv run dev
+```
+
+### Start production server
+```bash
+uv run start
+```
 
 ---
 

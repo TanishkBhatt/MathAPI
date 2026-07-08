@@ -16,7 +16,7 @@ app = APIRouter(
     response_model=GetFormulaeResponse,
     status_code=status.HTTP_200_OK,
     summary="Get All Formulae",
-    description="Fetches all formulae for a specific mathematics topic, including both plain text and LaTeX code for better rendering. Requires a valid `api_key` for access.",
+    description="Fetches all formulae for a specific mathematics topic, LaTeX code for better rendering. Requires a valid `api_key` for access.",
     response_description="List of all formulae of a particular topic."
 )
 
@@ -24,7 +24,7 @@ app = APIRouter(
 
 def formulae(
         request: Request,
-        api_key: str|None = None,
+        api_key: str | None = Query(None, description="Your API key for authentication"),
         topic_id: str = Query(
             ...,
             description="Unique identifier of the mathematics topic to retrieve formulae for. Must match a valid `topic_id` from the `/get-topics` endpoint.",

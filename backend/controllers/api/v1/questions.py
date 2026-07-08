@@ -4,34 +4,19 @@ from typing import Any, List, Dict
 from random import sample
 from backend.models.components.helpers import Difficulty, QuestionType
 from backend.utils.database import get_documents
-from backend.utils.helpers import verify_api_key
+from backend.utils.helpers import validate_api_key
 
 def get_questions(
-        database: MongoClient, 
-        api_key: str|None, 
+        database: MongoClient,
+        api_key: str | None,
         topic_id: str, 
         limit: int, 
         difficulty: Difficulty|None, 
         question_type: QuestionType|None
     ) -> Dict[str, Any]:
     
-    # VERIFIYING API KEY
-    authenticate: bool = False
-    if api_key:
-        try:
-            authenticate = verify_api_key(
-                database,
-                api_key
-            )
-        except Exception:
-            pass
-
-    if not authenticate:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Unauthorized Access - Valid API Key Required"
-        )
-
+    validate_api_key(database, api_key)
+    
     # RETRIEVING DATA
     try:
         questions: List[Dict[str, Any]] = get_documents(

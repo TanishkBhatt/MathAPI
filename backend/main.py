@@ -17,6 +17,7 @@ from backend.routes.contribute import (
     contribute
 )
 
+from fastapi.middleware.cors import CORSMiddleware
 from slowapi.middleware import SlowAPIMiddleware
 from slowapi.errors import RateLimitExceeded
 from slowapi.extension import _rate_limit_exceeded_handler
@@ -73,6 +74,15 @@ app.include_router(formulae.app)
 app.include_router(sources.app)
 
 app.include_router(contribute.app)
+
+# CORS MIDDLEWARE
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # APPLYING LIMITING
 app.state.limiter = limiter

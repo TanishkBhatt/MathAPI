@@ -25,7 +25,7 @@ app = APIRouter(
 
 def questions(
         request: Request,
-        api_key: str|None = None,
+        api_key: str | None = Query(None, description="Your API key for authentication"),
         topic_id: str = Query(
             ...,
             description="Unique identifier of the mathematics topic to retrieve questions for. Must match a valid `topic_id` from the `/get-topics` endpoint.",
@@ -34,7 +34,7 @@ def questions(
         limit: int = Query(
             10,
             ge=1,
-            description="Maximum number of questions to return. Requires a valid `api_key` to use."
+            description="Maximum number of questions to return."
         ),
         difficulty: Difficulty | None = Query(
             None,

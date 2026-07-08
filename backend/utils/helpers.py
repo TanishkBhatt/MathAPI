@@ -1,6 +1,7 @@
 import hashlib
 import secrets
 import time
+from fastapi import HTTPException, status
 from pymongo import MongoClient
 
 # GENERATE API KEY
@@ -33,3 +34,23 @@ def verify_api_key(
         return False
 
     return True
+
+# VALIDATE API KEY AND RAISE HTTP EXCEPTION
+def validate_api_key(database: MongoClient, api_key: str | None) -> None:
+    if not api_key:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Unauthorized Access - Valid API Key Required"
+        )
+    try:
+        authenticated = verify_api_key(database, api_key)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Error In Connecting With Database"
+        )
+    if not authenticated:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Unauthorized Access - Valid API Key Required"
+        )

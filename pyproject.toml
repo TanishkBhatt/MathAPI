@@ -13,3 +13,7 @@ dependencies = [
     "pymongo>=4.17.0",
     "slowapi>=0.1.9",
 ]
+
+[tool.uv.scripts]
+dev = "uvicorn backend.main:app --reload"
+start = "uvicorn backend.main:app"

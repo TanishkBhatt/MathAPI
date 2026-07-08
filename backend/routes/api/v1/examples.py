@@ -24,7 +24,7 @@ app = APIRouter(
 
 def examples(
         request: Request,
-        api_key: str|None = None,
+        api_key: str | None = Query(None, description="Your API key for authentication"),
         topic_id: str = Query(
             ...,
             description="Unique identifier of the mathematics topic to retrieve examples for. Must match a valid `topic_id` from the `/get-topics` endpoint.",

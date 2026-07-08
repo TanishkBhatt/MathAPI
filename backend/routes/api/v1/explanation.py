@@ -24,26 +24,26 @@ app = APIRouter(
 
 def explain(
         request: Request,
-        api_key: str|None = None,
+        api_key: str | None = Query(None, description="Your API key for authentication"),
         topic_id: str = Query(
             ...,
             description="Unique identifier of the mathematics topic to retrieve. Must match a valid `topic_id` from the `/get-topics` endpoint.",
             examples=["quadratic-equation"]
         ),
         include_formulae: bool = Query(
-            True,
+            False,
             description="Whether to include all formulae related to that topic in the response."
         ),
         include_examples: bool = Query(
-            True,
+            False,
             description="Whether to include 2 worked examples for the topic in the response."
         ),
         include_questions: bool = Query(
-            True,
+            False,
             description="Whether to include 3 practice questions for the topic in the response."
         ),
         include_sources: bool = Query(
-            True,
+            False,
             description="Whether to include learning sources for the topic in the response."
         ),
         database: MongoClient = Depends(get_db)

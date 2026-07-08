@@ -2,31 +2,16 @@ from fastapi import HTTPException, status
 from pymongo import MongoClient
 from typing import Any, List, Dict
 from backend.utils.database import get_documents
-from backend.utils.helpers import verify_api_key
+from backend.utils.helpers import validate_api_key
 
 def get_formulae(
-        database: MongoClient, 
-        api_key: str|None, 
+        database: MongoClient,
+        api_key: str | None,
         topic_id: str
     ) -> Dict[str, Any]:
     
-    # VERIFIYING API KEY
-    authenticate: bool = False
-    if api_key:
-        try:
-            authenticate = verify_api_key(
-                database,
-                api_key
-            )
-        except Exception:
-            pass
+    validate_api_key(database, api_key)
     
-    if not authenticate:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Unauthorized Access - Valid API Key Required"
-        )
-
     # RETRIEVING DATA
     try:
         formulae_data: List[Dict[str, Any]] = get_documents(

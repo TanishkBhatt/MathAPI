@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, status, Depends
+from fastapi import APIRouter, Request, status, Depends, Query
 from typing import Any
 from pymongo import MongoClient
 from backend.models.api.v1.topics import GetAllTopicsResponse
@@ -24,7 +24,9 @@ app = APIRouter(
 
 def topics(
         request: Request,
-        api_key: str|None = None, 
+        api_key: str | None = Query(None, description="Your API key for authentication"),
+        skip: int = Query(0, ge=0, description="Number of topics to skip"),
+        limit: int = Query(10, ge=1, description="Maximum number of topics to return"),
         database: MongoClient = Depends(get_db)
     ) -> dict[str, Any]:
-    return get_topics(database, api_key)
+    return get_topics(database, api_key, skip, limit)
