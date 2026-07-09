@@ -1,6 +1,6 @@
 [project]
 name = "mathapi"
-version = "0.1.0"
+version = "1.0.0"
 description = "api services"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -14,6 +14,11 @@ dependencies = [
     "slowapi>=0.1.9",
 ]
 
-[tool.uv.scripts]
+[dependency-groups]
+dev = [
+    "uv-script>=0.1.9",
+]
+
+[tool.uvs.scripts]
 dev = "uvicorn backend.main:app --reload"
 start = "uvicorn backend.main:app"

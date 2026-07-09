@@ -9,7 +9,7 @@ def contribution(
         database: MongoClient, 
         admin_token: str, 
         contribution_type: ContributionType,
-        request_data: Dict[str, Any]
+        request_data: List[Dict[str, Any]]
     ) -> Dict[str, Any]:
 
     # VALIDATING ADMIN_TOKEN
@@ -20,12 +20,18 @@ def contribution(
         )
     
     # VALIDATING IS THE TOPIC_ID VALID
+    for data in request_data:
+        if "topic_id" not in data:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail="Missing Required Field - 'topic_id' is required in each contribution data"
+            )
     try:
         topic: List[Dict[str, Any]] = get_documents(
             database,
             "datasets",
             "topics",
-            {"topic_id": request_data.get("topic_id", "Unknown")}
+            {"topic_id": data.get("topic_id", "Unknown")}
         )
     except ConnectionError as e:
         raise HTTPException(
@@ -36,13 +42,13 @@ def contribution(
     if not topic:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Topic With ID - '{request_data.get('topic_id', 'Unknown')}' Not Found"
+            detail=f"Topic With ID - '{data.get('topic_id', 'Unknown')}' Not Found"
         )
 
     # VALIDATING THE CONTRIBUTION DATA
     if contribution_type.value == "Question":
         try:
-            QuestionContributionSchema(**request_data)
+            QuestionContributionSchema(**data)
         except Exception as e:
             raise HTTPException(
                 status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
@@ -51,7 +57,7 @@ def contribution(
 
     if contribution_type.value == "Example":
         try:
-            ExampleContributionSchema(**request_data)
+            ExampleContributionSchema(**data)
         except Exception as e:
             raise HTTPException(
                 status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
@@ -64,7 +70,7 @@ def contribution(
             database,
             "datasets",
             f"{contribution_type.value.lower()}s",
-            request_data
+            data
         )
     except ConnectionError as e:
         raise HTTPException(
@@ -75,5 +81,5 @@ def contribution(
     # RETURN OBJECT
     return {
         "success": True,
-        "message": f"{contribution_type.value} Contribution Successful"
+        "message": f"{contribution_type.value}s Contribution Successful"
     }

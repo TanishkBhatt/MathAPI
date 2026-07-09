@@ -2,6 +2,8 @@
 
 [![Documentations](https://img.shields.io/badge/Documentation-005571?style=for-the-badge&logo=fastapi&logoColor=white)](https://mathapi.vercel.app/docs)
 
+- MathAPI Documentation
+
 ![MathAPI Docs Screenshot](img/docs.png)
 
 ## Introduction
@@ -106,7 +108,7 @@ MathAPI/
 │   │   ├── api/v1/                 # API response Pydantic models
 │   │   └── components/
 │   │       ├── helpers.py          # Shared enums and base models
-│   │       └── main.py             # Composite models (Topic, Question, Explain)
+│   │       └── main.py             # Composite models (Topic, Explain, Example, Question)
 │   │
 │   ├── routes/
 │   │   ├── home.py                 # GET /
@@ -155,12 +157,12 @@ uv sync
 
 ### Start development server with hot reload
 ```bash
-uv run dev
+uv run uvs dev
 ```
 
 ### Start production server
 ```bash
-uv run start
+uv run uvs start
 ```
 
 ---
@@ -176,17 +178,19 @@ Contribute questions/examples directly to the database via the authenticated end
 ```bash
 curl -X POST "https://mathapi.vercel.app/contribute?admin_token=YOUR_ADMIN_TOKEN&contribution_type=Question" \
   -H "Content-Type: application/json" \
-  -d '{
-    "topic_id": "quadratic-equation",
-    "question": "Your question here...",
-    "difficulty": "Intermediate",
-    "question_type": ["Conceptual"],
-    "options": {"A": "...", "B": "...", "C": "...", "D": "..."},
-    "expected_time_limit": "2 min",
-    "hint": "Think about...",
-    "answer": "A",
-    "solution_sources": [{"source": "Textbook", "type": "Book", "link": "..."}]
-  }'
+  -d '[
+    {
+      "topic_id": "quadratic-equation",
+      "question": "Your question here...",
+      "difficulty": "Intermediate",
+      "question_type": ["Conceptual"],
+      "options": {"A": "...", "B": "...", "C": "...", "D": "..."},
+      "expected_time_limit": "2 min",
+      "hint": "Think about...",
+      "answer": "A",
+      "solution_sources": [{"source": "Textbook", "type": "Book", "link": "..."}]
+    }
+  ]'
 ```
 
 ---
