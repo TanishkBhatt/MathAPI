@@ -36,7 +36,8 @@ def import_data(
         db_conn: MongoClient, 
         db_name: str, 
         coll_name: str, 
-        data: Dict[str, Any]
+        data: Dict[str, Any] | List[Dict[str, Any]],
+        data_type: str = "Dict"
     ) -> None:
     
     client = db_conn
@@ -44,6 +45,9 @@ def import_data(
     coll = db[coll_name]
 
     try:
-        coll.insert_one(data)
+        if data_type == "List":
+            coll.insert_many(data)
+        else:
+            coll.insert_one(data)
     except Exception as e:
         raise ConnectionError("Error In Connecting With Database")

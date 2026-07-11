@@ -70,7 +70,8 @@ def contribution(
             database,
             "datasets",
             f"{contribution_type.value.lower()}s",
-            data
+            request_data,
+            data_type="List"
         )
     except ConnectionError as e:
         raise HTTPException(
