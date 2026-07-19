@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request, status, Depends, Query
 from typing import Any
-from pymongo import MongoClient
+from motor.motor_asyncio import AsyncIOMotorClient
 from backend.models.api.v1.topics import GetAllTopicsResponse
 from backend.utils.database import get_db
 from backend.controllers.api.v1.topics import get_topics
@@ -22,9 +22,9 @@ app = APIRouter(
 
 @limiter.limit("100/hour")
 
-def topics(
+async def topics(
         request: Request,
         api_key: str | None = Query(None, description="Your API key for authentication"),
-        database: MongoClient = Depends(get_db)
+        database: AsyncIOMotorClient = Depends(get_db)
     ) -> dict[str, Any]:
-    return get_topics(database, api_key)
+    return await get_topics(database, api_key)

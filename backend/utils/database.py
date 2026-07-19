@@ -1,18 +1,16 @@
-from pymongo import MongoClient
+from motor.motor_asyncio import AsyncIOMotorClient
 from typing import List, Dict, Any
 from backend.config import settings
 
-_client = MongoClient(settings.DB_CONNECTION_URL)
+_client = AsyncIOMotorClient(settings.DB_CONNECTION_URL)
 
-# GET DATABASE CONNECTION
-def get_db() -> MongoClient:
+def get_db() -> AsyncIOMotorClient:
     return _client
 
-# GET DOCUMENTS FROM DATABASE
-def get_documents(
-        db_conn: MongoClient, 
-        db_name: str, 
-        coll_name: str, 
+async def get_documents(
+        db_conn: AsyncIOMotorClient,
+        db_name: str,
+        coll_name: str,
         filter_query: dict[str, str] | None = None
     ) -> List[Dict[str, Any]]:
 
@@ -22,7 +20,7 @@ def get_documents(
 
     query = filter_query or {}
     try:
-        data: List[Dict[str, Any]] = list(coll.find(query))
+        data: List[Dict[str, Any]] = await coll.find(query).to_list(length=None)
     except Exception as e:
         raise ConnectionError("Error In Connecting With Database")
 
@@ -31,23 +29,22 @@ def get_documents(
 
     return data
 
-# INSERT DOCUMENT INTO DATABASE
-def import_data(
-        db_conn: MongoClient, 
-        db_name: str, 
-        coll_name: str, 
+async def import_data(
+        db_conn: AsyncIOMotorClient,
+        db_name: str,
+        coll_name: str,
         data: Dict[str, Any] | List[Dict[str, Any]],
         data_type: str = "Dict"
     ) -> None:
-    
+
     client = db_conn
     db = client[db_name]
     coll = db[coll_name]
 
     try:
         if data_type == "List":
-            coll.insert_many(data)
+            await coll.insert_many(data)
         else:
-            coll.insert_one(data)
+            await coll.insert_one(data)
     except Exception as e:
         raise ConnectionError("Error In Connecting With Database")

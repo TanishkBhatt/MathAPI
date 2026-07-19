@@ -1,19 +1,20 @@
 from fastapi import HTTPException, status
-from pymongo import MongoClient
+from motor.motor_asyncio import AsyncIOMotorClient
+from asyncio import gather
 from typing import List, Dict, Any
 from backend.utils.database import get_documents
 from backend.utils.helpers import validate_api_key
 
-def get_topics(
-        database: MongoClient,
+async def get_topics(
+        database: AsyncIOMotorClient,
         api_key: str | None
     ) -> Dict[str, Any]:
     
-    validate_api_key(database, api_key)
+    await validate_api_key(database, api_key)
     
     # RETRIEVING ALL TOPICS
     try:
-        topics: List[Dict[str, Any]] = get_documents(
+        topics: List[Dict[str, Any]] = await get_documents(
             database,
             "datasets",
             "topics"
@@ -29,32 +30,11 @@ def get_topics(
         topic_id = topic["topic_id"]
         
         try:
-            formulae_data = get_documents(
-                database,
-                "datasets",
-                "formulae",
-                {"topic_id": topic_id}
-            )
-
-            sources_data = get_documents(
-                database,
-                "datasets",
-                "sources",
-                {"topic_id": topic_id}
-            )
-
-            examples_data = get_documents(
-                database,
-                "datasets",
-                "examples",
-                {"topic_id": topic_id}
-            )
-
-            questions_data = get_documents(
-                database,
-                "datasets",
-                "questions",
-                {"topic_id": topic_id}
+            formulae_data, sources_data, examples_data, questions_data = await gather(
+                get_documents(database, "datasets", "formulae", {"topic_id": topic_id}),
+                get_documents(database, "datasets", "sources", {"topic_id": topic_id}),
+                get_documents(database, "datasets", "examples", {"topic_id": topic_id}),
+                get_documents(database, "datasets", "questions", {"topic_id": topic_id})
             ) 
 
         except ConnectionError as e:
@@ -67,7 +47,7 @@ def get_topics(
         topic["formulae_available"] = len(formulae_data[0].get("formulae", [])) if formulae_data else 0
         topic["examples_available"] = len(examples_data)
         topic["questions_available"] = len(questions_data)
-    
+
     # RETURN OBJECT
     return {
         "success": True,

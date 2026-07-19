@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request, status, Depends, Query
 from typing import Any
-from pymongo import MongoClient
+from motor.motor_asyncio import AsyncIOMotorClient
 from backend.models.api.v1.explanation import ExplanationResponse
 from backend.utils.database import get_db
 from backend.controllers.api.v1.explanation import explain_topic
@@ -22,7 +22,7 @@ app = APIRouter(
 
 @limiter.limit("100/hour")
 
-def explain(
+async def explain(
         request: Request,
         api_key: str | None = Query(None, description="Your API key for authentication"),
         topic_id: str = Query(
@@ -46,6 +46,6 @@ def explain(
             False,
             description="Whether to include learning sources for the topic in the response."
         ),
-        database: MongoClient = Depends(get_db)
+        database: AsyncIOMotorClient = Depends(get_db)
     ) -> dict[str, Any]:
-    return explain_topic(database, api_key, topic_id, include_formulae, include_examples, include_questions, include_sources)
+    return await explain_topic(database, api_key, topic_id, include_formulae, include_examples, include_questions, include_sources)

@@ -1,20 +1,20 @@
 from fastapi import HTTPException, status
-from pymongo import MongoClient
+from motor.motor_asyncio import AsyncIOMotorClient
 from typing import Any, List, Dict
 from backend.utils.database import get_documents
 from backend.utils.helpers import validate_api_key
 
-def get_sources(
-        database: MongoClient,
+async def get_sources(
+        database: AsyncIOMotorClient,
         api_key: str | None,
         topic_id: str
     ) -> Dict[str, Any]:
     
-    validate_api_key(database, api_key)
+    await validate_api_key(database, api_key)
     
     # RETRIEVING DATA
     try:
-        sources_data: List[Dict[str, Any]] = get_documents(
+        sources_data: List[Dict[str, Any]] = await get_documents(
             database,
             "datasets",
             "sources",

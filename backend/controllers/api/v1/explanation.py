@@ -1,12 +1,12 @@
 from fastapi import HTTPException, status
-from pymongo import MongoClient
+from motor.motor_asyncio import AsyncIOMotorClient
 from typing import List, Dict, Any
 from random import sample
 from backend.utils.database import get_documents
 from backend.utils.helpers import validate_api_key
 
-def explain_topic(
-        database: MongoClient,
+async def explain_topic(
+        database: AsyncIOMotorClient,
         api_key: str | None,
         topic_id: str, 
         include_formulae: bool, 
@@ -15,11 +15,11 @@ def explain_topic(
         include_sources: bool
     ) -> Dict[str, Any]:
     
-    validate_api_key(database, api_key)
+    await validate_api_key(database, api_key)
     
     # RETRIVEING DATA
     try:
-        explanations: List[Dict[str, Any]] = get_documents(
+        explanations: List[Dict[str, Any]] = await get_documents(
             database,
             "datasets",
             "explain",
@@ -43,7 +43,7 @@ def explain_topic(
     # FORMULAE, EXAMPLES, QUESTIONS LEARNING SOURCES INCLUSION
     if include_formulae:
         try:
-            formulae: List[Dict[str, Any]] = get_documents(
+            formulae: List[Dict[str, Any]] = await get_documents(
                 database,
                 "datasets",
                 "formulae",
@@ -60,7 +60,7 @@ def explain_topic(
 
     if include_examples:
         try:
-            examples: List[Dict[str, Any]] = get_documents(
+            examples: List[Dict[str, Any]] = await get_documents(
                 database,
                 "datasets",
                 "examples",
@@ -77,7 +77,7 @@ def explain_topic(
 
     if include_questions:
         try:
-            questions: List[Dict[str, Any]] = get_documents(
+            questions: List[Dict[str, Any]] = await get_documents(
                 database,
                 "datasets",
                 "questions",
@@ -97,7 +97,7 @@ def explain_topic(
 
     if include_sources:
         try:
-            source_data: List[Dict[str, Any]] = get_documents(
+            source_data: List[Dict[str, Any]] = await get_documents(
                 database,
                 "datasets",
                 "sources",

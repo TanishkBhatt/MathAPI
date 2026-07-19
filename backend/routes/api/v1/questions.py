@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request, status, Depends, Query
 from typing import Any, List
-from pymongo import MongoClient
+from motor.motor_asyncio import AsyncIOMotorClient
 from backend.models.api.v1.questions import GetQuestionsResponse
 from backend.models.components.helpers import Difficulty, QuestionType
 from backend.utils.database import get_db
@@ -23,7 +23,7 @@ app = APIRouter(
 
 @limiter.limit("100/hour")
 
-def questions(
+async def questions(
         request: Request,
         api_key: str | None = Query(None, description="Your API key for authentication"),
         topic_id: str = Query(
@@ -44,6 +44,6 @@ def questions(
             None,
             description="Filter questions by type category. Valid values: `Conceptual`, `Numerical`, `To Prove`, `Word Problem`, `Case Based`, `Higher Order Thinking Skills`."
         ),
-        database: MongoClient = Depends(get_db)
+        database: AsyncIOMotorClient = Depends(get_db)
     ) -> dict[str, Any]:
-    return get_questions(database, api_key, topic_id, limit, difficulty, question_type)
+    return await get_questions(database, api_key, topic_id, limit, difficulty, question_type)

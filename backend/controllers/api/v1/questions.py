@@ -1,13 +1,13 @@
 from fastapi import HTTPException, status
-from pymongo import MongoClient
+from motor.motor_asyncio import AsyncIOMotorClient
 from typing import Any, List, Dict
 from random import sample
 from backend.models.components.helpers import Difficulty, QuestionType
 from backend.utils.database import get_documents
 from backend.utils.helpers import validate_api_key
 
-def get_questions(
-        database: MongoClient,
+async def get_questions(
+        database: AsyncIOMotorClient,
         api_key: str | None,
         topic_id: str, 
         limit: int, 
@@ -15,11 +15,11 @@ def get_questions(
         question_type: QuestionType|None
     ) -> Dict[str, Any]:
     
-    validate_api_key(database, api_key)
+    await validate_api_key(database, api_key)
     
     # RETRIEVING DATA
     try:
-        questions: List[Dict[str, Any]] = get_documents(
+        questions: List[Dict[str, Any]] = await get_documents(
             database,
             "datasets",
             "questions",

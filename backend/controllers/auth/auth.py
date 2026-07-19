@@ -1,18 +1,18 @@
 from fastapi import HTTPException, status
-from pymongo import MongoClient
+from motor.motor_asyncio import AsyncIOMotorClient
 from typing import Any, Dict, List
 from backend.models.auth.auth import AuthRequest
 from backend.utils.database import get_documents, import_data
 from backend.utils.helpers import generate_api_key
 
-def authenticate_user(
-        database: MongoClient, 
+async def authenticate_user(
+        database: AsyncIOMotorClient, 
         auth_data: AuthRequest
     ) -> Dict[str, Any]:
 
     # CHECKING IS USERNAME AND EMAIL ALREADY EXISTS OR NOT
     try:
-        users: List[Dict[str, Any]] = get_documents(
+        users: List[Dict[str, Any]] = await get_documents(
             database,
             "auth",
             "users",
@@ -47,7 +47,7 @@ def authenticate_user(
 
     # IMPORTING DATA TO DB
     try:
-        import_data(
+        await import_data(
             database,
             "auth",
             "users",
