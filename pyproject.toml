@@ -12,6 +12,8 @@ dependencies = [
     "pydantic[email]>=2.13.4",
     "pymongo>=4.17.0",
     "slowapi>=0.1.9",
+    "requests>=2.34.2",
+    "motor>=3.7.1",
 ]
 
 [dependency-groups]
