@@ -104,8 +104,8 @@ MathAPI/
 │   │       └── contribute.py
 │   │   ├── api/v1/                 # API response Pydantic models
 │   │   └── components/
-│   │       ├── helpers.py          # Shared enums and base models
-│   │       └── main.py             # Composite models (Topic, Explain, Example, Question)
+│   │       ├── helpers.py          # Shared Enums and BaseModels
+│   │       └── main.py             # Composite models - Topic, Explain, Example, Question
 │   │
 │   ├── routes/
 │   │   ├── home.py                 # GET /
@@ -114,14 +114,16 @@ MathAPI/
 │   │   └── contribute/
 │   │       └── contribute.py       # POST /contribute
 │   │   └── api/v1/
-│   │           ├── get_topics.py   # GET /topics
+│   │           ├── topics.py       # GET /topics
 │   │           ├── explanation.py  # GET /explain
 │   │           ├── examples.py     # GET /examples
 │   │           ├── questions.py    # GET /questions
 │   │           ├── formulae.py     # GET /formulae
 │   │           └── sources.py      # GET /sources
 │   │
-│   └── utils/                      # Database, API auth and limiter functions
+│   ├── utils/                      # Database, API auth and limiter functions
+│   ├── test/                       # Pytest integration
+│   └── img/                        # Documentation screenshots
 │
 ├── pyproject.toml                  # UV based dependency management
 ├── requirements.txt                # PIP based dependency management
@@ -199,6 +201,16 @@ uv run uvs dev
 ### Start production server
 ```bash
 uv run uvs start
+```
+
+### Run automated tests
+```bash
+uv run uvs test
+```
+
+### Demo streamlit project
+```bash
+uv run uvs demo-project
 ```
 
 ---

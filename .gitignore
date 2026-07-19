@@ -5,6 +5,7 @@ build/
 dist/
 wheels/
 *.egg-info
+.pytest_cache/
 
 # Virtual environments
 .venv/
@@ -19,6 +20,11 @@ uv.lock
 # Environment variables
 .env
 
-# Local Database and Testing
+# Local Database
 database/
-test/
+
+# Opencode
+.opencode/
+
+# Graphify
+graphify-out/

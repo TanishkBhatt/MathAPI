@@ -39,18 +39,18 @@ async def get_questions(
         )
     
     # FILTERING OUT DIFFICULTY
-    f1 = [q for q in questions if q.get("difficulty") == difficulty.value] if difficulty else questions
+    by_difficulty = [q for q in questions if q.get("difficulty") == difficulty.value] if difficulty else questions
 
     # FILTERING OUT QUESTION_TYPE
-    f2 = [q for q in f1 if question_type.value in q.get("question_type", [])] if question_type else f1
+    by_type = [q for q in by_difficulty if question_type.value in q.get("question_type", [])] if question_type else by_difficulty
 
     # APPLYING LIMITS
-    f2 = sample(f2, min(limit, len(f2))) if f2 else []
+    selected = sample(by_type, min(limit, len(by_type))) if by_type else []
 
     # RETURN OBJECT
     return {
         "success": True,
         "message": "Data Successfully Retrieved",
-        "total_questions": len(f2),
-        "questions": f2
+        "total_questions": len(selected),
+        "questions": selected
     }
