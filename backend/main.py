@@ -11,7 +11,9 @@ from backend.routes.api.v1 import (
     questions,
     formulae,
     topics,
-    sources
+    sources,
+    daily_challenge,
+    random_question
 )
 from backend.routes.contribute import (
     contribute
@@ -70,6 +72,8 @@ app.include_router(examples.app)
 app.include_router(questions.app)
 app.include_router(formulae.app)
 app.include_router(sources.app)
+app.include_router(daily_challenge.app)
+app.include_router(random_question.app)
 
 app.include_router(contribute.app)
 

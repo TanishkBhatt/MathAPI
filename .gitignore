@@ -22,9 +22,3 @@ uv.lock
 
 # Local Database
 database/
-
-# Opencode
-.opencode/
-
-# Graphify
-graphify-out/

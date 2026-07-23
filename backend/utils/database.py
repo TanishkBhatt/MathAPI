@@ -23,11 +23,29 @@ async def get_documents(
         data: List[Dict[str, Any]] = await coll.find(query).to_list(length=None)
     except Exception as e:
         raise ConnectionError("Error In Connecting With Database")
-
+    
     for doc in data:
         doc.pop("_id", None)
-
+    
     return data
+
+
+async def update_documents(
+        db_conn: AsyncIOMotorClient,
+        db_name: str,
+        coll_name: str,
+        filter_query: dict,
+        update_data: dict
+    ) -> None:
+
+    client = db_conn
+    db = client[db_name]
+    coll = db[coll_name]
+
+    try:
+        await coll.update_many(filter_query, update_data)
+    except Exception as e:
+        raise ConnectionError("Error In Connecting With Database")
 
 async def import_data(
         db_conn: AsyncIOMotorClient,

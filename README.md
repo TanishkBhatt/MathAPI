@@ -59,6 +59,12 @@ A user can hit only 100 GET requests on Get API routes with an API Key per hour.
 ### Admin Contribution
 Authorized admins can contribute new questions and examples directly to the database.
 
+### Daily Challenge
+Get 3 daily challenge problems — one Beginner, one Intermediate, and one Advanced — randomly assigned and shared globally for the day.
+
+### Random Question
+Fetch a single random question from any topic, any difficulty, any type in one call.
+
 ### Interactive Docs
 Full Swagger UI at `/docs` and ReDoc at `/redoc`.
 
@@ -76,6 +82,8 @@ Full Swagger UI at `/docs` and ReDoc at `/redoc`.
 | `GET` | `/api/v1/questions` | Get practice questions with optional difficulty & type filters | ✅ |
 | `GET` | `/api/v1/formulae` | Get all formulae for a topic | ✅ |
 | `GET` | `/api/v1/sources` | Get all learning sources for a topic | ✅ |
+| `GET` | `/api/v1/daily-challenge` | Get 3 daily challenge problems — one per difficulty level | ✅ |
+| `GET` | `/api/v1/random-question` | Get a single random question from any topic | ✅ |
 | `POST` | `/contribute` | Admin-only — contribute a new question/example to the database | 👑 |
 
 ---
@@ -114,16 +122,19 @@ MathAPI/
 │   │   └── contribute/
 │   │       └── contribute.py       # POST /contribute
 │   │   └── api/v1/
-│   │           ├── topics.py       # GET /topics
-│   │           ├── explanation.py  # GET /explain
-│   │           ├── examples.py     # GET /examples
-│   │           ├── questions.py    # GET /questions
-│   │           ├── formulae.py     # GET /formulae
-│   │           └── sources.py      # GET /sources
+│   │           ├── topics.py           # GET /topics
+│   │           ├── explanation.py      # GET /explain
+│   │           ├── examples.py         # GET /examples
+│   │           ├── questions.py        # GET /questions
+│   │           ├── formulae.py         # GET /formulae
+│   │           ├── sources.py          # GET /sources
+│   │           ├── daily_challenge.py  # GET /daily-challenge
+│   │           └── random_question.py  # GET /random-question
 │   │
-│   ├── utils/                      # Database, API auth and limiter functions
-│   ├── test/                       # Pytest integration
-│   └── img/                        # Documentation screenshots
+│   └── utils/                      # Database, API auth and limiter functions
+├── test/
+│   ├── pytest/                     # Pytest integration tests
+│   └── project/                    # Streamlit demo application
 │
 ├── pyproject.toml                  # UV based dependency management
 ├── requirements.txt                # PIP based dependency management
