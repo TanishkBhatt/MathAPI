@@ -135,6 +135,7 @@ MathAPI/
 ├── test/
 │   ├── pytest/                     # Pytest integration tests
 │   └── project/                    # Streamlit demo application
+│   └── logs/                    # Tests and server logs
 │
 ├── pyproject.toml                  # UV based dependency management
 ├── requirements.txt                # PIP based dependency management
