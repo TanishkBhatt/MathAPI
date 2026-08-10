@@ -24,7 +24,7 @@ dev = [
 ]
 
 [tool.uvs.scripts]
-dev = "uvicorn backend.main:app --reload"
-start = "uvicorn backend.main:app"
+dev = "uvicorn backend.main:app --port 3000 --reload"
+start = "uvicorn backend.main:app --port 3000"
 test = "pytest test/pytest -v"
 demo-project = "streamlit run test/project/streamlit_app.py"

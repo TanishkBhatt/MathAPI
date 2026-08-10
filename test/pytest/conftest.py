@@ -3,7 +3,7 @@ import uuid
 import requests
 import pytest
 
-API_BASE = "http://127.0.0.1:8000"
+API_BASE = "http://127.0.0.1:3000"
 
 @pytest.fixture(scope="session")
 def api_base():

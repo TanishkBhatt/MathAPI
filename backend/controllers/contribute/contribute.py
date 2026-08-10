@@ -18,14 +18,43 @@ async def contribution(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Unauthorized Access - Valid ADMIN_TOKEN Required"
         )
+
+    # VALIDATING THE CONTRIBUTION DATA IS NOT EMPTY
+    if not request_data:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Empty Contribution Data - Provide At Least One Item To Contribute"
+        )
     
-    # VALIDATING IS THE TOPIC_ID VALID
+    # VALIDATING THE CONTRIBUTION DATA AND THE TOPIC_ID
     for item in request_data:
         if "topic_id" not in item:
             raise HTTPException(
                 status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
                 detail="Missing Required Field - 'topic_id' is required in each contribution data"
             )
+
+        # VALIDATING THE CONTRIBUTION DATA (before the topic lookup, so an
+        # invalid payload returns 422 rather than a misleading 404)
+        if contribution_type.value == "Question":
+            try:
+                QuestionContributionSchema(**item)
+            except Exception as e:
+                raise HTTPException(
+                    status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                    detail=f"Invalid Question Contribution Data Schema"
+                )
+
+        if contribution_type.value == "Example":
+            try:
+                ExampleContributionSchema(**item)
+            except Exception as e:
+                raise HTTPException(
+                    status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                    detail=f"Invalid Example Contribution Data Schema"
+                )
+
+        # VALIDATING IS THE TOPIC_ID VALID
         try:
             topic: List[Dict[str, Any]] = await get_documents(
                 database,
@@ -44,25 +73,6 @@ async def contribution(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=f"Topic With ID - '{item.get('topic_id', 'Unknown')}' Not Found"
             )
-
-        # VALIDATING THE CONTRIBUTION DATA
-        if contribution_type.value == "Question":
-            try:
-                QuestionContributionSchema(**item)
-            except Exception as e:
-                raise HTTPException(
-                    status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-                    detail=f"Invalid Question Contribution Data Schema"
-                )
-
-        if contribution_type.value == "Example":
-            try:
-                ExampleContributionSchema(**item)
-            except Exception as e:
-                raise HTTPException(
-                    status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-                    detail=f"Invalid Example Contribution Data Schema"
-                )
     
     # IMPORT DATA TO DATABASE
     try:

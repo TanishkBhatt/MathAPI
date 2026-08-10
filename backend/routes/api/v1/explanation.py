@@ -28,7 +28,7 @@ async def explain(
         topic_id: str = Query(
             ...,
             description="Unique identifier of the mathematics topic to retrieve. Must match a valid `topic_id` from the `/get-topics` endpoint.",
-            examples=["quadratic-equation"]
+            examples=["quadratic-equations"]
         ),
         include_formulae: bool = Query(
             False,

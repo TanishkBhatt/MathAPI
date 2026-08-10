@@ -28,7 +28,7 @@ async def examples(
         topic_id: str = Query(
             ...,
             description="Unique identifier of the mathematics topic to retrieve examples for. Must match a valid `topic_id` from the `/get-topics` endpoint.",
-            examples=["quadratic-equation"]
+            examples=["quadratic-equations"]
         ),
         limit: int = Query(
             2,

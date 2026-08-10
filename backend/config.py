@@ -5,6 +5,7 @@ from functools import lru_cache
 class Settings(BaseSettings):
     DB_CONNECTION_URL: str
     ADMIN_TOKEN: str
+    API_KEY_VALID_MONTHS: int = 6
 
     model_config = SettingsConfigDict(
         env_file="backend/.env",

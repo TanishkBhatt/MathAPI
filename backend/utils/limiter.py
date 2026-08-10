@@ -3,8 +3,11 @@ from fastapi.responses import JSONResponse
 from slowapi import Limiter
 
 # FETCHING API_KEY
-def get_api_key(request: Request) -> str:
-    return request.query_params.get("api_key", "unknown")
+# Requests without an API key are NOT rate-limited here: they fail
+# authentication anyway, and must not consume a shared bucket that would
+# later produce 429 responses for valid API keys.
+def get_api_key(request: Request) -> str | None:
+    return request.query_params.get("api_key")
 
 # LIMITER OBJECT
 limiter = Limiter(key_func=get_api_key)

@@ -28,7 +28,7 @@ async def formulae(
         topic_id: str = Query(
             ...,
             description="Unique identifier of the mathematics topic to retrieve formulae for. Must match a valid `topic_id` from the `/get-topics` endpoint.",
-            examples=["quadratic-equation"]
+            examples=["quadratic-equations"]
         ),
         database: AsyncIOMotorClient = Depends(get_db)
     ) -> dict[str, Any]:

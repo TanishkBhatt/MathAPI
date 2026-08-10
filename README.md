@@ -51,7 +51,7 @@ Fetches selected learning sources (website/ youtube video) for that particular t
 All mathematical expressions are LaTeX coded for better rendering and user experience.
 
 ### API Key Authentication
-Register with a username and email to receive a unique API key for authenticated access.
+Register with a username and email to receive a unique API key for authenticated access. Keys are valid for **6 months** from registration; expired keys return `401` and must be re-created.
 
 ### API Key Limiting
 A user can hit only 100 GET requests on Get API routes with an API Key per hour.
@@ -176,7 +176,7 @@ MathAPI/
 
 ### Explore a specific topic
 ```bash
-  curl "https://mathapi.vercel.app/api/v1/explanation?api_key=YOUR_API_KEY&topic_id=quadratic-equation&include_examples=true&include_questions=true"
+  curl "https://mathapi.vercel.app/api/v1/explanation?api_key=YOUR_API_KEY&topic_id=quadratic-equations&include_examples=true&include_questions=true"
 ```
 
 ---
@@ -239,7 +239,7 @@ curl -X POST "https://mathapi.vercel.app/contribute?admin_token=YOUR_ADMIN_TOKEN
   -H "Content-Type: application/json" \
   -d '[
     {
-      "topic_id": "quadratic-equation",
+      "topic_id": "quadratic-equations",
       "question": "Your question here...",
       "difficulty": "Intermediate",
       "question_type": ["Conceptual"],
