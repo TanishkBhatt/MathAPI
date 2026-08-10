@@ -1,0 +1,49 @@
+INFO:     127.0.0.1:52737 - "POST /auth HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52738 - "POST /auth HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52738 - "POST /auth HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52739 - "POST /auth HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:52740 - "POST /auth HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:52741 - "POST /auth HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:52742 - "POST /auth HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52743 - "POST /contribute HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:52744 - "POST /contribute?admin_token=wrong-token HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52745 - "POST /auth HTTP/1.1" 201 Created
+INFO:     127.0.0.1:52746 - "GET /api/v1/daily-challenge?api_key=mathapi_key_b272afe70495_KBzEuqN-KLJRVGZ9xUZAa_AwOLX0kl2Y_exp%3D1802236510 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52747 - "GET /api/v1/daily-challenge HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52748 - "GET /api/v1/daily-challenge?api_key=bogus HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52749 - "GET /api/v1/topics HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52749 - "GET /api/v1/explanation?topic_id=quadratic-equations HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52749 - "GET /api/v1/examples?topic_id=quadratic-equations HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52749 - "GET /api/v1/questions?topic_id=quadratic-equations HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52749 - "GET /api/v1/formulae?topic_id=quadratic-equations HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52749 - "GET /api/v1/sources?topic_id=quadratic-equations HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52750 - "GET /api/v1/topics?api_key=bogus HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52750 - "GET /api/v1/explanation?topic_id=quadratic-equations&api_key=bogus HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52750 - "GET /api/v1/examples?topic_id=quadratic-equations&api_key=bogus HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52750 - "GET /api/v1/questions?topic_id=quadratic-equations&api_key=bogus HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52750 - "GET /api/v1/formulae?topic_id=quadratic-equations&api_key=bogus HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52750 - "GET /api/v1/sources?topic_id=quadratic-equations&api_key=bogus HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52751 - "GET /api/v1/examples?api_key=mathapi_key_b272afe70495_KBzEuqN-KLJRVGZ9xUZAa_AwOLX0kl2Y_exp%3D1802236510&topic_id=quadratic-equations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52752 - "GET /api/v1/examples?api_key=mathapi_key_b272afe70495_KBzEuqN-KLJRVGZ9xUZAa_AwOLX0kl2Y_exp%3D1802236510&topic_id=quadratic-equations&limit=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52753 - "GET /api/v1/examples?api_key=mathapi_key_b272afe70495_KBzEuqN-KLJRVGZ9xUZAa_AwOLX0kl2Y_exp%3D1802236510&topic_id=non-existent-topic HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52754 - "GET /api/v1/explanation?api_key=mathapi_key_b272afe70495_KBzEuqN-KLJRVGZ9xUZAa_AwOLX0kl2Y_exp%3D1802236510&topic_id=quadratic-equations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52755 - "GET /api/v1/explanation?api_key=mathapi_key_b272afe70495_KBzEuqN-KLJRVGZ9xUZAa_AwOLX0kl2Y_exp%3D1802236510&topic_id=quadratic-equations&include_formulae=True&include_examples=True&include_questions=True&include_sources=True HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52756 - "GET /api/v1/explanation?api_key=mathapi_key_b272afe70495_KBzEuqN-KLJRVGZ9xUZAa_AwOLX0kl2Y_exp%3D1802236510&topic_id=quadratic-equations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52757 - "GET /api/v1/explanation?api_key=mathapi_key_b272afe70495_KBzEuqN-KLJRVGZ9xUZAa_AwOLX0kl2Y_exp%3D1802236510&topic_id=non-existent-topic HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52758 - "GET /api/v1/explanation?api_key=mathapi_key_b272afe70495_KBzEuqN-KLJRVGZ9xUZAa_AwOLX0kl2Y_exp=1802236510 HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:52759 - "GET /api/v1/formulae?api_key=mathapi_key_b272afe70495_KBzEuqN-KLJRVGZ9xUZAa_AwOLX0kl2Y_exp%3D1802236510&topic_id=quadratic-equations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52760 - "GET /api/v1/formulae?api_key=mathapi_key_b272afe70495_KBzEuqN-KLJRVGZ9xUZAa_AwOLX0kl2Y_exp%3D1802236510&topic_id=non-existent-topic HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52761 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52762 - "GET /api/v1/questions?api_key=mathapi_key_b272afe70495_KBzEuqN-KLJRVGZ9xUZAa_AwOLX0kl2Y_exp%3D1802236510&topic_id=quadratic-equations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52763 - "GET /api/v1/questions?api_key=mathapi_key_b272afe70495_KBzEuqN-KLJRVGZ9xUZAa_AwOLX0kl2Y_exp%3D1802236510&topic_id=quadratic-equations&limit=3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52764 - "GET /api/v1/questions?api_key=mathapi_key_b272afe70495_KBzEuqN-KLJRVGZ9xUZAa_AwOLX0kl2Y_exp%3D1802236510&topic_id=quadratic-equations&difficulty=Beginner HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52765 - "GET /api/v1/questions?api_key=mathapi_key_b272afe70495_KBzEuqN-KLJRVGZ9xUZAa_AwOLX0kl2Y_exp%3D1802236510&topic_id=quadratic-equations&question_type=Numerical HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52766 - "GET /api/v1/questions?api_key=mathapi_key_b272afe70495_KBzEuqN-KLJRVGZ9xUZAa_AwOLX0kl2Y_exp%3D1802236510&topic_id=non-existent-topic HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52767 - "GET /api/v1/random-question?api_key=mathapi_key_b272afe70495_KBzEuqN-KLJRVGZ9xUZAa_AwOLX0kl2Y_exp%3D1802236510 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52768 - "GET /api/v1/random-question HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52769 - "GET /api/v1/random-question?api_key=bogus HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52770 - "GET /api/v1/sources?api_key=mathapi_key_b272afe70495_KBzEuqN-KLJRVGZ9xUZAa_AwOLX0kl2Y_exp%3D1802236510&topic_id=quadratic-equations HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52771 - "GET /api/v1/sources?api_key=mathapi_key_b272afe70495_KBzEuqN-KLJRVGZ9xUZAa_AwOLX0kl2Y_exp%3D1802236510&topic_id=non-existent-topic HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52772 - "GET /api/v1/topics?api_key=mathapi_key_b272afe70495_KBzEuqN-KLJRVGZ9xUZAa_AwOLX0kl2Y_exp=1802236510 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52773 - "GET /api/v1/topics HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52774 - "GET /api/v1/topics?api_key=invalid_key_123 HTTP/1.1" 401 Unauthorized

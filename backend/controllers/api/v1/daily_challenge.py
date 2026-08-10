@@ -1,10 +1,9 @@
 from fastapi import HTTPException, status
 from motor.motor_asyncio import AsyncIOMotorClient
-from pymongo import ReturnDocument
-from pymongo.errors import DuplicateKeyError
 from typing import Any, Dict, List
+from random import sample
 from datetime import datetime
-from backend.utils.database import ensure_index
+from backend.utils.database import get_documents, update_documents
 from backend.utils.helpers import validate_api_key
 
 async def get_daily_challenge(
@@ -15,94 +14,75 @@ async def get_daily_challenge(
     await validate_api_key(database, api_key)
     today = datetime.now().strftime("%Y-%m-%d")
 
-    db = database["datasets"]
-    challenges_coll = db["daily_challenges"]
-
-    # ONE document per day -> same set for every user, no unbounded arrays
+    # CHECK IF TODAY'S CHALLENGE EXISTS
     try:
-        await ensure_index(
+        existing: List[Dict[str, Any]] = await get_documents(
             database,
             "datasets",
-            "daily_challenges",
-            [("challenge_date", 1)],
-            unique=True,
-            index_name="challenge_date_unique"
+            "questions",
+            {"challenge_date": today}
         )
-    except Exception:
-        # index creation is best-effort; the DuplicateKeyError path below
-        # still protects the race even if the index does not exist yet
-        pass
-
-    try:
-        existing = await challenges_coll.find_one({"challenge_date": today})
-    except Exception as e:
+    except ConnectionError as e:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail=f"{str(e)}"
+            detail=str(e)
         )
 
-    if existing:
-        questions: List[Dict[str, Any]] = existing.get("questions", [])
+    if len(existing) >= 3:
+        selected = sample(existing, 3)
         return {
             "success": True,
             "message": "Daily Challenge Data Successfully Retrieved",
             "challenge_date": today,
-            "total_questions": len(questions),
-            "questions": questions
+            "total_questions": len(selected),
+            "questions": selected
         }
 
     # PICK 1 BEGINNER + 1 INTERMEDIATE + 1 ADVANCED
-    questions_coll = db["questions"]
+    client = database
+    db = client["datasets"]
+    coll = db["questions"]
 
-    selected: List[Dict[str, Any]] = []
-    difficulties: List[str] = ["Beginner", "Intermediate", "Advanced"]
+    selected = []
+    ids = []
+    difficulties = ["Beginner", "Intermediate", "Advanced"]
 
     try:
         for diff in difficulties:
-            cursor = questions_coll.aggregate([
+            cursor = coll.aggregate([
                 {"$match": {"difficulty": diff}},
                 {"$sample": {"size": 1}}
             ])
             docs: List[Dict[str, Any]] = await cursor.to_list(None)
             if docs:
+                ids.append(docs[0]["_id"])
                 docs[0].pop("_id", None)
                 selected.append(docs[0])
-    except Exception as e:
+    except Exception:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail=f"{str(e)}"
+            detail="Error In Connecting With Database"
         )
 
-    # RACE-SAFE UPSERT: if another request created today's set first, adopt it
-    try:
-        doc = await challenges_coll.find_one_and_update(
-            {"challenge_date": today},
-            {"$setOnInsert": {"challenge_date": today, "questions": selected}},
-            upsert=True,
-            return_document=ReturnDocument.AFTER
-        )
-    except DuplicateKeyError:
+    if ids:
         try:
-            doc = await challenges_coll.find_one({"challenge_date": today})
-        except Exception as e:
+            await update_documents(
+                database,
+                "datasets",
+                "questions",
+                {"_id": {"$in": ids}},
+                {"$push": {"challenge_date": today}}
+            )
+        except ConnectionError as e:
             raise HTTPException(
                 status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-                detail=f"{str(e)}"
+                detail=str(e)
             )
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail=f"{str(e)}"
-        )
 
-    if doc is None:
-        doc = {"challenge_date": today, "questions": selected}
-
-    questions = doc.get("questions", [])
     return {
         "success": True,
         "message": "Daily Challenge Data Successfully Retrieved",
         "challenge_date": today,
-        "total_questions": len(questions),
-        "questions": questions
+        "total_questions": len(selected),
+        "questions": selected
     }
