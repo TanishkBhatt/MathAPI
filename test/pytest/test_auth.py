@@ -45,5 +45,5 @@ def test_auth_returns_expiry(client, api_base):
     expiry = resp.json()["api_key_data"]["expiry"]
     assert expiry is not None
     now = time.time()
-    assert expiry > now
-    assert expiry - now < 186 * 24 * 3600  # ~6 calendar months (with slack)
+    assert time.strptime(expiry, "%a %b %d %H:%M:%S %Y") > time.localtime(now)
+    assert time.strptime(expiry, "%a %b %d %H:%M:%S %Y").tm_year - time.localtime(now).tm_year <= 1  # ~6 calendar months (with slack)

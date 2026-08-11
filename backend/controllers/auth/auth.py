@@ -39,7 +39,7 @@ async def _existing_user_response(
     return {
         "username": user["username"],
         "api_key": user["api_key"],
-        "expiry": expiry
+        "expiry": time.ctime(expiry)
     }
 
 async def authenticate_user(
@@ -129,6 +129,6 @@ async def authenticate_user(
         "api_key_data": {
             "username": auth_data.username,
             "api_key": api_key,
-            "expiry": exp
+            "expiry": time.ctime(exp)
         }
     }
