@@ -20,11 +20,9 @@ dev = [
     "uv-script>=0.1.9",
     "requests>=2.34.2",
     "pytest>=8.0",
-    "streamlit>=1.40.0",
 ]
 
 [tool.uvs.scripts]
-dev = "uvicorn backend.main:app --port 3000 --reload"
-start = "uvicorn backend.main:app --port 3000"
-test = "pytest test/pytest -v"
-demo-project = "streamlit run test/project/streamlit_app.py"
+dev = "uvicorn main:app --port 3000 --reload"
+start = "uvicorn main:app --port 3000"
+test = "pytest tests -v"

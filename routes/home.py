@@ -1,0 +1,28 @@
+from fastapi import APIRouter, status
+from typing import Any
+from models.home import HomeResponse
+
+app = APIRouter(
+    tags=["Home"]
+)
+
+@app.get(
+    "/",
+    response_model=HomeResponse,
+    status_code=status.HTTP_200_OK,
+    summary="API Health Check",
+    description="Returns a health-check response confirming that the MathAPI service is running and accessible. Also provides a guide to proceed.",
+    response_description="Service status confirmation with success flag and welcome message."
+)
+def home() -> dict[str, Any]:
+    return {
+        "success": True,
+        "message": "MathAPI - API Services",
+        "help": {
+            "get_started": "Go to our Documentation, the POST /auth route, submit your details and get an api_key of 6 months expiry.",
+            "explore_routes": "We have currently a total of 8 GET routes serving Topics, Explanations, Worked Examples, Practice Questions, Formulae, Learning Sources, Daily Challenge Problems and Random Questions at /api/v1 with a limit of 100 requests per hour."
+        },
+        "docs": "https://mathapi.vercel.app/docs",
+        "repo": "https://github.com/TanishkBhatt/MathAPI",
+        "author": "Tanishk Bhatt - A Student and A Programmer"
+    }

@@ -1,16 +1,13 @@
 # MathAPI - API Services
 
+> A RESTful API service designed for students and developers pursuing mathematics and related fields. Provides structured access to topic explanations, step-by-step worked examples, practice questions, and concise formula sheets across various branches of mathematics.
+
 [![Documentations](https://img.shields.io/badge/Documentation-005571?style=for-the-badge&logo=fastapi&logoColor=white)](https://mathapi.vercel.app/docs)
-
-- MathAPI Documentation
-
-![MathAPI Docs Screenshot](img/docs.png)
 
 ---
 
 ## Table of Contents
 
-- [Introduction](#introduction)
 - [Key Features](#features)
 - [Routes](#routes)
 - [Project Structure](#project-structure)
@@ -19,11 +16,6 @@
 - [Run Project Locally](#running-locally)
 - [Contribution](#contribution)
 - [Author And Credits](#author-and-credits)
-
----
-
-## Introduction
-> A RESTful API service designed for students and developers pursuing mathematics and related fields. Provides structured access to topic explanations, step-by-step worked examples, practice questions, and concise formula sheets across various branches of mathematics.
 
 ---
 
@@ -45,28 +37,25 @@ Retrieve multiple-choice questions with difficulty and type filters to test your
 Fetches concise formula collections for any topic in both plain text and LaTeX format.
 
 ### Learning Sources
-Fetches selected learning sources (website/ youtube video) for that particular topic.
+Fetches selected learning sources (a website or a youtube video) for that particular topic.
 
 ### LaTeX Support
-All mathematical expressions are LaTeX coded for better rendering and user experience.
+All mathematical expressions are **LaTeX** coded for better rendering and user experience.
 
 ### API Key Authentication
-Register with a username and email to receive a unique API key for authenticated access. Keys are valid for **6 months** from registration; expired keys return `401` and must be re-created.
+Register with a username and email to receive a unique API key for authenticated access. Keys are valid for **6 months** from registration; expired keys return **UNAUTHORIZED_401** and must be re-created.
 
 ### API Key Limiting
-A user can hit only 100 GET requests on Get API routes with an API Key per hour.
-
-### Admin Contribution
-Authorized admins can contribute new questions and examples directly to the database.
+A user can hit only **100 GET requests** on Get API routes with an API Key per hour.
 
 ### Daily Challenge
-Get 3 daily challenge problems — one Beginner, one Intermediate, and one Advanced — randomly assigned and shared globally for the day.
+Get **3 daily challenge problems** — one Beginner, one Intermediate, and one Advanced — randomly assigned and shared globally for the day.
 
 ### Random Question
 Fetch a single random question from any topic, any difficulty, any type in one call.
 
 ### Interactive Docs
-Full Swagger UI at `/docs` and ReDoc at `/redoc`.
+Full Swagger UI at **/docs** and ReDoc at **/redoc**.
 
 ---
 
@@ -84,7 +73,6 @@ Full Swagger UI at `/docs` and ReDoc at `/redoc`.
 | `GET` | `/api/v1/sources` | Get all learning sources for a topic | ✅ |
 | `GET` | `/api/v1/daily-challenge` | Get 3 daily challenge problems — one per difficulty level | ✅ |
 | `GET` | `/api/v1/random-question` | Get a single random question from any topic | ✅ |
-| `POST` | `/contribute` | Admin-only — contribute a new question/example to the database | 👑 |
 
 ---
 
@@ -92,56 +80,46 @@ Full Swagger UI at `/docs` and ReDoc at `/redoc`.
 
 ```
 MathAPI/
-├── backend/
-│   ├── main.py                     # FastAPI app entry point
-│   ├── .env                        # Environment variables (not tracked) 
-│   ├── config.py                   # Environment variables settings
-│   │
-│   ├── controllers/
-│   │   └── auth/                   # User registration logic
-│   │       └── auth.py
-│   │   └── contribute/             # Admin contribution logic
-│   │       └── contribute.py
-│   │   └── api/v1/                 # Main Backend Logic
-│   │
-│   ├── models/
-│   │   ├── home.py                 # Home response schema
-│   │   └── auth/                   # Auth request/response schemas
-│   │       └── auth.py
-│   │   └── contribute/             # Contribution schemas
-│   │       └── contribute.py
-│   │   ├── api/v1/                 # API response Pydantic models
-│   │   └── components/
-│   │       ├── helpers.py          # Shared Enums and BaseModels
-│   │       └── main.py             # Composite models - Topic, Explain, Example, Question
-│   │
-│   ├── routes/
-│   │   ├── home.py                 # GET /
-│   │   └── auth/
-│   │       └── auth.py             # POST /auth
-│   │   └── contribute/
-│   │       └── contribute.py       # POST /contribute
-│   │   └── api/v1/
-│   │           ├── topics.py           # GET /topics
-│   │           ├── explanation.py      # GET /explain
-│   │           ├── examples.py         # GET /examples
-│   │           ├── questions.py        # GET /questions
-│   │           ├── formulae.py         # GET /formulae
-│   │           ├── sources.py          # GET /sources
-│   │           ├── daily_challenge.py  # GET /daily-challenge
-│   │           └── random_question.py  # GET /random-question
-│   │
-│   └── utils/                      # Database, API auth and limiter functions
-├── test/
-│   ├── pytest/                     # Pytest integration tests
-│   └── project/                    # Streamlit demo application
-│   └── logs/                    # Tests and server logs
-│
-├── pyproject.toml                  # UV based dependency management
-├── requirements.txt                # PIP based dependency management
-├── vercel.json                     # Deployment config
-├── .gitignore                      # Untracked files config
-└── README.md                       # Documentation
+  ├── main.py                     # FastAPI app entry point
+  ├── .env                        # Environment variables (not tracked) 
+  ├── config.py                   # Environment variables settings
+  │
+  ├── controllers/
+  │   └── auth/                   # User registration logic
+  │       └── auth.py
+  │   └── api/v1/                 # Main Backend Logic
+  │
+  ├── models/
+  │   ├── home.py                 # Home response schema
+  │   └── auth/                   # Auth request/response schemas
+  │       └── auth.py
+  │   ├── api/v1/                 # API response Pydantic models
+  │   └── components/
+  │       ├── helpers.py          # Shared Enums and BaseModels
+  │       └── main.py             # Composite models - Topic, Explain, Example, Question
+  │
+  ├── routes/
+  │   ├── home.py                 # GET /
+  │   └── auth/
+  │       └── auth.py             # POST /auth
+  │   └── api/v1/
+  │           ├── topics.py              # GET /topics
+  │           ├── explanation.py         # GET /explain
+  │           ├── examples.py            # GET /examples
+  │           ├── questions.py           # GET /questions
+  │           ├── formulae.py            # GET /formulae
+  │           ├── sources.py             # GET /sources
+  │           ├── daily_challenge.py     # GET /daily-challenge
+  │           └── random_question.py     # GET /random-question
+  │
+  ├── utils/                      # Database, API auth and limiter functions
+  ├── tests/                      # Pytest integration tests
+  │
+  ├── pyproject.toml                  # UV based dependency management
+  ├── requirements.txt                # PIP based dependency management
+  ├── vercel.json                     # Deployment config
+  ├── .gitignore                      # Untracked files config
+  └── README.md                       # Documentation
 ```
 
 ---
@@ -190,7 +168,7 @@ git clone https://github.com/TanishkBhatt/MathAPI.git
 ```
 
 ### Create environment variables
-- MathAPI/backend/.env
+- MathAPI/.env
 
 ```python
 # Database Connetion URL
@@ -220,38 +198,11 @@ uv run uvs start
 uv run uvs test
 ```
 
-### Demo streamlit project
-```bash
-uv run uvs demo-project
-```
-
 ---
 
 ## Contribution
 
-### For Users
 Found a bug or have a feature request? Open an issue on the [GitHub repository](https://github.com/TanishkBhatt/MathAPI).
-
-### For Admins
-Contribute questions/examples directly to the database via the authenticated endpoint:
-
-```bash
-curl -X POST "https://mathapi.vercel.app/contribute?admin_token=YOUR_ADMIN_TOKEN&contribution_type=Question" \
-  -H "Content-Type: application/json" \
-  -d '[
-    {
-      "topic_id": "quadratic-equations",
-      "question": "Your question here...",
-      "difficulty": "Intermediate",
-      "question_type": ["Conceptual"],
-      "options": {"A": "...", "B": "...", "C": "...", "D": "..."},
-      "expected_time_limit": "2 min",
-      "hint": "Think about...",
-      "answer": "A",
-      "solution_sources": [{"source": "Textbook", "type": "Book", "link": "..."}]
-    }
-  ]'
-```
 
 ---
 
