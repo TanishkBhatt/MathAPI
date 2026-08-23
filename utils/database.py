@@ -1,5 +1,5 @@
 from motor.motor_asyncio import AsyncIOMotorClient
-from pymongo.errors import DuplicateKeyError
+from pymongo.errors import DuplicateKeyError, PyMongoError
 from typing import List, Dict, Any
 from config import settings
 
@@ -44,14 +44,12 @@ async def get_documents(
     query = filter_query or {}
     try:
         data: List[Dict[str, Any]] = await coll.find(query).to_list(length=None)
-    except DuplicateKeyError:
-        raise
-    except Exception as e:
+    except PyMongoError as e:
         raise ConnectionError("Error In Connecting With Database")
-    
+
     for doc in data:
         doc.pop("_id", None)
-    
+
     return data
 
 
@@ -71,7 +69,7 @@ async def update_documents(
         await coll.update_many(filter_query, update_data)
     except DuplicateKeyError:
         raise
-    except Exception as e:
+    except PyMongoError as e:
         raise ConnectionError("Error In Connecting With Database")
 
 async def import_data(
@@ -96,5 +94,5 @@ async def import_data(
             await coll.insert_one(data)
     except DuplicateKeyError:
         raise
-    except Exception as e:
+    except PyMongoError as e:
         raise ConnectionError("Error In Connecting With Database")

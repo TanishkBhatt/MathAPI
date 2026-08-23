@@ -1,5 +1,6 @@
 from fastapi import HTTPException, status
 from motor.motor_asyncio import AsyncIOMotorClient
+from pymongo.errors import PyMongoError
 from typing import Any, Dict, List
 from utils.database import get_documents
 from utils.helpers import validate_api_key
@@ -18,7 +19,7 @@ async def get_random_question(
     try:
         cursor = coll.aggregate([{"$sample": {"size": 1}}])
         docs: List[Dict[str, Any]] = await cursor.to_list(None)
-    except Exception:
+    except PyMongoError:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="Error In Connecting With Database"

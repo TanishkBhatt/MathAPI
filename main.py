@@ -31,19 +31,23 @@ from utils.limiter import (
 tags_metadata = [
     {
         "name": "Home",
-        "description": "Health check and help route."
+        "description": "Health check and help route. No authentication required - confirms the service is running and points to the quick-start guide."
     },
     {
         "name": "Auth",
-        "description": "Authentication endpoints for obtaining the API key."
+        "description": "Authentication endpoint for obtaining an API key. Register a unique username and email to receive a key valid for 6 months; registering again with the same username returns the existing key."
     },
     {
         "name": "Get API",
-        "description": "Core data retrieval endpoints for serving mathematical assets. Requires a valid `api_key` (100 requests per hour limit)"
+        "description": "Core data retrieval endpoints for serving mathematical assets - topics, explanations, worked examples, practice questions, formulae, learning sources, daily challenge problems and random questions. Requires a valid `api_key` query parameter obtained from the `/auth` route. Limited to 100 requests per hour per API key."
     }
 ]
 
-description = "A `RESTful API Services` designed for students and developers pursuing mathematics and related fields. Provides structured access to topic explanations, step-by-step worked examples, practice questions and concise formulae sheets of topics across various branches mathematics."
+description = """A `RESTful API Service` designed for students and developers pursuing mathematics and related fields.
+
+Provides structured access to topic explanations, step-by-step worked examples, practice questions and concise formulae sheets of topics across various branches of mathematics.
+
+**Quick Start:** hit `POST /auth` with a username and email to receive your API key, then pass it as the `api_key` query parameter on any Get API route."""
 
 # INITIALIZING THE APP
 app = FastAPI(
@@ -51,6 +55,10 @@ app = FastAPI(
     description=description,
     version="1.0.0",
     summary="Mathematics Education API Services",
+    contact={
+        "name": "Tanishk Bhatt",
+        "url": "https://github.com/TanishkBhatt/MathAPI"
+    },
     openapi_tags=tags_metadata,
     docs_url=None   # Disable default docs
 )
@@ -80,7 +88,7 @@ app.include_router(random_question.app)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -92,4 +100,4 @@ app.add_middleware(SlowAPIMiddleware)
 # CUSTOM LIMIT EXCEEDED HANDLER
 @app.exception_handler(RateLimitExceeded)
 async def custom_handler(request: Request, exc: RateLimitExceeded) -> JSONResponse:
-    return limiting_response()
+    return limiting_response(request, exc)

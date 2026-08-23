@@ -3,8 +3,8 @@ import uuid
 
 
 def test_auth_success(client, api_base):
-    username = "new-test-user"
-    email = "new-test-user@test.com"
+    username = f"new-test-user-{uuid.uuid4().hex[:12]}"
+    email = f"{username}@test.com"
     resp = client.post(f"{api_base}/auth", json={"username": username, "email": email})
     assert resp.status_code == 201
     data = resp.json()
@@ -14,10 +14,12 @@ def test_auth_success(client, api_base):
 
 
 def test_auth_duplicate(client, api_base):
-    resp = client.post(f"{api_base}/auth", json={"username": "duplicate", "email": "duplicate@test.com"})
+    username = f"duplicate-{uuid.uuid4().hex[:12]}"
+    email = f"{username}@test.com"
+    resp = client.post(f"{api_base}/auth", json={"username": username, "email": email})
     assert resp.status_code == 201
-    resp2 = client.post(f"{api_base}/auth", json={"username": "duplicate", "email": "duplicate@test.com"})
-    assert resp2.status_code == 201
+    resp2 = client.post(f"{api_base}/auth", json={"username": username, "email": email})
+    assert resp2.status_code == 200
     assert resp2.json()["success"] is True
     assert resp2.json()["message"] == "User Is Already Authenticated"
 

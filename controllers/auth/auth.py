@@ -1,7 +1,7 @@
 import time
 from fastapi import HTTPException, status
 from motor.motor_asyncio import AsyncIOMotorClient
-from pymongo.errors import DuplicateKeyError
+from pymongo.errors import DuplicateKeyError, PyMongoError
 from typing import Any, Dict, List
 from config import settings
 from models.auth.auth import AuthRequest
@@ -57,7 +57,7 @@ async def authenticate_user(
             unique=True,
             index_name="username_unique"
         )
-    except Exception:
+    except PyMongoError:
         pass
 
     # CHECKING IS USERNAME ALREADY EXISTS OR NOT
