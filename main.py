@@ -57,7 +57,7 @@ app = FastAPI(
     summary="Mathematics Education API Services",
     contact={
         "name": "Tanishk Bhatt",
-        "url": "https://github.com/TanishkBhatt/MathAPI"
+        "url": "https://tanishkbhatt.vercel.app"
     },
     openapi_tags=tags_metadata,
     docs_url=None   # Disable default docs

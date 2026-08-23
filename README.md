@@ -91,6 +91,7 @@ MathAPI/
   │
   ├── models/
   │   ├── home.py                 # Home response schema
+  │   ├── errors.py               # API Errors response schema
   │   └── auth/                   # Auth request/response schemas
   │       └── auth.py
   │   ├── api/v1/                 # API response Pydantic models
