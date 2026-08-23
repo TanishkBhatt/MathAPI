@@ -6,4 +6,4 @@ class GetSourcesResponse(BaseModel):
     success: bool
     message: str
     total_sources: int
-    learning_sources: List[LearningSource]
+    sources: List[LearningSource]

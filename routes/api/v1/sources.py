@@ -27,7 +27,7 @@ async def sources(
         api_key: str | None = Query(None, description="Your API key for authentication"),
         topic_id: str = Query(
             ...,
-            description="Unique identifier of the mathematics topic to retrieve learning sources for. Must match a valid `topic_id` from the `/get-topics` endpoint.",
+            description="Unique identifier of the mathematics topic to retrieve learning sources for. Must match a valid `topic_id` from the `/topics` endpoint.",
             examples=["quadratic-equations"]
         ),
         database: AsyncIOMotorClient = Depends(get_db)

@@ -19,3 +19,7 @@ uv.lock
 
 # Environment variables
 .env
+
+# Local Database
+database/
+db_func/

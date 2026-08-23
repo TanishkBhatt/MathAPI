@@ -10,7 +10,7 @@ def test_sources_success(client, api_base, api_key):
     data = resp.json()
     assert data["success"] is True
     assert data["total_sources"] > 0
-    source = data["learning_sources"][0]
+    source = data["sources"][0]
     assert "title" in source
     assert "type" in source
     assert "link" in source

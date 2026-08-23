@@ -27,8 +27,8 @@ async def get_sources(
         )
 
     # VALIDATING IS TOPIC_ID VALID OR NOT
-    learning_sources: List[Dict[str, Any]] = sources_data[0]["learning_sources"] if sources_data else []
-    if not learning_sources:
+    sources: List[Dict[str, Any]] = sources_data[0]["learning_sources"] if sources_data else []
+    if not sources:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Topic With ID - '{topic_id}' Not Found"
@@ -38,6 +38,6 @@ async def get_sources(
     return {
         "success": True,
         "message": "Data Successfully Retrieved",
-        "total_sources": len(learning_sources),
-        "learning_sources": learning_sources
+        "total_sources": len(sources),
+        "sources": sources
     }
