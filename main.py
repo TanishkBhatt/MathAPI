@@ -44,8 +44,10 @@ tags_metadata = [
 ]
 
 description = """A `RESTful API Service` designed for students and developers pursuing mathematics and related fields.
+
 Provides structured access to topic explanations, step-by-step worked examples, practice questions and concise formulae sheets of topics across various branches of mathematics.
-Quick Start : Hit POST `/auth` with a username and email to receive your API key, then pass it as the `api_key` query parameter on any Get API route."""
+
+Quick Start : Hit `POST /auth` with a username and email to receive your API key, then pass it as the `api_key` query parameter on any Get API route."""
 
 # INITIALIZING THE APP
 app = FastAPI(
