@@ -39,15 +39,13 @@ tags_metadata = [
     },
     {
         "name": "Get API",
-        "description": "Core data retrieval endpoints for serving mathematical assets - topics, explanations, worked examples, practice questions, formulae, learning sources, daily challenge problems and random questions. Requires a valid `api_key` query parameter obtained from the `/auth` route. Limited to 100 requests per hour per API key."
+        "description": "Core data retrieval endpoints for serving mathematical assets - topics, explanations, worked examples, practice questions, formulae, learning sources, daily challenge problems and random questions. Requires a valid api_key query parameter obtained from the /auth route. Limited to 100 requests per hour per API key."
     }
 ]
 
-description = """A `RESTful API Service` designed for students and developers pursuing mathematics and related fields.
+description = """A `RESTFUL API Service` designed for Students and Sevelopers pursuing Sathematics and related fields.
 
-Provides structured access to topic explanations, step-by-step worked examples, practice questions and concise formulae sheets of topics across various branches of mathematics.
-
-Quick Start : Hit `POST /auth` with a username and email to receive your API key, then pass it as the `api_key` query parameter on any Get API route."""
+Provides structured access to Topic Explanations, step-by-step Worked Examples, Practice Questions, concise Formulae Sheets, Learning Sources of Topics across various Branches of Mathematics. With an interactive touch of Random Question and Daily Challanges."""
 
 # INITIALIZING THE APP
 app = FastAPI(
@@ -56,8 +54,8 @@ app = FastAPI(
     version="1.0.0",
     summary="Mathematics Education API Services",
     contact={
-        "name": "Tanishk Bhatt",
-        "url": "https://tanishkbhatt.vercel.app"
+        "name": "Github Repository",
+        "url": "https://github.com/TanishkBhatt/MathAPI"
     },
     openapi_tags=tags_metadata,
     docs_url=None   # Disable default docs
