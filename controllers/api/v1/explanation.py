@@ -73,7 +73,7 @@ async def explain_topic(database: AsyncIOMotorClient, api_key: str | None, topic
                 detail=f"{str(e)}"
             )
     else:
-        explanation["learning_sources"] = []
+        explanation["sources"] = []
 
     # RETURN OBJECT
     return {

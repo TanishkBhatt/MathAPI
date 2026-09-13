@@ -30,7 +30,7 @@ def test_explanation_with_all_includes(client, api_base, api_key):
     assert len(data["explanation"]["formulae"]) > 0
     assert len(data["explanation"]["solved_examples"]) > 0
     assert len(data["explanation"]["try_yourself_questions"]) > 0
-    assert len(data["explanation"]["learning_sources"]) > 0
+    assert len(data["explanation"]["sources"]) > 0
 
 
 def test_explanation_without_includes(client, api_base, api_key):
@@ -43,7 +43,7 @@ def test_explanation_without_includes(client, api_base, api_key):
     assert data["explanation"]["formulae"] == []
     assert data["explanation"]["solved_examples"] == []
     assert data["explanation"]["try_yourself_questions"] == []
-    assert data["explanation"]["learning_sources"] == []
+    assert data["explanation"]["sources"] == []
 
 
 def test_explanation_invalid_topic(client, api_base, api_key):
