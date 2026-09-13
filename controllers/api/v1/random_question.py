@@ -2,14 +2,9 @@ from fastapi import HTTPException, status
 from motor.motor_asyncio import AsyncIOMotorClient
 from pymongo.errors import PyMongoError
 from typing import Any, Dict, List
-from utils.database import get_documents
 from utils.helpers import validate_api_key
 
-async def get_random_question(
-        database: AsyncIOMotorClient,
-        api_key: str | None
-    ) -> Dict[str, Any]:
-
+async def get_random_question(database: AsyncIOMotorClient, api_key: str | None) -> Dict[str, Any]:
     await validate_api_key(database, api_key)
 
     client = database

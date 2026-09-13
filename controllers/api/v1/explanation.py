@@ -5,26 +5,12 @@ from random import sample
 from utils.database import get_documents
 from utils.helpers import validate_api_key
 
-async def explain_topic(
-        database: AsyncIOMotorClient,
-        api_key: str | None,
-        topic_id: str, 
-        include_formulae: bool, 
-        include_examples: bool, 
-        include_questions: bool,
-        include_sources: bool
-    ) -> Dict[str, Any]:
-    
+async def explain_topic(database: AsyncIOMotorClient, api_key: str | None, topic_id: str,  include_formulae: bool,  include_examples: bool,  include_questions: bool, include_sources: bool) -> Dict[str, Any]:
     await validate_api_key(database, api_key)
     
-    # RETRIVEING DATA
+    # RETRIEVING DATA
     try:
-        explanations: List[Dict[str, Any]] = await get_documents(
-            database,
-            "datasets",
-            "explain",
-            {"topic_id": topic_id}
-        )
+        explanations: List[Dict[str, Any]] = await get_documents(database, "datasets", "explain", {"topic_id": topic_id})
     except ConnectionError as e:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -43,13 +29,8 @@ async def explain_topic(
     # FORMULAE, EXAMPLES, QUESTIONS LEARNING SOURCES INCLUSION
     if include_formulae:
         try:
-            formulae: List[Dict[str, Any]] = await get_documents(
-                database,
-                "datasets",
-                "formulae",
-                {"topic_id": topic_id}
-            )
-            explanation["formulae"] = formulae[0]["formulae"] if formulae else []
+            formulae: List[Dict[str, Any]] = await get_documents(database, "datasets", "formulae", {"topic_id": topic_id})
+            explanation["formulae"] = formulae
         except ConnectionError as e:
             raise HTTPException(
                 status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -60,12 +41,7 @@ async def explain_topic(
 
     if include_examples:
         try:
-            examples: List[Dict[str, Any]] = await get_documents(
-                database,
-                "datasets",
-                "examples",
-                {"topic_id": topic_id}
-            )
+            examples: List[Dict[str, Any]] = await get_documents(database, "datasets", "examples", {"topic_id": topic_id})
             explanation["solved_examples"] = examples[:2] if examples else []
         except ConnectionError as e:
             raise HTTPException(
@@ -77,15 +53,7 @@ async def explain_topic(
 
     if include_questions:
         try:
-            questions: List[Dict[str, Any]] = await get_documents(
-                database,
-                "datasets",
-                "questions",
-                {
-                    "topic_id": topic_id,
-                    "difficulty": "Beginner"
-                }
-            )
+            questions: List[Dict[str, Any]] = await get_documents(database, "datasets", "questions", {"topic_id": topic_id, "difficulty": "Beginner"})
             explanation["try_yourself_questions"] = sample(questions, min(3, len(questions))) if questions else []
         except ConnectionError as e:
             raise HTTPException(
@@ -97,13 +65,8 @@ async def explain_topic(
 
     if include_sources:
         try:
-            source_data: List[Dict[str, Any]] = await get_documents(
-                database,
-                "datasets",
-                "sources",
-                {"topic_id": topic_id}
-            )
-            explanation["learning_sources"] = source_data[0]["learning_sources"] if source_data else []
+            source_data: List[Dict[str, Any]] = await get_documents(database, "datasets", "sources", {"topic_id": topic_id})
+            explanation["sources"] = source_data
         except ConnectionError as e:
             raise HTTPException(
                 status_code=status.HTTP_503_SERVICE_UNAVAILABLE,

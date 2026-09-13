@@ -29,11 +29,7 @@ app = APIRouter(
         }
     }
 )
-async def auth(
-        data: AuthRequest,
-        response: Response,
-        database: AsyncIOMotorClient = Depends(get_db)
-    ) -> dict[str, Any]:
+async def auth(data: AuthRequest, response: Response, database: AsyncIOMotorClient = Depends(get_db)) -> dict[str, Any]:
     result = await authenticate_user(database, data)
     if result["message"] == "User Is Already Authenticated":
         response.status_code = status.HTTP_200_OK

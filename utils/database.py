@@ -68,7 +68,7 @@ async def update_documents(
     try:
         await coll.update_many(filter_query, update_data)
     except DuplicateKeyError:
-        raise
+        raise ConnectionError("Duplicate Key Error")
     except PyMongoError as e:
         raise ConnectionError("Error In Connecting With Database")
 

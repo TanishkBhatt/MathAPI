@@ -1,31 +1,21 @@
 from fastapi import HTTPException, status
 from motor.motor_asyncio import AsyncIOMotorClient
+from pymongo.errors import PyMongoError
 from typing import Any, List, Dict
 from random import sample
 from utils.database import get_documents
 from utils.helpers import validate_api_key
 
-async def get_examples(
-        database: AsyncIOMotorClient,
-        api_key: str | None,
-        topic_id: str, 
-        limit: int
-    ) -> Dict[str, Any]:
-    
+async def get_examples(database: AsyncIOMotorClient, api_key: str | None, topic_id: str,  limit: int) -> Dict[str, Any]:
     await validate_api_key(database, api_key)
     
     # RETRIEVING DATA
     try:
-        examples: List[Dict[str, Any]] = await get_documents(
-            database,
-            "datasets",
-            "examples",
-            {"topic_id": topic_id}
-        )
-    except ConnectionError as e:
+        examples: List[Dict[str, Any]] = await get_documents(database, "datasets", "examples", {"topic_id": topic_id})
+    except PyMongoError:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail=f"{str(e)}"
+            detail="Error In Connecting With Database"
         )
     
     # VALIDATING IS TOPIC_ID VALID OR NOT

@@ -2,30 +2,13 @@ from fastapi import HTTPException, status
 from motor.motor_asyncio import AsyncIOMotorClient
 from pymongo.errors import PyMongoError
 from typing import Any, Dict, List
-from random import sample
 from datetime import datetime
-from utils.database import update_documents
+from utils.database import update_documents, get_documents
 from utils.helpers import validate_api_key
 
 DB_ERROR = "Error In Connecting With Database"
 
-def _challenge_payload(
-        today: str,
-        selected: List[Dict[str, Any]]
-    ) -> Dict[str, Any]:
-    return {
-        "success": True,
-        "message": "Daily Challenge Data Successfully Retrieved",
-        "challenge_date": today,
-        "total_questions": len(selected),
-        "questions": selected
-    }
-
-async def get_daily_challenge(
-        database: AsyncIOMotorClient,
-        api_key: str | None
-    ) -> Dict[str, Any]:
-
+async def get_daily_challenge(database: AsyncIOMotorClient, api_key: str | None) -> Dict[str, Any]:
     await validate_api_key(database, api_key)
     today = datetime.now().strftime("%Y-%m-%d")
 
@@ -33,7 +16,7 @@ async def get_daily_challenge(
     db = client["datasets"]
     coll = db["questions"]
 
-    # CHECK IF TODAY'S CHALLENGE EXISTS - SORTED BY _id SO EVERY USER GETS THE SAME SET
+    # CHECK IF TODAY'S CHALLENGE EXISTS - MUST HAVE 1 OF EACH DIFFICULTY
     try:
         cursor = coll.find({"challenge_date": today}).sort("_id", 1).limit(3)
         existing: List[Dict[str, Any]] = await cursor.to_list(None)
@@ -43,10 +26,20 @@ async def get_daily_challenge(
             detail=DB_ERROR
         )
 
-    if len(existing) >= 3:
+    # Verify existing challenge has 1 of each difficulty
+    difficulties_in_existing = {doc.get("difficulty") for doc in existing}
+    required_difficulties = {"Beginner", "Intermediate", "Advanced"}
+    
+    if len(existing) >= 3 and required_difficulties.issubset(difficulties_in_existing):
         for doc in existing:
             doc.pop("_id", None)
-        return _challenge_payload(today, existing)
+        return {
+            "success": True,
+            "message": "Daily Challenge Data Successfully Retrieved",
+            "challenge_date": today,
+            "total_questions": len(existing),
+            "questions": existing
+        }
 
     existing_ids: List[Any] = [doc["_id"] for doc in existing]
 
@@ -92,4 +85,10 @@ async def get_daily_challenge(
                 detail=DB_ERROR
             )
 
-    return _challenge_payload(today, selected)
+    return {
+        "success": True,
+        "message": "Daily Challenge Data Successfully Retrieved",
+        "challenge_date": today,
+        "total_questions": len(selected),
+        "questions": selected
+    }

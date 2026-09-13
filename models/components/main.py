@@ -13,7 +13,7 @@ class Topic(BaseModel):
     formulae_available: int
     examples_available: int
     questions_available: int
-    learning_sources_available: int
+    sources_available: int
 
 class Example(BaseModel):
     topic_id: str
@@ -46,4 +46,4 @@ class Explain(BaseModel):
     formulae: List[Formula]
     solved_examples: List[Example]
     try_yourself_questions: List[Question]
-    learning_sources: List[LearningSource]
+    sources: List[LearningSource]
