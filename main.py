@@ -19,7 +19,7 @@ from routes.api.v1 import (
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi.middleware import SlowAPIMiddleware
 from slowapi.errors import RateLimitExceeded
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.openapi.docs import get_swagger_ui_html
 
 from utils.limiter import (
@@ -64,10 +64,40 @@ app = FastAPI(
 # CUSTOMIZATIONS
 @app.get("/docs", include_in_schema=False)
 async def custom_docs():
-    return get_swagger_ui_html(
-        openapi_url=app.openapi_url,    # type: ignore
-        title="MathAPI Docs"
-    )
+    """Custom Swagger UI documentation with Vercel Web Analytics integration."""
+    html = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui.css">
+        <link rel="shortcut icon" href="https://fastapi.tiangolo.com/img/favicon.png">
+        <title>MathAPI Docs</title>
+        <script>
+            window.va = window.va || function () {{ (window.vaq = window.vaq || []).push(arguments); }};
+        </script>
+        <script defer src="/_vercel/insights/script.js"></script>
+    </head>
+    <body>
+        <div id="swagger-ui"></div>
+        <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui-bundle.js"></script>
+        <script>
+        const ui = SwaggerUIBundle({{
+            url: '{app.openapi_url}',
+            dom_id: '#swagger-ui',
+            presets: [
+                SwaggerUIBundle.presets.apis,
+                SwaggerUIBundle.SwaggerUIStandalonePreset
+            ],
+            layout: "BaseLayout",
+            deepLinking: true,
+            showExtensions: true,
+            showCommonExtensions: true
+        }})
+        </script>
+    </body>
+    </html>
+    """
+    return HTMLResponse(content=html)
 
 # INCLUDING ROUTERS
 app.include_router(home.app)
