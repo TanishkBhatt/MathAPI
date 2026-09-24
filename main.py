@@ -19,7 +19,7 @@ from routes.api.v1 import (
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi.middleware import SlowAPIMiddleware
 from slowapi.errors import RateLimitExceeded
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.openapi.docs import get_swagger_ui_html
 
 from utils.limiter import (
@@ -64,10 +64,19 @@ app = FastAPI(
 # CUSTOMIZATIONS
 @app.get("/docs", include_in_schema=False)
 async def custom_docs():
-    return get_swagger_ui_html(
+    swagger_ui = get_swagger_ui_html(
         openapi_url=app.openapi_url,    # type: ignore
         title="MathAPI Docs"
     )
+    
+    # Inject Vercel Web Analytics script
+    analytics_script = '<script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>'
+    
+    # Insert analytics script before closing </head> tag
+    html_content = swagger_ui.body.decode()
+    html_with_analytics = html_content.replace('</head>', f'{analytics_script}\n</head>')
+    
+    return HTMLResponse(content=html_with_analytics, status_code=200)
 
 # INCLUDING ROUTERS
 app.include_router(home.app)
