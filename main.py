@@ -27,6 +27,10 @@ from utils.limiter import (
     limiting_response
 )
 
+from utils.logger import (
+    RequestLoggingMiddleware
+)
+
 # DOCS METADATA TAGS
 tags_metadata = [
     {
@@ -94,6 +98,9 @@ app.add_middleware(
 # APPLYING LIMITING
 app.state.limiter = limiter
 app.add_middleware(SlowAPIMiddleware)
+
+# REQUEST LOGGING (OUTERMOST - CAPTURES EVERY RESPONSE CODE INCLUDING 429)
+app.add_middleware(RequestLoggingMiddleware)
 
 # CUSTOM LIMIT EXCEEDED HANDLER
 @app.exception_handler(RateLimitExceeded)

@@ -1,6 +1,5 @@
 from fastapi import HTTPException, status
 from motor.motor_asyncio import AsyncIOMotorClient
-from pymongo.errors import PyMongoError
 from typing import Any, List, Dict
 from utils.database import get_documents
 from utils.helpers import validate_api_key
@@ -11,10 +10,10 @@ async def get_formulae(database: AsyncIOMotorClient, api_key: str | None, topic_
     # RETRIEVING DATA
     try:
         formulae_data: List[Dict[str, Any]] = await get_documents(database, "datasets", "formulae", {"topic_id": topic_id})
-    except PyMongoError:
+    except ConnectionError as e:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Error In Connecting With Database"
+            detail=f"{str(e)}"
         )
     
     # VALIDATING IS TOPIC_ID VALID OR NOT

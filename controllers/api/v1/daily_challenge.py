@@ -3,7 +3,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from pymongo.errors import PyMongoError
 from typing import Any, Dict, List
 from datetime import datetime
-from utils.database import update_documents, get_documents
+from utils.database import update_documents
 from utils.helpers import validate_api_key
 
 DB_ERROR = "Error In Connecting With Database"
