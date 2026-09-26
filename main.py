@@ -47,7 +47,7 @@ tags_metadata = [
     }
 ]
 
-description = """A `RESTFUL API Service` designed for Students and Sevelopers pursuing Sathematics and related fields.
+description = """A `RESTFUL API Service` designed for Students and Developers pursuing Mathematics and related fields.
 
 Provides structured access to Topic Explanations, step-by-step Worked Examples, Practice Questions, concise Formulae Sheets, Learning Sources of Topics across various Branches of Mathematics. With an interactive touch of Random Question and Daily Challanges."""
 
@@ -77,7 +77,7 @@ async def custom_docs():
     analytics_script = '<script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>'
     
     # Insert analytics script before closing </head> tag
-    html_content = swagger_ui.body.decode()
+    html_content = swagger_ui.body.decode()     # type: ignore
     html_with_analytics = html_content.replace('</head>', f'{analytics_script}\n</head>')
     
     return HTMLResponse(content=html_with_analytics, status_code=200)
