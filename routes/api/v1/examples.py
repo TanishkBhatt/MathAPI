@@ -1,11 +1,12 @@
-from fastapi import APIRouter, Request, status, Depends, Query
+from fastapi import APIRouter, Request, Response, status, Depends, Query
 from typing import Any
 from motor.motor_asyncio import AsyncIOMotorClient
 from models.api.v1.examples import GetExamplesResponse
 from models.errors import ErrorResponse
 from utils.database import get_db
 from controllers.api.v1.examples import get_examples
-from utils.limiter import limiter
+from utils.helpers import get_request_api_key
+from utils.limiter import get_client_ip, limiter
 
 app = APIRouter(
     prefix="/api/v1",
@@ -17,7 +18,7 @@ app = APIRouter(
     response_model=GetExamplesResponse,
     status_code=status.HTTP_200_OK,
     summary="Get Worked Examples",
-    description="Fetches step-by-step worked examples for a specific mathematics topic. Each example includes the question, key observation, concepts and formulae used, detailed solution steps, final answer and interpretation. Requires a valid `api_key` for access (100 requests per hour per API key).",
+    description="Fetches step-by-step worked examples for a specific mathematics topic. Each example includes the question, key observation, concepts and formulae used, detailed solution steps, final answer and interpretation. Requires a valid API key via the `X-API-Key` header or `api_key` query parameter (100 requests per hour per API key across all Get API routes).",
     response_description="List of worked examples with full step-by-step solutions and explanations.",
     responses={
         status.HTTP_401_UNAUTHORIZED: {
@@ -39,11 +40,13 @@ app = APIRouter(
     }
 )
 
-@limiter.limit("100/hour")
+@limiter.shared_limit("100/hour", scope="get_api")
+@limiter.shared_limit("300/hour", scope="get_api_ip", key_func=get_client_ip)
 
 async def examples(
         request: Request,
-        api_key: str | None = Query(None, description="Your API key for authentication", examples=["mathapi_key_4f2ab9c81d0e_Xk7mQ2pT9vLwRn3yJd8sFgH1cE_exp=1782144000"]),
+        response: Response,
+        api_key: str | None = Depends(get_request_api_key),
         topic_id: str = Query(
             ...,
             description="Unique identifier of the mathematics topic to retrieve examples for. Must match a valid `topic_id` from the `/api/v1/topics` endpoint.",

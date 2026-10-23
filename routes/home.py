@@ -19,8 +19,8 @@ def home() -> dict[str, Any]:
         "success": True,
         "message": "MathAPI - API Services",
         "help": {
-            "get_started": "Go to our Documentation, the POST /auth route, submit your details and get an api_key of 6 months expiry.",
-            "explore_routes": "We have currently a total of 8 GET routes serving Topics, Explanations, Worked Examples, Practice Questions, Formulae, Learning Sources, Daily Challenge Problems and Random Questions at /api/v1 with a limit of 100 requests per hour."
+            "get_started": "Go to our Documentation, the POST /auth route, submit your details and get an api_key of 6 months expiry. Send it via the X-API-Key header.",
+            "explore_routes": "We have currently a total of 8 GET routes serving Topics, Explanations, Worked Examples, Practice Questions, Formulae, Learning Sources, Daily Challenge Problems and Random Questions at /api/v1 with a limit of 100 requests per hour per API key across all routes."
         },
         "docs": "https://mathapi.vercel.app/docs",
         "repo": "https://github.com/TanishkBhatt/MathAPI",

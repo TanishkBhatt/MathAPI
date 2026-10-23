@@ -4,8 +4,8 @@ from functools import lru_cache
 # BASE SETTINGS
 class Settings(BaseSettings):
     DB_CONNECTION_URL: str
-    ADMIN_TOKEN: str
     API_KEY_VALID_MONTHS: int = 6
+    RATE_LIMIT_STORAGE_URI: str | None = None
 
     model_config = SettingsConfigDict(
         env_file=".env",

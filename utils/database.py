@@ -1,9 +1,12 @@
+import logging
 from motor.motor_asyncio import AsyncIOMotorClient
-from pymongo.errors import DuplicateKeyError, PyMongoError
+from pymongo.errors import ConnectionFailure, DuplicateKeyError, PyMongoError
 from typing import List, Dict, Any
 from config import settings
 
-_client = AsyncIOMotorClient(settings.DB_CONNECTION_URL)
+logger = logging.getLogger(__name__)
+
+_client = AsyncIOMotorClient(settings.DB_CONNECTION_URL, serverSelectionTimeoutMS=5000)
 
 # INDEXES THAT HAVE ALREADY BEEN CREATED IN THIS PROCESS
 _ensured_indexes: set = set()
@@ -29,6 +32,30 @@ async def ensure_index(
     await coll.create_index(index_spec, unique=unique, name=index_name)
     # create_index is idempotent, but definitive only once we succeeded
     _ensured_indexes.add(key)
+
+async def ensure_core_indexes(db_conn: AsyncIOMotorClient) -> None:
+    indexes = [
+        ("auth", "users", [("username", 1)], True, "username_unique"),
+        ("auth", "users", [("api_key", 1)], True, "api_key_unique"),
+        ("datasets", "topics", [("topic_id", 1)], False, "topics_topic_id"),
+        ("datasets", "explain", [("topic_id", 1)], False, "explain_topic_id"),
+        ("datasets", "examples", [("topic_id", 1)], False, "examples_topic_id"),
+        ("datasets", "formulae", [("topic_id", 1)], False, "formulae_topic_id"),
+        ("datasets", "sources", [("topic_id", 1)], False, "sources_topic_id"),
+        ("datasets", "questions", [("topic_id", 1)], False, "questions_topic_id"),
+        ("datasets", "questions", [("difficulty", 1)], False, "questions_difficulty"),
+        ("datasets", "questions", [("topic_id", 1), ("difficulty", 1)], False, "questions_topic_difficulty"),
+        ("datasets", "daily_challenges", [("challenge_date", 1)], True, "challenge_date_unique"),
+    ]
+
+    for db_name, coll_name, index_spec, unique, index_name in indexes:
+        try:
+            await ensure_index(db_conn, db_name, coll_name, index_spec, unique=unique, index_name=index_name)
+        except ConnectionFailure as e:
+            logger.warning("Could not create index %s: %s", index_name, e)
+            break
+        except PyMongoError as e:
+            logger.warning("Could not create index %s: %s", index_name, e)
 
 async def get_documents(
         db_conn: AsyncIOMotorClient,

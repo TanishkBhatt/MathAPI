@@ -6,5 +6,6 @@ pydantic[email]>=2.13.4
 motor>=3.7.1
 pymongo>=4.17.0
 slowapi>=0.1.9
+redis>=5.0
 requests>=2.34.2
 pytest>=8.0

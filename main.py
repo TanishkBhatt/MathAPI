@@ -1,3 +1,5 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, Request
 from routes import (
     home
@@ -19,8 +21,10 @@ from routes.api.v1 import (
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi.middleware import SlowAPIMiddleware
 from slowapi.errors import RateLimitExceeded
-from fastapi.responses import JSONResponse, HTMLResponse
+from fastapi.responses import JSONResponse
 from fastapi.openapi.docs import get_swagger_ui_html
+
+from utils.database import ensure_core_indexes, get_db
 
 from utils.limiter import (
     limiter,
@@ -39,11 +43,11 @@ tags_metadata = [
     },
     {
         "name": "Auth",
-        "description": "Authentication endpoint for obtaining an API key. Register a unique username and email to receive a key valid for 6 months; registering again with the same username returns the existing key."
+        "description": "Authentication endpoint for obtaining an API key. Register a unique username and email to receive a key valid for 6 months; registering again with the same username and email returns the existing key, while expired keys are rotated automatically."
     },
     {
         "name": "Get API",
-        "description": "Core data retrieval endpoints for serving mathematical assets - topics, explanations, worked examples, practice questions, formulae, learning sources, daily challenge problems and random questions. Requires a valid api_key query parameter obtained from the /auth route. Limited to 100 requests per hour per API key."
+        "description": "Core data retrieval endpoints for serving mathematical assets - topics, explanations, worked examples, practice questions, formulae, learning sources, daily challenge problems and random questions. Requires a valid API key via the X-API-Key header (or api_key query parameter) obtained from the /auth route. Limited to 100 requests per hour per API key across all Get API routes, with an additional 300 requests per hour per client IP."
     }
 ]
 
@@ -51,8 +55,14 @@ description = """A `RESTFUL API Service` designed for Students and Developers pu
 
 Provides structured access to Topic Explanations, step-by-step Worked Examples, Practice Questions, concise Formulae Sheets, Learning Sources of Topics across various Branches of Mathematics. With an interactive touch of Random Question and Daily Challanges."""
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await ensure_core_indexes(get_db())
+    yield
+
 # INITIALIZING THE APP
 app = FastAPI(
+    lifespan=lifespan,
     title="MathAPI",
     description=description,
     version="1.0.0",
@@ -62,25 +72,16 @@ app = FastAPI(
         "url": "https://github.com/TanishkBhatt/MathAPI"
     },
     openapi_tags=tags_metadata,
-    docs_url=None   # Disable default docs
+    docs_url=None
 )
 
 # CUSTOMIZATIONS
 @app.get("/docs", include_in_schema=False)
 async def custom_docs():
-    swagger_ui = get_swagger_ui_html(
+    return get_swagger_ui_html(
         openapi_url=app.openapi_url,    # type: ignore
         title="MathAPI Docs"
     )
-    
-    # Inject Vercel Web Analytics script
-    analytics_script = '<script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>'
-    
-    # Insert analytics script before closing </head> tag
-    html_content = swagger_ui.body.decode()     # type: ignore
-    html_with_analytics = html_content.replace('</head>', f'{analytics_script}\n</head>')
-    
-    return HTMLResponse(content=html_with_analytics, status_code=200)
 
 # INCLUDING ROUTERS
 app.include_router(home.app)

@@ -1,0 +1,45 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.12, pytest-9.1.1, pluggy-1.6.0 -- D:\BACKEND\MathAPI\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: D:\BACKEND\MathAPI
+configfile: pyproject.toml
+plugins: anyio-4.13.0
+collecting ... collected 35 items
+
+tests/test_auth.py::test_auth_success PASSED                             [  2%]
+tests/test_auth.py::test_auth_duplicate PASSED                           [  5%]
+tests/test_auth.py::test_auth_missing_username PASSED                    [  8%]
+tests/test_auth.py::test_auth_missing_email PASSED                       [ 11%]
+tests/test_auth.py::test_auth_invalid_email PASSED                       [ 14%]
+tests/test_auth.py::test_auth_returns_expiry PASSED                      [ 17%]
+tests/test_daily_challenge.py::test_daily_challenge_success PASSED       [ 20%]
+tests/test_daily_challenge.py::test_daily_challenge_missing_key PASSED   [ 22%]
+tests/test_daily_challenge.py::test_daily_challenge_invalid_key PASSED   [ 25%]
+tests/test_errors.py::test_all_endpoints_401_without_key PASSED          [ 28%]
+tests/test_errors.py::test_all_endpoints_401_invalid_key PASSED          [ 31%]
+tests/test_examples.py::test_examples_success PASSED                     [ 34%]
+tests/test_examples.py::test_examples_with_limit PASSED                  [ 37%]
+tests/test_examples.py::test_examples_invalid_topic PASSED               [ 40%]
+tests/test_explanation.py::test_explanation_success PASSED               [ 42%]
+tests/test_explanation.py::test_explanation_with_all_includes PASSED     [ 45%]
+tests/test_explanation.py::test_explanation_without_includes PASSED      [ 48%]
+tests/test_explanation.py::test_explanation_invalid_topic PASSED         [ 51%]
+tests/test_explanation.py::test_explanation_missing_topic_id PASSED      [ 54%]
+tests/test_formulae.py::test_formulae_success PASSED                     [ 57%]
+tests/test_formulae.py::test_formulae_invalid_topic PASSED               [ 60%]
+tests/test_home.py::test_home_success PASSED                             [ 62%]
+tests/test_questions.py::test_questions_success PASSED                   [ 65%]
+tests/test_questions.py::test_questions_with_limit PASSED                [ 68%]
+tests/test_questions.py::test_questions_filter_difficulty PASSED         [ 71%]
+tests/test_questions.py::test_questions_filter_type PASSED               [ 74%]
+tests/test_questions.py::test_questions_invalid_topic PASSED             [ 77%]
+tests/test_random_question.py::test_random_question_success PASSED       [ 80%]
+tests/test_random_question.py::test_random_question_missing_key PASSED   [ 82%]
+tests/test_random_question.py::test_random_question_invalid_key PASSED   [ 85%]
+tests/test_sources.py::test_sources_success PASSED                       [ 88%]
+tests/test_sources.py::test_sources_invalid_topic PASSED                 [ 91%]
+tests/test_topics.py::test_topics_success PASSED                         [ 94%]
+tests/test_topics.py::test_topics_missing_key PASSED                     [ 97%]
+tests/test_topics.py::test_topics_invalid_key PASSED                     [100%]
+
+============================= 35 passed in 7.66s ==============================

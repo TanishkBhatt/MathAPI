@@ -2,7 +2,7 @@
 
 > A RESTful API service designed for students and developers pursuing mathematics and related fields. Provides structured access to topic explanations, step-by-step worked examples, practice questions, and concise formula sheets across various branches of mathematics.
 
-[![Documentations](https://img.shields.io/badge/Documentation-005571?style=for-the-badge&logo=fastapi&logoColor=white)](https://mathapi.vercel.app/docs)
+[![Documentations](https://img.shields.io/badge/Documentation-blue?style=for-the-badge&logo=fastapi&logoColor=white)](https://mathapi.vercel.app/docs)
 
 ---
 
@@ -43,10 +43,10 @@ Fetches selected learning sources (a website or a youtube video) for that partic
 All mathematical expressions are **LaTeX** coded for better rendering and user experience.
 
 ### API Key Authentication
-Register with a username and email to receive a unique API key for authenticated access. Keys are valid for **6 months** from registration; expired keys return **UNAUTHORIZED_401** and must be re-created.
+Register with a username and email to receive a unique API key for authenticated access. Keys are valid for **6 months** from registration. Registering again with the same username and email returns the existing key; expired keys are rotated automatically. A different email for an existing username is rejected with **409_CONFLICT**.
 
 ### API Key Limiting
-A user can hit only **100 GET requests** on Get API routes with an API Key per hour.
+A user can hit only **100 GET requests** across all Get API routes with an API Key per hour, plus **300 requests per client IP** per hour. On Vercel, the MongoDB connection is used automatically as shared limit storage; set `RATE_LIMIT_STORAGE_URI` to a Redis instance for the best performance.
 
 ### Daily Challenge
 Get **3 daily challenge problems** — one Beginner, one Intermediate, and one Advanced — randomly assigned and shared globally for the day.
@@ -151,12 +151,14 @@ MathAPI/
 
 ### Use the API key to access topics
 ```bash
-  curl "https://mathapi.vercel.app/api/v1/topics?api_key=YOUR_API_KEY"
+  curl "https://mathapi.vercel.app/api/v1/topics" \
+    -H "X-API-Key: YOUR_API_KEY"
 ```
 
 ### Explore a specific topic
 ```bash
-  curl "https://mathapi.vercel.app/api/v1/explanation?api_key=YOUR_API_KEY&topic_id=quadratic-equations&include_examples=true&include_questions=true"
+  curl "https://mathapi.vercel.app/api/v1/explanation?topic_id=quadratic-equations&include_examples=true&include_questions=true" \
+    -H "X-API-Key: YOUR_API_KEY"
 ```
 
 ---
@@ -175,8 +177,8 @@ git clone https://github.com/TanishkBhatt/MathAPI.git
 # Database Connetion URL
 DB_CONNECTION_URL=YOUR_MONGODB_URL
 
-# Admin Token
-ADMIN_TOKEN=YOUR_ADMIN_TOKEN
+# Optional - shared rate limit storage (e.g. redis://...)
+RATE_LIMIT_STORAGE_URI=YOUR_REDIS_URL
 ```
 
 ### Install dependencies
@@ -210,6 +212,6 @@ Found a bug or have a feature request? Open an issue on the [GitHub repository](
 ## Author And Credits
 **Tanishk Bhatt** — A Student and A Programmer
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-005571?style=for-the-badge&logo=streamlit&logoColor=white)](https://tanishkbhatt.vercel.app)
+[![Portfolio](https://img.shields.io/badge/Portfolio-orange?style=for-the-badge&logo=streamlit&logoColor=white)](https://tanishkbhatt.vercel.app)
 
 ---

@@ -3,8 +3,27 @@ import secrets
 import time
 from calendar import monthrange
 from datetime import datetime
-from fastapi import HTTPException, status
+from fastapi import Header, HTTPException, Query, status
 from motor.motor_asyncio import AsyncIOMotorClient
+
+API_KEY_EXAMPLE = "mathapi_key_4f2ab9c81d0e_Xk7mQ2pT9vLwRn3yJd8sFgH1cE_exp=1782144000"
+
+
+def get_request_api_key(
+        api_key: str | None = Query(
+            None,
+            description="Your API key for authentication. Prefer the X-API-Key header.",
+            examples=[API_KEY_EXAMPLE]
+        ),
+        x_api_key: str | None = Header(
+            None,
+            alias="X-API-Key",
+            description="Your API key for authentication. Preferred over the api_key query parameter."
+        )
+    ) -> str | None:
+
+    return x_api_key or api_key
+
 
 def generate_api_key(
         username: str,
