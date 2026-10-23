@@ -134,7 +134,8 @@ MathAPI/
 | **Database** | [MongoDB](https://www.mongodb.com/) via [PyMongo](https://pymongo.readthedocs.io/) |
 | **Validation** | [Pydantic v2](https://docs.pydantic.dev/) — data validation & settings |
 | **Auth** | API key-based ([Hashlib](https://docs.python.org/3/library/hashlib.html), [Secrets](https://docs.python.org/3/library/secrets.html)) |
-| **Rate Limiting** | [SlowAPI](https://slowapi.readthedocs.io/) — 100 requests/hour per key |
+| **Rate Limiting** | [SlowAPI](https://slowapi.readthedocs.io/) — 100 requests/hour per key + 300 requests/hour per IP |
+| **Rate Limit Storage** | [Redis](https://redis.io/) — shared counters across serverless instances |
 | **Deployment** | [Vercel](https://vercel.com/) — serverless Python functions |
 | **Environment** | [Python](https://python.org) 3.12+, managed with [UV](https://docs.astral.sh/uv/) |
 
