@@ -2,17 +2,13 @@ from pydantic import BaseModel
 from enum import Enum
 
 class Branch(Enum):
-    arithmetic = "Arithmetic"
     number_theory = "Number Theory"
     algebra = "Algebra"
     geometry = "Geometry"
     coordinate_geometry = "Coordinate Geometry"
     trigonometry = "Trigonometry"
     combinatorics = "Combinatorics"
-    probability = "Probability"
-    statistics = "Statistics"
-    introductory_linear_algebra = "Introductory Linear Algebra"
-    introductory_calculus = "Introductory Calculus"
+    applied_mathematics = "Applied Mathematics"
 
 class Difficulty(Enum):
     beginner = "Beginner"

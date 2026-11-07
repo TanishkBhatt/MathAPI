@@ -26,10 +26,3 @@ def api_key(api_base):
     )
     assert resp.status_code == 201, f"Auth failed: {resp.text}"
     return resp.json()["api_key_data"]["api_key"]
-
-@pytest.fixture
-def admin_token():
-    token = os.environ.get("ADMIN_TOKEN")
-    if not token:
-        pytest.skip("ADMIN_TOKEN not set — skipping admin-only tests")
-    return token
