@@ -22,3 +22,4 @@ uv.lock
 
 # Local Database
 database/
+db_to_post/
