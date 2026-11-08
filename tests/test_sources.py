@@ -1,5 +1,4 @@
-TOPIC_ID = "quadratic-equations"
-
+TOPIC_ID = "01_number_system"
 
 def test_sources_success(client, api_base, api_key):
     resp = client.get(
@@ -14,7 +13,6 @@ def test_sources_success(client, api_base, api_key):
     assert "title" in source
     assert "type" in source
     assert "link" in source
-
 
 def test_sources_invalid_topic(client, api_base, api_key):
     resp = client.get(

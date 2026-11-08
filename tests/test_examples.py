@@ -1,5 +1,4 @@
-TOPIC_ID = "quadratic-equations"
-
+TOPIC_ID = "01_number_system"
 
 def test_examples_success(client, api_base, api_key):
     resp = client.get(
@@ -15,7 +14,6 @@ def test_examples_success(client, api_base, api_key):
     assert "answer" in example
     assert "steps" in example
 
-
 def test_examples_with_limit(client, api_base, api_key):
     resp = client.get(
         f"{api_base}/api/v1/examples",
@@ -23,7 +21,6 @@ def test_examples_with_limit(client, api_base, api_key):
     )
     assert resp.status_code == 200
     assert resp.json()["total_examples"] == 1
-
 
 def test_examples_invalid_topic(client, api_base, api_key):
     resp = client.get(

@@ -1,7 +1,6 @@
 import time
 import uuid
 
-
 def test_auth_success(client, api_base):
     username = f"new-test-user-{uuid.uuid4().hex[:12]}"
     email = f"{username}@test.com"
@@ -48,4 +47,4 @@ def test_auth_returns_expiry(client, api_base):
     assert expiry is not None
     now = time.time()
     assert time.strptime(expiry, "%a %b %d %H:%M:%S %Y") > time.localtime(now)
-    assert time.strptime(expiry, "%a %b %d %H:%M:%S %Y").tm_year - time.localtime(now).tm_year <= 1  # ~6 calendar months (with slack)
+    assert time.strptime(expiry, "%a %b %d %H:%M:%S %Y").tm_year - time.localtime(now).tm_year <= 1

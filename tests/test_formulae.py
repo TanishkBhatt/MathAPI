@@ -1,5 +1,4 @@
-TOPIC_ID = "quadratic-equations"
-
+TOPIC_ID = "01_number_system"
 
 def test_formulae_success(client, api_base, api_key):
     resp = client.get(
@@ -13,7 +12,6 @@ def test_formulae_success(client, api_base, api_key):
     formula = data["formulae"][0]
     assert "title" in formula
     assert "code" in formula
-
 
 def test_formulae_invalid_topic(client, api_base, api_key):
     resp = client.get(

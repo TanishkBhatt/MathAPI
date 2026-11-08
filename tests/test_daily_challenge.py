@@ -15,11 +15,9 @@ def test_daily_challenge_success(client, api_base, api_key):
     assert "answer" in q
     assert "difficulty" in q
 
-
 def test_daily_challenge_missing_key(client, api_base):
     resp = client.get(f"{api_base}/api/v1/daily-challenge")
     assert resp.status_code == 401
-
 
 def test_daily_challenge_invalid_key(client, api_base):
     resp = client.get(f"{api_base}/api/v1/daily-challenge?api_key=bogus")
