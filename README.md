@@ -158,7 +158,7 @@ MathAPI/
 
 ### Explore a specific topic
 ```bash
-  curl "https://mathapi.vercel.app/api/v1/explanation?topic_id=quadratic-equations&include_examples=true&include_questions=true" \
+  curl "https://mathapi.vercel.app/api/v1/explanation?topic_id=<topic_id>" \
     -H "X-API-Key: YOUR_API_KEY"
 ```
 

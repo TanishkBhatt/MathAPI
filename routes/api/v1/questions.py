@@ -50,8 +50,7 @@ async def questions(
         api_key: str | None = Depends(get_request_api_key),
         topic_id: str = Query(
             ...,
-            description="Unique identifier of the mathematics topic to retrieve questions for. Must match a valid `topic_id` from the `/api/v1/topics` endpoint.",
-            examples=["quadratic-equations"]
+            description="Unique identifier of the mathematics topic to retrieve questions for. Must match a valid `topic_id` from the `/api/v1/topics` endpoint."
         ),
         limit: int = Query(
             10,

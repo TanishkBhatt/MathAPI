@@ -49,8 +49,7 @@ async def sources(
         api_key: str | None = Depends(get_request_api_key),
         topic_id: str = Query(
             ...,
-            description="Unique identifier of the mathematics topic to retrieve learning sources for. Must match a valid `topic_id` from the `/api/v1/topics` endpoint.",
-            examples=["quadratic-equations"]
+            description="Unique identifier of the mathematics topic to retrieve learning sources for. Must match a valid `topic_id` from the `/api/v1/topics` endpoint."
         ),
         database: AsyncIOMotorClient = Depends(get_db)
     ) -> dict[str, Any]:
