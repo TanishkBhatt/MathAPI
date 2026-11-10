@@ -14,6 +14,7 @@
 - [Tech Stack Used](#tech-stack)
 - [Quick Start](#quick-start)
 - [Run Project Locally](#running-locally)
+- [MathLab Demo App](#mathlab-demo-app)
 - [Contribution](#contribution)
 - [Author And Credits](#author-and-credits)
 
@@ -116,6 +117,11 @@ MathAPI/
   ├── utils/                      # Database, API auth and limiter functions
   ├── tests/                      # Pytest integration tests
   │
+  ├── demo_project/               # Streamlit demo frontend (MathLab)
+  │   ├── streamlit_app.py        # App entry point
+  │   ├── core/                   # Config, API client, state, and UI helpers
+  │   └── views/                  # Application pages
+  │
   ├── pyproject.toml                  # UV based dependency management
   ├── requirements.txt                # PIP based dependency management
   ├── vercel.json                     # Deployment config
@@ -196,6 +202,36 @@ uv run uvs start
 ### Run automated tests
 ```bash
 uv run uvs test
+```
+
+---
+
+## MathLab Demo App
+
+`demo_project/` contains **MathLab**, a Streamlit frontend for MathAPI. It automatically creates or reuses a demo API key for each new session, renders mathematical expressions with LaTeX, and uses Streamlit's default light theme without custom styling.
+
+The app includes:
+
+- Dashboard with catalog statistics and daily challenge access
+- Topic browsing and a topic studio with explanations, worked examples, practice, formulae, and learning sources
+- Practice Arena, Daily Challenge, and Random Question quizzes
+- Formula Vault with LaTeX-rendered formula sheets
+- Session-only saved topics, quiz progress, and accuracy tracking
+- Settings for session refresh, API connectivity, and cached data
+
+### Run MathLab
+
+Start MathAPI from the repository root:
+
+```bash
+uv sync
+uv run uvs dev
+```
+
+In a second terminal, start the Streamlit app from the repository root:
+
+```bash
+uv run uvs demo_project
 ```
 
 ---

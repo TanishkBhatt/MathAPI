@@ -12,6 +12,7 @@ dependencies = [
     "pymongo>=4.17.0",
     "slowapi>=0.1.9",
     "motor>=3.7.1",
+    "streamlit>=1.42,<2",
 ]
 
 [dependency-groups]
@@ -25,3 +26,4 @@ dev = [
 dev = "uvicorn main:app --port 3000 --reload"
 start = "uvicorn main:app --port 3000"
 test = "pytest tests -v"
+demo_project = "streamlit run demo_project/streamlit_app.py"
