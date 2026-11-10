@@ -5,7 +5,6 @@ from functools import lru_cache
 class Settings(BaseSettings):
     DB_CONNECTION_URL: str
     API_KEY_VALID_MONTHS: int = 6
-    RATE_LIMIT_STORAGE_URI: str | None = None
 
     model_config = SettingsConfigDict(
         env_file=".env",

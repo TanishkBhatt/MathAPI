@@ -8,8 +8,6 @@ from config import settings
 
 
 def _get_storage_uri() -> str:
-    if settings.RATE_LIMIT_STORAGE_URI:
-        return settings.RATE_LIMIT_STORAGE_URI
     if os.getenv("VERCEL"):
         return settings.DB_CONNECTION_URL
     return "memory://"

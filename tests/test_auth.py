@@ -23,6 +23,21 @@ def test_auth_duplicate(client, api_base):
     assert resp2.json()["message"] == "User Is Already Authenticated"
 
 
+def test_auth_username_with_different_email(client, api_base):
+    username = f"email-conflict-{uuid.uuid4().hex[:12]}"
+    resp = client.post(
+        f"{api_base}/auth",
+        json={"username": username, "email": f"{username}@test.com"},
+    )
+    assert resp.status_code == 201
+
+    resp2 = client.post(
+        f"{api_base}/auth",
+        json={"username": username, "email": f"other-{username}@test.com"},
+    )
+    assert resp2.status_code == 409
+
+
 def test_auth_missing_username(client, api_base):
     resp = client.post(f"{api_base}/auth", json={"email": "test@test.com"})
     assert resp.status_code == 422

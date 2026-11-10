@@ -46,7 +46,7 @@ All mathematical expressions are **LaTeX** coded for better rendering and user e
 Register with a username and email to receive a unique API key for authenticated access. Keys are valid for **6 months** from registration. Registering again with the same username and email returns the existing key; expired keys are rotated automatically. A different email for an existing username is rejected with **409_CONFLICT**.
 
 ### API Key Limiting
-A user can hit only **100 GET requests** across all Get API routes with an API Key per hour, plus **300 requests per client IP** per hour. On Vercel, the MongoDB connection is used automatically as shared limit storage; set `RATE_LIMIT_STORAGE_URI` to a Redis instance for the best performance.
+A user can hit only **100 GET requests** across all Get API routes with an API Key per hour, plus **300 requests per client IP** per hour. On Vercel, the MongoDB connection is used automatically as shared limit storage.
 
 ### Daily Challenge
 Get **3 daily challenge problems** — one Beginner, one Intermediate, and one Advanced — randomly assigned and shared globally for the day.
@@ -135,7 +135,6 @@ MathAPI/
 | **Validation** | [Pydantic v2](https://docs.pydantic.dev/) — data validation & settings |
 | **Auth** | API key-based ([Hashlib](https://docs.python.org/3/library/hashlib.html), [Secrets](https://docs.python.org/3/library/secrets.html)) |
 | **Rate Limiting** | [SlowAPI](https://slowapi.readthedocs.io/) — 100 requests/hour per key + 300 requests/hour per IP |
-| **Rate Limit Storage** | [Redis](https://redis.io/) — shared counters across serverless instances |
 | **Deployment** | [Vercel](https://vercel.com/) — serverless Python functions |
 | **Environment** | [Python](https://python.org) 3.12+, managed with [UV](https://docs.astral.sh/uv/) |
 
@@ -177,9 +176,6 @@ git clone https://github.com/TanishkBhatt/MathAPI.git
 ```python
 # Database Connetion URL
 DB_CONNECTION_URL=YOUR_MONGODB_URL
-
-# Optional - shared rate limit storage (e.g. redis://...)
-RATE_LIMIT_STORAGE_URI=YOUR_REDIS_URL
 ```
 
 ### Install dependencies

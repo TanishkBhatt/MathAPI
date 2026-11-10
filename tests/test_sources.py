@@ -1,9 +1,8 @@
-TOPIC_ID = "01_number_system"
-
-def test_sources_success(client, api_base, api_key):
+def test_sources_success(client, api_base, topic_id, auth_headers):
     resp = client.get(
         f"{api_base}/api/v1/sources",
-        params={"api_key": api_key, "topic_id": TOPIC_ID},
+        params={"topic_id": topic_id},
+        headers=auth_headers,
     )
     assert resp.status_code == 200
     data = resp.json()
@@ -14,9 +13,10 @@ def test_sources_success(client, api_base, api_key):
     assert "type" in source
     assert "link" in source
 
-def test_sources_invalid_topic(client, api_base, api_key):
+def test_sources_invalid_topic(client, api_base, auth_headers):
     resp = client.get(
         f"{api_base}/api/v1/sources",
-        params={"api_key": api_key, "topic_id": "non-existent-topic"},
+        params={"topic_id": "non-existent-topic"},
+        headers=auth_headers,
     )
     assert resp.status_code == 404

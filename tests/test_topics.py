@@ -1,5 +1,5 @@
-def test_topics_success(client, api_base, api_key):
-    resp = client.get(f"{api_base}/api/v1/topics?api_key={api_key}")
+def test_topics_success(client, api_base, auth_headers):
+    resp = client.get(f"{api_base}/api/v1/topics", headers=auth_headers)
     assert resp.status_code == 200
     data = resp.json()
     assert data["success"] is True
@@ -18,5 +18,5 @@ def test_topics_missing_key(client, api_base):
 
 
 def test_topics_invalid_key(client, api_base):
-    resp = client.get(f"{api_base}/api/v1/topics?api_key=invalid_key_123")
+    resp = client.get(f"{api_base}/api/v1/topics", params={"api_key": "invalid_key_123"})
     assert resp.status_code == 401
