@@ -24,5 +24,6 @@ def home() -> dict[str, Any]:
         },
         "docs": "https://mathapi.vercel.app/docs",
         "repo": "https://github.com/TanishkBhatt/MathAPI",
+        "demo_app": "https://mathlabs-mathapi.vercel.app",
         "author": "Tanishk Bhatt - A Student and A Programmer"
     }

@@ -51,7 +51,7 @@ tags_metadata = [
     }
 ]
 
-description = """A `RESTFUL API Service` designed for Students and Developers pursuing Mathematics and related fields.
+description = """`RESTFUL API SERVICES`
 
 Provides structured access to Topic Explanations, step-by-step Worked Examples, Practice Questions, concise Formulae Sheets, Learning Sources of Topics across various Branches of Mathematics. With an interactive touch of Random Question and Daily Challanges."""
 
@@ -68,8 +68,8 @@ app = FastAPI(
     version="1.0.0",
     summary="Mathematics Education API Services",
     contact={
-        "name": "Github Repository",
-        "url": "https://github.com/TanishkBhatt/MathAPI"
+        "name": "MathLabs",
+        "url": "https://mathlabs-mathapi.vercel.app"
     },
     openapi_tags=tags_metadata,
     docs_url=None
@@ -116,3 +116,4 @@ app.add_middleware(RequestLoggingMiddleware)
 @app.exception_handler(RateLimitExceeded)
 async def custom_handler(request: Request, exc: RateLimitExceeded) -> JSONResponse:
     return limiting_response(request, exc)
+    

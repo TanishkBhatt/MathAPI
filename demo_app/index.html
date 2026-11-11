@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MathLabs is a focused mathematics learning workspace powered by MathAPI.">
+  <meta name="theme-color" content="#171513">
+  <title>Dashboard · MathLabs</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23FE9332'/%3E%3Ctext x='32' y='45' font-family='Poppins,Arial,sans-serif' font-size='36' font-weight='700' text-anchor='middle' fill='%23171513'%3E%E2%88%91%3C/text%3E%3C/svg%3E">
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem('mathlabs.theme');
+        if (theme === 'light' || theme === 'dark') {
+          document.documentElement.dataset.theme = theme;
+        }
+      } catch (error) {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    }());
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script defer src="index.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#view" data-skip-link>Skip to content</a>
+
+  <div class="loading-screen" id="loading-screen" role="status" aria-live="polite">
+    <div class="loading-brand">
+      <span class="brand-mark brand-mark-lg" aria-hidden="true">∑</span>
+      <div>
+        <strong>MathLabs</strong>
+        <span id="loading-message">Connecting to local MathAPI…</span>
+      </div>
+    </div>
+    <span class="spinner" aria-hidden="true"></span>
+  </div>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Primary sidebar">
+      <a class="brand" href="#/dashboard" aria-label="MathLabs dashboard">
+        <span class="brand-mark" aria-hidden="true">∑</span>
+        <span class="brand-copy">
+          <strong>MathLabs</strong>
+          <small>Powered by MathAPI</small>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Primary navigation">
+        <p class="nav-label">Workspace</p>
+        <a class="nav-link" data-route="dashboard" href="#/dashboard">
+          <span class="nav-icon" data-icon="dashboard"></span>
+          <span>Dashboard</span>
+        </a>
+        <a class="nav-link" data-route="topics" href="#/topics">
+          <span class="nav-icon" data-icon="book"></span>
+          <span>Explore Topics</span>
+        </a>
+        <a class="nav-link" data-route="practice" href="#/practice">
+          <span class="nav-icon" data-icon="target"></span>
+          <span>Practice Arena</span>
+        </a>
+
+        <p class="nav-label">Discover</p>
+        <a class="nav-link" data-route="daily" href="#/daily">
+          <span class="nav-icon" data-icon="calendar"></span>
+          <span>Daily Challenge</span>
+        </a>
+        <a class="nav-link" data-route="random" href="#/random">
+          <span class="nav-icon" data-icon="shuffle"></span>
+          <span>Random Question</span>
+        </a>
+        <a class="nav-link" data-route="formulas" href="#/formulas">
+          <span class="nav-icon" data-icon="formula"></span>
+          <span>Formula Vault</span>
+        </a>
+
+        <p class="nav-label">Account</p>
+        <a class="nav-link" data-route="saved" href="#/saved">
+          <span class="nav-icon" data-icon="bookmark"></span>
+          <span>Saved &amp; Progress</span>
+        </a>
+        <a class="nav-link" data-route="settings" href="#/settings">
+          <span class="nav-icon" data-icon="settings"></span>
+          <span>Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-spacer"></div>
+
+      <section class="session-card" aria-label="Demo session">
+        <div class="session-head">
+          <span class="avatar" id="session-avatar">DP</span>
+          <div>
+            <strong id="session-username">demo_project</strong>
+            <span id="session-expiry">Connecting…</span>
+          </div>
+        </div>
+        <div class="session-key">
+          <span class="mini-label">Demo API key</span>
+          <code id="session-key">Not available</code>
+        </div>
+      </section>
+
+      <div class="sidebar-actions">
+        <button class="btn btn-ghost btn-full" type="button" data-action="refresh-session">
+          <span data-icon="refresh"></span>
+          Refresh session
+        </button>
+        <button class="btn btn-ghost btn-full" type="button" data-action="clear-cache">
+          <span data-icon="database"></span>
+          Clear cache
+        </button>
+      </div>
+
+      <p class="sidebar-note">Local demo · MathAPI on :3000</p>
+    </aside>
+
+    <button class="sidebar-backdrop" id="sidebar-backdrop" type="button" aria-label="Close navigation"></button>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="icon-btn mobile-menu-btn" id="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+          <span data-icon="menu"></span>
+        </button>
+
+        <div class="topbar-copy">
+          <span class="eyebrow" id="page-eyebrow">Workspace</span>
+          <h1 id="page-title">Dashboard</h1>
+        </div>
+
+        <div class="topbar-actions">
+          <a class="status-pill" id="api-status" href="#/settings" title="Open settings">
+            <span class="status-dot"></span>
+            <span id="api-status-text">Local API</span>
+          </a>
+          <a class="icon-btn" href="#/random" title="Random question" aria-label="Open a random question">
+            <span data-icon="shuffle"></span>
+          </a>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false">
+            <span class="theme-icon theme-icon-sun" data-icon="sun"></span>
+            <span class="theme-icon theme-icon-moon" data-icon="moon"></span>
+          </button>
+        </div>
+      </header>
+
+      <main class="view" id="view" tabindex="-1"></main>
+
+      <footer class="app-footer">
+        <span>MathLabs — a local MathAPI learning demo.</span>
+        <span>LaTeX by KaTeX · Data by MathAPI</span>
+      </footer>
+    </div>
+  </div>
+
+  <div class="toast-stack" id="toast-stack" aria-live="polite" aria-atomic="false"></div>
+  <div class="modal-root" id="modal-root"></div>
+
+  <noscript>
+    <div class="noscript">MathLabs needs JavaScript enabled to render topics, quizzes, and LaTeX content.</div>
+  </noscript>
+</body>
+</html>

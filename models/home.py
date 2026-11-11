@@ -7,4 +7,5 @@ class HomeResponse(BaseModel):
     help: Dict[str, str]
     docs: str
     repo: str
+    demo_app: str
     author: str

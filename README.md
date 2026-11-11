@@ -1,8 +1,12 @@
 # MathAPI - API Services
 
-> A RESTful API service designed for students and developers pursuing mathematics and related fields. Provides structured access to topic explanations, step-by-step worked examples, practice questions, and concise formula sheets across various branches of mathematics.
+> A RESTfUL API SERVICES designed for students and developers pursuing mathematics and related fields. Provides structured access to topic explanations, step-by-step worked examples, practice questions, and concise formula sheets across various branches of mathematics.
 
 [![Documentations](https://img.shields.io/badge/Documentation-blue?style=for-the-badge&logo=fastapi&logoColor=white)](https://mathapi.vercel.app/docs)
+
+[![MathLabs](https://img.shields.io/badge/MathLabs-orange?style=for-the-badge&logo=fastapi&logoColor=white)](https://mathlabs-mathapi.vercel.app)
+
+[![Portfolio](https://img.shields.io/badge/Portfolio-red?style=for-the-badge&logo=vercel&logoColor=white)](https://tanishkbhatt.vercel.app)
 
 ---
 
@@ -14,7 +18,7 @@
 - [Tech Stack Used](#tech-stack)
 - [Quick Start](#quick-start)
 - [Run Project Locally](#running-locally)
-- [MathLab Demo App](#mathlab-demo-app)
+- [About MathLabs](#about-mathlabs)
 - [Contribution](#contribution)
 - [Author And Credits](#author-and-credits)
 
@@ -117,10 +121,10 @@ MathAPI/
   ├── utils/                      # Database, API auth and limiter functions
   ├── tests/                      # Pytest integration tests
   │
-  ├── demo_project/               # Streamlit demo frontend (MathLab)
-  │   ├── streamlit_app.py        # App entry point
-  │   ├── core/                   # Config, API client, state, and UI helpers
-  │   └── views/                  # Application pages
+  ├── demo_app/                   # Static MathLabs demo frontend
+  │   ├── index.html
+  │   ├── style.css
+  │   └── index.js
   │
   ├── pyproject.toml                  # UV based dependency management
   ├── requirements.txt                # PIP based dependency management
@@ -142,6 +146,7 @@ MathAPI/
 | **Auth** | API key-based ([Hashlib](https://docs.python.org/3/library/hashlib.html), [Secrets](https://docs.python.org/3/library/secrets.html)) |
 | **Rate Limiting** | [SlowAPI](https://slowapi.readthedocs.io/) — 100 requests/hour per key + 300 requests/hour per IP |
 | **Deployment** | [Vercel](https://vercel.com/) — serverless Python functions |
+| **Frontend** | HTML, CSS, JavaScript, [KaTeX](https://katex.org/), [Poppins](https://fonts.google.com/specimen/Poppins) |
 | **Environment** | [Python](https://python.org) 3.12+, managed with [UV](https://docs.astral.sh/uv/) |
 
 --- 
@@ -180,7 +185,6 @@ git clone https://github.com/TanishkBhatt/MathAPI.git
 - MathAPI/.env
 
 ```python
-# Database Connetion URL
 DB_CONNECTION_URL=YOUR_MONGODB_URL
 ```
 
@@ -206,33 +210,22 @@ uv run uvs test
 
 ---
 
-## MathLab Demo App
+## About MathLabs
 
-`demo_project/` contains **MathLab**, a Streamlit frontend for MathAPI. It automatically creates or reuses a demo API key for each new session, renders mathematical expressions with LaTeX, and uses Streamlit's default light theme without custom styling.
+MathLabs is a frontend demo application driven by MathAPIs, made with HTML-CSS-JS framework, providing users an interactive experience and developers an idea of how to use our services.
 
 The app includes:
 
-- Dashboard with catalog statistics and daily challenge access
-- Topic browsing and a topic studio with explanations, worked examples, practice, formulae, and learning sources
-- Practice Arena, Daily Challenge, and Random Question quizzes
-- Formula Vault with LaTeX-rendered formula sheets
-- Session-only saved topics, quiz progress, and accuracy tracking
-- Settings for session refresh, API connectivity, and cached data
+- Dashboard with catalog statistics, branch discovery, bookmarks, and daily challenge access
+- Searchable topic catalog with branch, difficulty, and sort filters
+- Topic studio with explanations, worked examples, interactive practice, formulae, and learning sources
+- Practice Arena with topic, difficulty, question-type, and set-size filters
+- Daily Challenge and Random Question quizzes with hints, expected time limits, and solution sources
+- Formula Vault with copyable LaTeX formula sheets
+- Session-only saved topics, quiz progress, accuracy tracking, and recent sessions
+- Settings for session refresh, API health, theme, cache, and local learning data
 
-### Run MathLab
-
-Start MathAPI from the repository root:
-
-```bash
-uv sync
-uv run uvs dev
-```
-
-In a second terminal, start the Streamlit app from the repository root:
-
-```bash
-uv run uvs demo_project
-```
+[![MathLabs](https://img.shields.io/badge/MathLabs-orange?style=for-the-badge&logo=fastapi&logoColor=white)](https://mathlabs-mathapi.vercel.app)
 
 ---
 
@@ -245,6 +238,6 @@ Found a bug or have a feature request? Open an issue on the [GitHub repository](
 ## Author And Credits
 **Tanishk Bhatt** — A Student and A Programmer
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-orange?style=for-the-badge&logo=streamlit&logoColor=white)](https://tanishkbhatt.vercel.app)
+[![Portfolio](https://img.shields.io/badge/Portfolio-red?style=for-the-badge&logo=vercel&logoColor=white)](https://tanishkbhatt.vercel.app)
 
 ---
