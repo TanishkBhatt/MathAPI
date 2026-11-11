@@ -1304,11 +1304,11 @@
       return {
         html: pageHead({
           eyebrow: "Workspace",
-          title: "Your local mathematics workspace",
+          title: "Your mathematics workspace",
           text: "No topics were returned by MathAPI."
         }) + emptyState({
           title: "The catalog is empty",
-          text: "Add topic data to the local MathAPI database, then refresh.",
+          text: "Add topic data to the MathAPI database, then refresh.",
           iconName: "book-open"
         })
       };
@@ -1354,9 +1354,9 @@
     const html = `
       <section class="hero">
         <div class="hero-copy">
-          <span class="badge"><span class="badge-dot"></span>Local mathematics workspace</span>
+          <span class="badge"><span class="badge-dot"></span>Mathematics workspace</span>
           <h2>Build intuition, <span>one idea at a time.</span></h2>
-          <p class="hero-text">MathLabs turns the local MathAPI catalog into a focused study space: explore concepts, work through examples, and check your understanding with guided practice.</p>
+          <p class="hero-text">MathLabs turns the MathAPI catalog into a focused study space: explore concepts, work through examples, and check your understanding with guided practice.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#/topics">${icon("book-open")} Explore topics</a>
             <a class="btn btn-secondary" href="#/practice">${icon("target")} Start practicing</a>
@@ -1782,7 +1782,7 @@
         html: pageHead({
           eyebrow: "Workspace",
           title: "Practice Arena",
-          text: "Build custom practice sets from the local topic catalog."
+          text: "Build custom practice sets from the topic catalog."
         }) + emptyState({
           title: "No topics available",
           text: "The practice arena needs topics and questions in MathAPI.",
@@ -1861,7 +1861,7 @@
         html: pageHead({
           eyebrow: "Discover",
           title: "Daily Challenge",
-          text: "Three questions selected for everyone using this local API today."
+          text: "Three questions selected for everyone using this API today."
         }) + emptyState({
           title: "No challenge today",
           text: "MathAPI did not return a daily challenge.",
@@ -2005,7 +2005,7 @@
         html: pageHead({
           eyebrow: "Library",
           title: "Formula Vault",
-          text: "Concise, LaTeX-rendered formula sheets from the local catalog."
+          text: "Concise, LaTeX-rendered formula sheets from the catalog."
         }) + emptyState({
           title: "No topics available",
           text: "The formula vault needs topics in MathAPI.",
@@ -2161,13 +2161,13 @@
     const online = Boolean(app.online);
     const attempted = Object.values(state.progress).reduce((sum, entry) => sum + (entry.attempted || 0), 0);
     const healthMessage = online
-      ? (app.health?.message || "The local API responded successfully.")
+      ? (app.health?.message || "The API responded successfully.")
       : "Start MathAPI with uv run uvs dev, then test the connection.";
     const html = `
       ${pageHead({
         eyebrow: "Account",
-        title: "Settings & local session.",
-        text: "MathLabs is a local-only demo. Authentication, progress, and bookmarks stay in this browser tab.",
+        title: "Settings & session.",
+        text: "MathLabs is a demo application. Authentication, progress, and bookmarks stay in this browser tab.",
         actions: `<button class="btn btn-secondary" type="button" data-action="test-connection">${icon("wifi")} Test connection</button>`
       })}
       <div class="settings-grid">
@@ -2186,7 +2186,7 @@
           </div>
         </article>
         <article class="info-card">
-          <h3>Local MathAPI</h3>
+          <h3>MathAPI</h3>
           <p>The frontend talks only to the API running on this machine.</p>
           <div class="health-card ${online ? "is-online" : "is-offline"}">
             <span class="health-icon">${icon(online ? "wifi" : "server")}</span>
@@ -2206,14 +2206,13 @@
           </div>
         </article>
         <article class="info-card span-2">
-          <h3>Appearance & local data</h3>
+          <h3>Appearance & data</h3>
           <p>Theme persists in localStorage; bookmarks and quiz progress use sessionStorage.</p>
           <div class="info-list">
             ${settingsInfoRow("Theme", document.documentElement.dataset.theme === "light" ? "Light" : "Dark", true)}
             ${settingsInfoRow("Bookmarked topics", String(state.bookmarks.length), true)}
             ${settingsInfoRow("Questions attempted", String(attempted), true)}
             ${settingsInfoRow("Cached API responses", String(app.cache.size), true)}
-            ${settingsInfoRow("Static app", "uv run uvs demo_app")}
           </div>
           <div class="actions-row">
             <button class="btn btn-secondary btn-sm" type="button" data-action="theme">${icon("sun")} Toggle theme</button>
@@ -2418,7 +2417,7 @@
       }
       if (action === "reset-learning-data") {
         const confirmed = await openModal({
-          title: "Reset all local learning data?",
+          title: "Reset all learning data?",
           message: "Bookmarks, progress, recent sessions, and the last-opened topic will be cleared from sessionStorage.",
           confirmLabel: "Reset everything",
           danger: true
