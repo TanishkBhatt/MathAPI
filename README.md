@@ -17,7 +17,6 @@
 - [Project Structure](#project-structure)
 - [Tech Stack Used](#tech-stack)
 - [Quick Start](#quick-start)
-- [Run Project Locally](#running-locally)
 - [About MathLabs](#about-mathlabs)
 - [Contribution](#contribution)
 - [Author And Credits](#author-and-credits)
@@ -90,15 +89,13 @@ MathAPI/
   ├── config.py                   # Environment variables settings
   │
   ├── controllers/
-  │   └── auth/                   # User registration logic
-  │       └── auth.py
+  │   ├── auth/auth.py            # User registration logic
   │   └── api/v1/                 # Main Backend Logic
   │
   ├── models/
   │   ├── home.py                 # Home response schema
   │   ├── errors.py               # API Errors response schema
-  │   └── auth/                   # Auth request/response schemas
-  │       └── auth.py
+  │   ├── auth/auth.py            # Auth request/response schemas
   │   ├── api/v1/                 # API response Pydantic models
   │   └── components/
   │       ├── helpers.py          # Shared Enums and BaseModels
@@ -106,8 +103,7 @@ MathAPI/
   │
   ├── routes/
   │   ├── home.py                 # GET /
-  │   └── auth/
-  │       └── auth.py             # POST /auth
+  │   ├── auth/auth.py            # POST /auth
   │   └── api/v1/
   │           ├── topics.py              # GET /topics
   │           ├── explanation.py         # GET /explain
@@ -174,47 +170,12 @@ MathAPI/
 
 ---
 
-## Running Locally
-
-### Clone the reporitory
-```bash
-git clone https://github.com/TanishkBhatt/MathAPI.git
-```
-
-### Create environment variables
-- MathAPI/.env
-
-```python
-DB_CONNECTION_URL=YOUR_MONGODB_URL
-```
-
-### Install dependencies
-```bash
-uv sync
-```
-
-### Start development server
-```bash
-uv run uvs dev
-```
-
-### Start production server
-```bash
-uv run uvs start
-```
-
-### Run automated tests
-```bash
-uv run uvs test
-```
-
----
 
 ## About MathLabs
 
 MathLabs is a frontend demo application driven by MathAPIs, made with HTML-CSS-JS framework, providing users an interactive experience and developers an idea of how to use our services.
 
-The app includes:
+The App Includes:
 
 - Dashboard with catalog statistics, branch discovery, bookmarks, and daily challenge access
 - Searchable topic catalog with branch, difficulty, and sort filters
