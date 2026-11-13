@@ -1,5 +1,3 @@
-from contextlib import asynccontextmanager
-
 from fastapi import FastAPI, Request
 from routes import (
     home
@@ -35,8 +33,10 @@ from utils.logger import (
     RequestLoggingMiddleware
 )
 
+from contextlib import asynccontextmanager
+
 # DOCS METADATA TAGS
-tags_metadata = [
+tags_metadata: list[dict[str, str]] = [
     {
         "name": "Home",
         "description": "Health check and help route. No authentication required - confirms the service is running and points to the quick-start guide."
@@ -51,9 +51,25 @@ tags_metadata = [
     }
 ]
 
-description = """`RESTFUL API SERVICES`
+description: str = """
 
-Provides structured access to Topic Explanations, step-by-step Worked Examples, Practice Questions, concise Formulae Sheets, Learning Sources of Topics across various Branches of Mathematics. With an interactive touch of Random Question and Daily Challanges."""
+`MATHEMATICS REST API`
+
+A comprehensive RESTFUL API designed to make mathematical knowledge structured, accessible, and interactive.
+
+MathAPI provides programmatic access to Topic Explanations, concise Formula Sheets, meticulously Worked-Out Examples, Objective Practice Questions and Learning Sources across diverse branches of Mathematics.
+
+Beyond static learning resources, it introduces interactive learning features such as Random Question Generation and Daily Challenge Problems, encouraging continuous practice and mathematical exploration.
+
+Whether you are a Mathematics enthusiast, a student, or a developer looking to integrate mathematical resources into your applications, MathAPI offers a structured and extensible platform for mathematical learning.
+
+GitHub : [TanishkBhatt/MathAPI](https://github.com/TanishkBhatt/MathAPI)
+
+MathLabs : [Explore the Demo Application](https://mathlabs-mathapi.vercel.app)
+
+Developer Profile : [tanishkbhatt.vercel.app](https://tanishkbhatt.vercel.app)
+
+"""
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -66,11 +82,6 @@ app = FastAPI(
     title="MathAPI",
     description=description,
     version="1.0.0",
-    summary="Mathematics Education API Services",
-    contact={
-        "name": "MathLabs",
-        "url": "https://mathlabs-mathapi.vercel.app"
-    },
     openapi_tags=tags_metadata,
     docs_url=None
 )
@@ -116,4 +127,3 @@ app.add_middleware(RequestLoggingMiddleware)
 @app.exception_handler(RateLimitExceeded)
 async def custom_handler(request: Request, exc: RateLimitExceeded) -> JSONResponse:
     return limiting_response(request, exc)
-    
