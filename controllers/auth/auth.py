@@ -9,10 +9,8 @@ from models.auth.auth import AuthRequest
 from utils.database import get_documents, import_data, update_documents, ensure_index
 from utils.helpers import generate_api_key, compute_expiry
 
-
 def _normalize_email(email: str) -> str:
     return email.strip().lower()
-
 
 # BUILDS THE EXISTING USER RESPONSE, BACKFILLS LEGACY KEY EXPIRY AND ROTATES EXPIRED KEYS
 async def _existing_user_response(database: AsyncIOMotorClient, user: Dict[str, Any], email: str) -> tuple[Dict[str, Any], bool]:

@@ -6,14 +6,10 @@ from datetime import datetime
 from fastapi import Header, HTTPException, Query, status
 from motor.motor_asyncio import AsyncIOMotorClient
 
-API_KEY_EXAMPLE = "mathapi_key_4f2ab9c81d0e_Xk7mQ2pT9vLwRn3yJd8sFgH1cE_exp=1782144000"
-
-
 def get_request_api_key(
         api_key: str | None = Query(
             None,
-            description="Your API key for authentication. Prefer the X-API-Key header.",
-            examples=[API_KEY_EXAMPLE]
+            description="Your API key for authentication. Prefer the X-API-Key header."
         ),
         x_api_key: str | None = Header(
             None,
@@ -23,7 +19,6 @@ def get_request_api_key(
     ) -> str | None:
 
     return x_api_key or api_key
-
 
 def generate_api_key(
         username: str,

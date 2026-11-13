@@ -7,12 +7,10 @@ from urllib.parse import urlencode, parse_qsl
 MAX_BODY_CHARS = 500
 SENSITIVE_KEYS = {"api_key", "password", "token", "authorization"}
 
-
 def _mask_key(api_key: str) -> str:
     if not api_key:
         return "-"
     return f"sha256:{hashlib.sha256(api_key.encode()).hexdigest()[:12]}"
-
 
 def _sanitize(value):
     if isinstance(value, dict):
@@ -24,7 +22,6 @@ def _sanitize(value):
         return [_sanitize(item) for item in value]
     return value
 
-
 def _client_ip(scope) -> str:
     headers = {k.decode("latin-1").lower(): v.decode("latin-1") for k, v in scope.get("headers", [])}
     forwarded = headers.get("x-forwarded-for")
@@ -35,14 +32,12 @@ def _client_ip(scope) -> str:
         return client[0]
     return "-"
 
-
 def _format_params(query_string: bytes) -> str:
     if not query_string:
         return "-"
     pairs = [(k, "***" if k == "api_key" else v)
              for k, v in parse_qsl(query_string.decode("latin-1"), keep_blank_values=True)]
     return urlencode(pairs, safe="*")
-
 
 def _format_body(body: bytes) -> str:
     if not body:
@@ -56,7 +51,6 @@ def _format_body(body: bytes) -> str:
     if len(text) > MAX_BODY_CHARS:
         text = text[: MAX_BODY_CHARS - 3] + "..."
     return text
-
 
 class RequestLoggingMiddleware:
     def __init__(self, app):

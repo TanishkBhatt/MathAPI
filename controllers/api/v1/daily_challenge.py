@@ -7,9 +7,8 @@ from datetime import datetime, timezone
 from utils.database import ensure_index
 from utils.helpers import validate_api_key
 
-DB_ERROR = "Error In Connecting With Database"
-DIFFICULTIES = ("Beginner", "Intermediate", "Advanced")
-
+DB_ERROR: str = "Error In Connecting With Database"
+DIFFICULTIES: tuple[str] = ("Beginner", "Intermediate", "Advanced")
 
 async def _pick_question_ids(database: AsyncIOMotorClient) -> List[Any]:
     questions = database["datasets"]["questions"]
@@ -26,7 +25,6 @@ async def _pick_question_ids(database: AsyncIOMotorClient) -> List[Any]:
             ids.append(docs[0]["_id"])
 
     return ids
-
 
 async def _get_or_create_challenge(database: AsyncIOMotorClient, today: str) -> Dict[str, Any] | None:
     challenges = database["datasets"]["daily_challenges"]
@@ -67,7 +65,6 @@ async def _get_or_create_challenge(database: AsyncIOMotorClient, today: str) -> 
         return_document=ReturnDocument.AFTER
     )
 
-
 async def _load_questions(database: AsyncIOMotorClient, question_ids: List[Any]) -> List[Dict[str, Any]]:
     questions = database["datasets"]["questions"]
     docs: List[Dict[str, Any]] = await questions.find({"_id": {"$in": question_ids}}).to_list(None)
@@ -83,7 +80,6 @@ async def _load_questions(database: AsyncIOMotorClient, question_ids: List[Any])
         selected.append(doc)
 
     return selected
-
 
 async def get_daily_challenge(database: AsyncIOMotorClient, api_key: str | None) -> Dict[str, Any]:
     await validate_api_key(database, api_key)

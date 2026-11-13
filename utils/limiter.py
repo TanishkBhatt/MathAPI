@@ -6,12 +6,10 @@ from slowapi import Limiter
 
 from config import settings
 
-
 def _get_storage_uri() -> str:
     if os.getenv("VERCEL"):
         return settings.DB_CONNECTION_URL
     return "memory://"
-
 
 def get_client_ip(request: Request) -> str:
     forwarded = request.headers.get("x-forwarded-for")
@@ -21,7 +19,6 @@ def get_client_ip(request: Request) -> str:
         return request.client.host
     return "unknown"
 
-
 def get_api_key(request: Request) -> str:
     api_key = request.headers.get("x-api-key") or request.query_params.get("api_key")
     if api_key:
@@ -29,14 +26,12 @@ def get_api_key(request: Request) -> str:
         return f"key:{digest}"
     return f"ip:{get_client_ip(request)}"
 
-
 limiter = Limiter(
     key_func=get_api_key,
     storage_uri=_get_storage_uri(),
     headers_enabled=True,
     swallow_errors=True,
 )
-
 
 def limiting_response(
         request: Request | None = None,
