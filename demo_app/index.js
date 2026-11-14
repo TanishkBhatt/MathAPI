@@ -23,7 +23,6 @@
     "Geometry",
     "Coordinate Geometry",
     "Trigonometry",
-    "Combinatorics",
     "Applied Mathematics"
   ]);
   const DIFFICULTIES = Object.freeze(["Beginner", "Intermediate", "Advanced"]);

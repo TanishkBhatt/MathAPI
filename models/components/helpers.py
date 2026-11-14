@@ -7,7 +7,6 @@ class Branch(Enum):
     geometry = "Geometry"
     coordinate_geometry = "Coordinate Geometry"
     trigonometry = "Trigonometry"
-    combinatorics = "Combinatorics"
     applied_mathematics = "Applied Mathematics"
 
 class Difficulty(Enum):
