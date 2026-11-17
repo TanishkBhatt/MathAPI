@@ -5,6 +5,7 @@ def test_home_success(client, api_base):
     assert data["success"] is True
     assert "message" in data
     assert "help" in data
+    assert set(data["help"]) == {"get_started", "explore_routes", "explore_mathlabs"}
     assert "docs" in data
     assert "repo" in data
     assert "author" in data

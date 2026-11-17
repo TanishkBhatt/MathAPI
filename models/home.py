@@ -4,7 +4,7 @@ from typing import Dict
 class help(BaseModel):
     get_started: str
     explore_routes: str
-    explore_demo_application: str
+    explore_mathlabs: str
 
 class HomeResponse(BaseModel):
     success: bool

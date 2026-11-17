@@ -65,7 +65,7 @@ Whether you are a Mathematics enthusiast, a student, or a developer looking to i
 
 GitHub : [TanishkBhatt/MathAPI](https://github.com/TanishkBhatt/MathAPI)
 
-MathLabs : [Explore the Demo Application](https://mathlabs-mathapi.vercel.app)
+MathLabs : [Explore MathLabs](https://mathlabs-mathapi.vercel.app)
 
 Developer Profile : [tanishkbhatt.vercel.app](https://tanishkbhatt.vercel.app)
 

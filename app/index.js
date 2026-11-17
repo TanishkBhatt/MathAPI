@@ -2,12 +2,9 @@
   "use strict";
 
   const API_BASE = "https://mathapi.vercel.app";
-  const DEMO_IDENTITY = Object.freeze({
-    username: "demo_app",
-    email: "demo_app@example.com"
-  });
   const STORAGE_KEYS = Object.freeze({
-    session: "mathlabs.session",
+    apiKey: "mathlabs.apiKey",
+    legacySession: "mathlabs.session",
     state: "mathlabs.state",
     theme: "mathlabs.theme"
   });
@@ -43,8 +40,8 @@
     daily: { eyebrow: "Discover", title: "Daily Challenge" },
     random: { eyebrow: "Discover", title: "Random Question" },
     formulas: { eyebrow: "Library", title: "Formula Vault" },
-    saved: { eyebrow: "Account", title: "Saved & Progress" },
-    settings: { eyebrow: "Account", title: "Settings" }
+    saved: { eyebrow: "Your data", title: "Saved & Progress" },
+    settings: { eyebrow: "Your data", title: "Settings" }
   });
 
   const ICON_PATHS = Object.freeze({
@@ -96,13 +93,12 @@
   });
 
   const app = {
-    session: null,
+    connection: null,
     health: null,
     healthAt: 0,
     cache: new Map(),
     inflight: new Map(),
     topics: [],
-    authenticated: false,
     online: false
   };
   const ui = {
@@ -236,29 +232,22 @@
     return formatDate(time);
   }
 
-  function sessionExpiryMs(session) {
-    const match = /_exp=(\d+)/.exec(session?.apiKey || "");
-    if (match) return Number(match[1]) * 1000;
-    const parsed = Date.parse(session?.expiry || "");
-    return Number.isFinite(parsed) ? parsed : 0;
+  function keyExpiryMs(apiKey) {
+    const match = /_exp=(\d+)/.exec(String(apiKey || ""));
+    if (!match) return 0;
+    const expiry = Number(match[1]) * 1000;
+    return Number.isFinite(expiry) ? expiry : 0;
   }
 
-  function sessionIsExpired(session) {
-    const expiry = sessionExpiryMs(session);
-    return Boolean(expiry && expiry <= Date.now() + 60 * 1000);
+  function keyIsExpired(connection) {
+    const expiry = keyExpiryMs(connection?.apiKey);
+    return Boolean(expiry && expiry <= Date.now());
   }
 
   function maskKey(value) {
     if (!value) return "Not available";
     if (value.length < 28) return "••••••••";
     return `${value.slice(0, 14)}…${value.slice(-10)}`;
-  }
-
-  function initials(value) {
-    const parts = String(value || "Demo Project").trim().split(/[^a-z0-9]+/i).filter(Boolean);
-    if (!parts.length) return "ML";
-    if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-    return `${parts[0][0]}${parts[1][0]}`.toUpperCase();
   }
 
   function normalizeLatex(value) {
@@ -424,37 +413,47 @@
     saveState();
   }
 
-  function loadSession() {
+  function clearLegacySession() {
     try {
-      const raw = sessionStorage.getItem(STORAGE_KEYS.session);
+      sessionStorage.removeItem(STORAGE_KEYS.legacySession);
+      localStorage.removeItem(STORAGE_KEYS.legacySession);
+    } catch (error) {
+      return;
+    }
+  }
+
+  function loadStoredConnection() {
+    try {
+      const raw = sessionStorage.getItem(STORAGE_KEYS.apiKey);
       if (!raw) return null;
       const parsed = JSON.parse(raw);
-      if (!parsed || typeof parsed.apiKey !== "string" || !parsed.apiKey) return null;
-      return {
-        username: typeof parsed.username === "string" ? parsed.username : DEMO_IDENTITY.username,
-        email: typeof parsed.email === "string" ? parsed.email : DEMO_IDENTITY.email,
-        apiKey: parsed.apiKey,
-        expiry: typeof parsed.expiry === "string" ? parsed.expiry : "",
-        savedAt: typeof parsed.savedAt === "string" ? parsed.savedAt : null
+      if (!parsed || typeof parsed.apiKey !== "string" || !parsed.apiKey.trim()) return null;
+      const connection = {
+        apiKey: parsed.apiKey.trim(),
+        savedAt: typeof parsed.savedAt === "string" ? parsed.savedAt : new Date().toISOString()
       };
+      if (keyIsExpired(connection)) {
+        clearStoredConnection();
+        return null;
+      }
+      return connection;
     } catch (error) {
       return null;
     }
   }
 
-  function saveSession(session) {
+  function saveStoredConnection(connection) {
     try {
-      sessionStorage.setItem(STORAGE_KEYS.session, JSON.stringify(session));
+      sessionStorage.setItem(STORAGE_KEYS.apiKey, JSON.stringify(connection));
+      return true;
     } catch (error) {
-      toast("The demo session could not be stored.", "error");
+      return false;
     }
   }
 
-  function clearSession() {
-    app.session = null;
-    app.authenticated = false;
+  function clearStoredConnection() {
     try {
-      sessionStorage.removeItem(STORAGE_KEYS.session);
+      sessionStorage.removeItem(STORAGE_KEYS.apiKey);
     } catch (error) {
       return;
     }
@@ -473,18 +472,19 @@
   function setApiStatus(kind, text) {
     const pill = document.getElementById("api-status");
     const label = document.getElementById("api-status-text");
+    const gateStatus = document.getElementById("auth-status");
     if (kind === "online") app.online = true;
     else if (kind === "offline") app.online = false;
+    if (gateStatus) {
+      gateStatus.textContent = text;
+      gateStatus.classList.remove("is-online", "is-offline", "is-checking");
+      if (kind) gateStatus.classList.add(`is-${kind}`);
+    }
     if (!pill || !label) return;
     pill.classList.remove("is-online", "is-offline", "is-checking");
     if (kind) pill.classList.add(`is-${kind}`);
     label.textContent = text;
     pill.title = text;
-  }
-
-  function setLoadingMessage(text) {
-    const message = document.getElementById("loading-message");
-    if (message && text) message.textContent = text;
   }
 
   function hideLoadingScreen() {
@@ -493,24 +493,24 @@
   }
 
   function updateSessionUI() {
-    const session = app.session;
-    const username = document.getElementById("session-username");
+    const connection = app.connection;
+    const state = document.getElementById("session-state");
     const expiry = document.getElementById("session-expiry");
     const key = document.getElementById("session-key");
-    const avatar = document.getElementById("session-avatar");
-    if (username) username.textContent = session?.username || DEMO_IDENTITY.username;
-    if (avatar) avatar.textContent = initials(session?.username || DEMO_IDENTITY.username);
+    const card = document.querySelector(".session-card");
+    if (state) state.textContent = connection ? "MathAPI connected" : "Not connected";
+    if (card) card.classList.toggle("is-connected", Boolean(connection));
     if (expiry) {
-      if (!session) {
-        expiry.textContent = "Not connected";
-      } else if (sessionIsExpired(session)) {
-        expiry.textContent = "Session expired";
+      if (!connection) {
+        expiry.textContent = "API key required";
+      } else if (keyIsExpired(connection)) {
+        expiry.textContent = "Key expired";
       } else {
-        const expiresAt = sessionExpiryMs(session);
-        expiry.textContent = expiresAt ? `Expires ${formatDate(expiresAt)}` : "Session active";
+        const expiresAt = keyExpiryMs(connection.apiKey);
+        expiry.textContent = expiresAt ? `Expires ${formatDate(expiresAt)}` : "Session only";
       }
     }
-    if (key) key.textContent = session ? maskKey(session.apiKey) : "Not available";
+    if (key) key.textContent = connection ? maskKey(connection.apiKey) : "Not connected";
   }
 
   function apiErrorMessage(data, status) {
@@ -520,11 +520,11 @@
     }
     if (typeof detail === "string" && detail.trim()) return detail;
     if (typeof data?.message === "string" && data.message.trim()) return data.message;
-    if (status === 401) return "The demo API key was rejected.";
+    if (status === 401) return "Your API key was rejected or has expired.";
     if (status === 404) return "The requested item was not found.";
     if (status === 429) return "The hourly MathAPI rate limit was reached.";
     if (status === 503) return "MathAPI could not reach its database.";
-    return status ? `MathAPI returned an error (${status}).` : "MathAPI is not reachable.";
+    return status ? `MathAPI returned an error (${status}).` : `MathAPI is not reachable at ${API_BASE}.`;
   }
 
   async function request(path, options = {}) {
@@ -532,14 +532,16 @@
       method = "GET",
       body,
       auth = true,
+      apiKey,
       timeout = 25000,
-      retry = true
+      handleAuth = true
     } = options;
     const controller = new AbortController();
     const timer = window.setTimeout(() => controller.abort(), timeout);
     const headers = { Accept: "application/json" };
     if (body !== undefined) headers["Content-Type"] = "application/json";
-    if (auth && app.session?.apiKey) headers["X-API-Key"] = app.session.apiKey;
+    const key = apiKey || (auth ? app.connection?.apiKey : "");
+    if (key) headers["X-API-Key"] = key;
     let response;
     try {
       response = await fetch(`${API_BASE}${path}`, {
@@ -554,7 +556,7 @@
         throw new ApiError("MathAPI did not respond in time.", { status: 0 });
       }
       setApiStatus("offline", "API offline");
-      throw new ApiError("MathAPI is not reachable on 127.0.0.1:3000.", { status: 0 });
+      throw new ApiError(`MathAPI is not reachable at ${API_BASE}.`, { status: 0 });
     } finally {
       window.clearTimeout(timer);
     }
@@ -576,16 +578,13 @@
 
     if (!response.ok) {
       const detail = apiErrorMessage(data, response.status);
-      if (response.status === 401 && auth && retry) {
-        try {
-          await authenticate({ force: true });
-          return request(path, { ...options, retry: false });
-        } catch (error) {
-          throw new ApiError("The demo session could not be renewed.", {
-            status: 401,
-            detail: "The demo session could not be renewed."
-          });
-        }
+      if (response.status === 401 && auth) {
+        if (handleAuth) handleAuthFailure(detail);
+        throw new ApiError(detail, {
+          status: 401,
+          detail,
+          data
+        });
       }
       if (response.status === 429) setApiStatus("checking", "Rate limited");
       else if (response.status === 503) setApiStatus("offline", "Database offline");
@@ -626,61 +625,246 @@
       app.healthAt = Date.now();
       setApiStatus("offline", "API offline");
       if (error instanceof ApiError) throw error;
-      throw new ApiError("MathAPI is not reachable on 127.0.0.1:3000.", { status: 0 });
+      throw new ApiError(`MathAPI is not reachable at ${API_BASE}.`, { status: 0 });
     } finally {
       window.clearTimeout(timer);
     }
   }
 
-  async function authenticate(options = {}) {
-    const force = Boolean(options.force);
-    if (app.authPromise) return app.authPromise;
-    if (!force) {
-      const existing = loadSession();
-      if (existing && !sessionIsExpired(existing)) {
-        app.session = existing;
-        app.authenticated = true;
-        updateSessionUI();
-        return existing;
-      }
-    }
-
-    app.authPromise = (async () => {
-      setLoadingMessage("Registering the demo session…");
-      const data = await request("/auth", {
-        method: "POST",
-        body: DEMO_IDENTITY,
-        auth: false,
-        retry: false,
-        timeout: 12000
-      });
-      const keyData = data?.api_key_data;
-      if (!keyData?.api_key) {
-        throw new ApiError("MathAPI did not return a demo API key.", { status: 0 });
-      }
-      const session = {
-        username: keyData.username || DEMO_IDENTITY.username,
-        email: DEMO_IDENTITY.email,
-        apiKey: keyData.api_key,
-        expiry: keyData.expiry || "",
-        savedAt: new Date().toISOString()
-      };
-      app.session = session;
-      app.authenticated = true;
-      saveSession(session);
-      updateSessionUI();
-      return session;
-    })().finally(() => {
-      app.authPromise = null;
-    });
-
-    return app.authPromise;
+  function setAppVisible(visible) {
+    const shell = document.getElementById("app-shell");
+    if (!shell) return;
+    shell.hidden = !visible;
+    shell.inert = !visible;
   }
 
-  async function refreshSession(options = {}) {
-    const session = await authenticate({ force: true });
-    if (options.notify !== false) toast("Demo session refreshed.", "success");
-    return session;
+  function syncGateStatus() {
+    const status = document.getElementById("auth-status");
+    if (!status) return;
+    const kind = !app.healthAt ? "checking" : app.online ? "online" : "offline";
+    status.textContent = !app.healthAt ? "Checking API…" : app.online ? "API online" : "API offline";
+    status.classList.remove("is-online", "is-offline", "is-checking");
+    status.classList.add(`is-${kind}`);
+  }
+
+  function setGateError(message) {
+    const error = document.getElementById("auth-error");
+    if (!error) return;
+    error.textContent = message || "";
+    error.hidden = !message;
+  }
+
+  function setGateBusy(busy) {
+    const form = document.getElementById("api-key-form");
+    const input = document.getElementById("api-key-input");
+    const submit = document.getElementById("auth-submit");
+    const toggle = document.querySelector('[data-action="toggle-key-visibility"]');
+    const cancel = document.getElementById("auth-cancel");
+    if (form) form.setAttribute("aria-busy", String(busy));
+    if (input) input.disabled = busy;
+    if (submit) {
+      submit.disabled = busy;
+      submit.textContent = busy
+        ? (app.connection ? "Updating key…" : "Connecting…")
+        : (app.connection ? "Update API key" : "Connect to MathAPI");
+    }
+    if (toggle) toggle.disabled = busy;
+    if (cancel) cancel.disabled = busy;
+  }
+
+  function showKeyGate(options = {}) {
+    const gate = document.getElementById("auth-gate");
+    if (!gate) return;
+    const replacing = Boolean(app.connection);
+    const input = document.getElementById("api-key-input");
+    const toggle = document.querySelector('[data-action="toggle-key-visibility"]');
+    const title = document.getElementById("auth-title");
+    const copy = document.getElementById("auth-copy-text");
+    const cancel = document.getElementById("auth-cancel");
+    closeSidebar();
+    gate.hidden = false;
+    document.body.classList.add("is-gated");
+    setAppVisible(Boolean(app.connection));
+    const shell = document.getElementById("app-shell");
+    if (shell) shell.inert = true;
+    if (title) title.textContent = replacing ? "Replace your MathAPI key." : "Bring your own MathAPI key.";
+    if (copy) {
+      copy.textContent = replacing
+        ? "Paste a new key to replace this tab's connection. The new key is checked before the old one is replaced."
+        : "Paste your key to load topics, examples, formulae, and quizzes. It stays in this tab only.";
+    }
+    if (cancel) cancel.hidden = !replacing;
+    if (input) {
+      input.value = "";
+      input.type = "password";
+      input.disabled = false;
+    }
+    if (toggle) {
+      toggle.textContent = "Show";
+      toggle.setAttribute("aria-pressed", "false");
+      toggle.setAttribute("aria-label", "Show API key");
+      toggle.disabled = false;
+    }
+    setGateError(options.error || "");
+    setGateBusy(false);
+    syncGateStatus();
+    if (!app.connection) document.title = "Connect API key · MathLabs";
+    window.setTimeout(() => {
+      if (!gate.hidden) input?.focus();
+    }, 30);
+  }
+
+  function hideKeyGate() {
+    const gate = document.getElementById("auth-gate");
+    if (!gate) return;
+    gate.hidden = true;
+    document.body.classList.remove("is-gated");
+    const input = document.getElementById("api-key-input");
+    if (input) {
+      input.value = "";
+      input.type = "password";
+    }
+    setGateError("");
+    setGateBusy(false);
+    setAppVisible(Boolean(app.connection));
+  }
+
+  function toggleKeyVisibility() {
+    const input = document.getElementById("api-key-input");
+    const toggle = document.querySelector('[data-action="toggle-key-visibility"]');
+    if (!input || !toggle) return;
+    const reveal = input.type === "password";
+    input.type = reveal ? "text" : "password";
+    toggle.textContent = reveal ? "Hide" : "Show";
+    toggle.setAttribute("aria-pressed", String(reveal));
+    toggle.setAttribute("aria-label", reveal ? "Hide API key" : "Show API key");
+    input.focus();
+  }
+
+  function keyValidationMessage(error) {
+    if (error instanceof ApiError) {
+      if (error.status === 401) {
+        return /expired/i.test(error.detail || "")
+          ? "That API key has expired. Create a new key, then paste it here."
+          : "That API key was rejected. Check the key and try again.";
+      }
+      if (error.status === 429) {
+        return "MathAPI's hourly rate limit is currently active. Wait for it to reset, then try again.";
+      }
+      if (error.status === 503) {
+        return "MathAPI could not reach its database. Try again shortly.";
+      }
+      if (error.status === 0) return error.message;
+    }
+    return error?.message || "That API key could not be verified.";
+  }
+
+  async function validateApiKey(apiKey) {
+    const data = await request("/api/v1/topics", {
+      auth: false,
+      apiKey,
+      handleAuth: false,
+      timeout: 15000
+    });
+    const topics = Array.isArray(data?.topics) ? data.topics : [];
+    return data && typeof data === "object" ? { ...data, topics } : { topics };
+  }
+
+  function clearApiState() {
+    renderSequence += 1;
+    app.topics = [];
+    app.cache.clear();
+    app.inflight.clear();
+    quizSession = null;
+    const view = document.getElementById("view");
+    if (view) view.innerHTML = "";
+  }
+
+  function handleAuthFailure(message) {
+    if (modalResolve) closeModal(false);
+    app.connection = null;
+    clearStoredConnection();
+    clearApiState();
+    updateSessionUI();
+    setAppVisible(false);
+    const expired = /expired/i.test(message || "");
+    showKeyGate({
+      error: expired
+        ? "Your API key has expired. Create a new key, then paste it here."
+        : "Your API key was rejected. Check the key and try again."
+    });
+  }
+
+  async function connectWithKey(event) {
+    if (event) event.preventDefault();
+    const input = document.getElementById("api-key-input");
+    const apiKey = input?.value.trim() || "";
+    if (!apiKey) {
+      setGateError("Paste your MathAPI key to continue.");
+      input?.focus();
+      return;
+    }
+    const replacing = Boolean(app.connection);
+    setGateBusy(true);
+    setGateError("");
+    try {
+      const data = await validateApiKey(apiKey);
+      const connection = {
+        apiKey,
+        savedAt: new Date().toISOString()
+      };
+      const stored = saveStoredConnection(connection);
+      app.connection = connection;
+      app.cache.clear();
+      app.inflight.clear();
+      app.topics = data.topics;
+      app.cache.set("/api/v1/topics", {
+        value: data,
+        expires: Date.now() + CACHE_TTL.topics
+      });
+      updateSessionUI();
+      hideKeyGate();
+      setAppVisible(true);
+      toast(replacing ? "API key updated." : "Connected to MathAPI.", "success");
+      if (!stored) {
+        toast("This browser blocked sessionStorage. The key will be lost when this page reloads.", "error");
+      }
+      await renderRoute();
+    } catch (error) {
+      setGateBusy(false);
+      setGateError(keyValidationMessage(error));
+      input?.focus();
+    }
+  }
+
+  async function disconnectConnection() {
+    const confirmed = await openModal({
+      title: "Disconnect MathAPI?",
+      message: "This removes the API key from this tab and clears cached API data. Bookmarks and learning progress stay intact.",
+      confirmLabel: "Disconnect",
+      danger: true
+    });
+    if (!confirmed) return;
+    app.connection = null;
+    clearStoredConnection();
+    clearApiState();
+    updateSessionUI();
+    setAppVisible(false);
+    toast("API key disconnected.", "success");
+    showKeyGate();
+  }
+
+  async function testGateConnection(element) {
+    if (element) element.disabled = true;
+    try {
+      await checkHealth();
+      setGateError("");
+      toast("MathAPI is reachable.", "success");
+    } catch (error) {
+      setGateError(error.message || "MathAPI is not reachable.");
+    } finally {
+      if (element) element.disabled = false;
+    }
   }
 
   async function fetchData(path, params = {}, cacheType = null) {
@@ -907,7 +1091,7 @@
     const status = error instanceof ApiError ? error.status : 0;
     const message = error instanceof Error ? error.message : String(error || "Something went wrong.");
     const extra = status === 0
-      ? "Start the API with uv run uvs dev, then try again."
+      ? `Check that MathAPI is reachable at ${API_BASE}, then try again.`
       : status === 429
         ? "MathAPI allows 100 authenticated requests per hour and 300 per IP. Try again later."
         : "";
@@ -2105,7 +2289,7 @@
       return {
         html: `
           ${pageHead({
-            eyebrow: "Account",
+            eyebrow: "Your data",
             title: "Saved work, session by session.",
             text: "Bookmarks and accuracy are stored in this tab's sessionStorage. Closing the tab clears the learning record.",
             actions
@@ -2145,7 +2329,7 @@
             ${historyMarkup}
           </section>` : ""}`,
         title: "Saved & Progress",
-        eyebrow: "Account"
+        eyebrow: "Your data"
       };
     });
   }
@@ -2155,38 +2339,39 @@
   }
 
   function viewSettings(route, sequence) {
-    const session = app.session;
-    const expiry = sessionExpiryMs(session);
+    const connection = app.connection;
+    const expiry = keyExpiryMs(connection?.apiKey);
     const online = Boolean(app.online);
     const attempted = Object.values(state.progress).reduce((sum, entry) => sum + (entry.attempted || 0), 0);
     const healthMessage = online
       ? (app.health?.message || "The API responded successfully.")
-      : "Start MathAPI with uv run uvs dev, then test the connection.";
+      : `MathAPI is not reachable at ${API_BASE}. Check the connection and try again.`;
     const html = `
       ${pageHead({
-        eyebrow: "Account",
-        title: "Settings & session.",
-        text: "MathLabs is a demo application. Authentication, progress, and bookmarks stay in this browser tab.",
+        eyebrow: "Your data",
+        title: "Settings & connection.",
+        text: "Manage the MathAPI key for this tab. Keys are session-only and are sent only to MathAPI.",
         actions: `<button class="btn btn-secondary" type="button" data-action="test-connection">${icon("wifi")} Test connection</button>`
       })}
       <div class="settings-grid">
         <article class="info-card">
-          <h3>Demo session</h3>
-          <p>The identity is fixed and read-only. A key is requested automatically when needed.</p>
+          <h3>API connection</h3>
+          <p>Your key is stored in sessionStorage and cleared when this tab closes.</p>
           <div class="info-list">
-            ${settingsInfoRow("Username", session?.username || DEMO_IDENTITY.username, true)}
-            ${settingsInfoRow("Email", session?.email || DEMO_IDENTITY.email, true)}
-            ${settingsInfoRow("API key", session ? maskKey(session.apiKey) : "Not connected")}
-            ${settingsInfoRow("Expires", expiry ? formatDateTime(expiry) : session?.expiry || "—", true)}
+            ${settingsInfoRow("Status", connection ? "Connected" : "Not connected", true)}
+            ${settingsInfoRow("API key", connection ? maskKey(connection.apiKey) : "Not connected")}
+            ${settingsInfoRow("Expires", expiry ? formatDateTime(expiry) : connection ? "Unknown" : "—", true)}
+            ${settingsInfoRow("Storage", "This tab only", true)}
           </div>
           <div class="actions-row">
-            <button class="btn btn-primary btn-sm" type="button" data-action="refresh-session">${icon("refresh")} Refresh session</button>
+            <button class="btn btn-primary btn-sm" type="button" data-action="change-api-key">${icon("lock")} Change API key</button>
             <button class="btn btn-ghost btn-sm" type="button" data-action="clear-cache">${icon("database")} Clear cache</button>
+            <button class="btn btn-danger btn-sm" type="button" data-action="disconnect-api-key" ${connection ? "" : "disabled"}>${icon("x")} Disconnect</button>
           </div>
         </article>
         <article class="info-card">
           <h3>MathAPI</h3>
-          <p>The frontend talks only to the API running on this machine.</p>
+          <p>All requests go to the live MathAPI endpoint.</p>
           <div class="health-card ${online ? "is-online" : "is-offline"}">
             <span class="health-icon">${icon(online ? "wifi" : "server")}</span>
             <div>
@@ -2206,7 +2391,7 @@
         </article>
         <article class="info-card span-2">
           <h3>Appearance & data</h3>
-          <p>Theme persists in localStorage; bookmarks and quiz progress use sessionStorage.</p>
+          <p>Theme persists in localStorage; your API key, bookmarks, and quiz progress stay in this tab's sessionStorage.</p>
           <div class="info-list">
             ${settingsInfoRow("Theme", document.documentElement.dataset.theme === "light" ? "Light" : "Dark", true)}
             ${settingsInfoRow("Bookmarked topics", String(state.bookmarks.length), true)}
@@ -2222,7 +2407,7 @@
     return {
       html,
       title: "Settings",
-      eyebrow: "Account"
+      eyebrow: "Your data"
     };
   }
 
@@ -2248,6 +2433,10 @@
   }
 
   async function renderRoute() {
+    if (!app.connection) {
+      showKeyGate();
+      return;
+    }
     const sequence = ++renderSequence;
     const route = parseHash();
     currentRoute = route;
@@ -2280,11 +2469,14 @@
         try {
           await result.after();
         } catch (error) {
-          if (sequence === renderSequence) toast(error.message || "This section could not load.", "error");
+          if (sequence !== renderSequence) return;
+          if (error instanceof ApiError && error.status === 401 && !app.connection) return;
+          toast(error.message || "This section could not load.", "error");
         }
       }
     } catch (error) {
       if (sequence !== renderSequence) return;
+      if (error instanceof ApiError && error.status === 401 && !app.connection) return;
       view.innerHTML = errorState(error);
       hydrateIcons(view);
     }
@@ -2309,14 +2501,34 @@
 
   async function handleAction(action, element) {
     try {
-      if (action === "refresh-session") {
-        if (element) element.disabled = true;
-        try {
-          await refreshSession();
-          if (currentRoute?.name === "settings") await renderRoute();
-        } finally {
-          if (element) element.disabled = false;
+      if (action === "change-api-key") {
+        showKeyGate();
+        return;
+      }
+      if (action === "cancel-key-gate") {
+        if (app.connection) hideKeyGate();
+        return;
+      }
+      if (action === "toggle-key-visibility") {
+        toggleKeyVisibility();
+        return;
+      }
+      if (action === "copy-auth-curl") {
+        const curl = document.getElementById("auth-curl")?.textContent?.trim();
+        if (!curl) {
+          toast("The request example is unavailable.", "error");
+          return;
         }
+        await copyText(curl);
+        toast("Request example copied.", "success");
+        return;
+      }
+      if (action === "auth-test-connection") {
+        await testGateConnection(element);
+        return;
+      }
+      if (action === "disconnect-api-key") {
+        await disconnectConnection();
         return;
       }
       if (action === "clear-cache") {
@@ -2423,7 +2635,7 @@
         });
         if (!confirmed) return;
         resetLearningState();
-        toast("Local learning data reset.", "success");
+        toast("Session learning data reset.", "success");
         await renderRoute();
         return;
       }
@@ -2432,6 +2644,7 @@
         if (currentRoute?.name === "settings") await renderRoute();
       }
     } catch (error) {
+      if (error instanceof ApiError && error.status === 401 && !app.connection) return;
       toast(error.message || "That action could not be completed.", "error");
     }
   }
@@ -2468,6 +2681,11 @@
     }
     if (event.target.closest("[data-skip-link]")) {
       event.preventDefault();
+      const gate = document.getElementById("auth-gate");
+      if (gate && !gate.hidden) {
+        document.getElementById("api-key-input")?.focus();
+        return;
+      }
       const view = document.getElementById("view");
       if (view) {
         view.focus();
@@ -2489,6 +2707,11 @@
       ui.topicSearch = event.target.value;
       refreshTopicResults();
     }
+  }
+
+  function onDocumentSubmit(event) {
+    if (event.target.id !== "api-key-form") return;
+    connectWithKey(event);
   }
 
   function onDocumentChange(event) {
@@ -2522,6 +2745,12 @@
       closeModal(false);
       return;
     }
+    const gate = document.getElementById("auth-gate");
+    if (gate && !gate.hidden) {
+      const cancel = document.getElementById("auth-cancel");
+      if (cancel && !cancel.hidden) hideKeyGate();
+      return;
+    }
     const sidebar = document.getElementById("sidebar");
     if (sidebar?.classList.contains("is-open")) closeSidebar();
   }
@@ -2530,6 +2759,7 @@
     document.addEventListener("click", onDocumentClick);
     document.addEventListener("input", onDocumentInput);
     document.addEventListener("change", onDocumentChange);
+    document.addEventListener("submit", onDocumentSubmit);
     document.addEventListener("keydown", onDocumentKeydown);
     window.addEventListener("hashchange", renderRoute);
     window.addEventListener("resize", onViewportResize);
@@ -2539,23 +2769,25 @@
     applyTheme(document.documentElement.dataset.theme === "light" ? "light" : "dark", false);
     hydrateIcons(document);
     bindEvents();
-    app.session = loadSession();
+    clearLegacySession();
+    app.connection = loadStoredConnection();
     updateSessionUI();
     setApiStatus("checking", "Checking API");
-    setLoadingMessage(app.session ? "Restoring the demo session…" : "Registering the demo session…");
     if (!window.location.hash || window.location.hash === "#/") {
       history.replaceState(null, "", "#/dashboard");
     }
     const healthPromise = checkHealth().catch(() => null);
-    try {
-      await authenticate();
-    } catch (error) {
-      toast(error.message || "The demo session could not be created.", "error");
+    if (app.connection) {
+      setAppVisible(true);
+      hideLoadingScreen();
+      await renderRoute();
+    } else {
+      hideLoadingScreen();
+      showKeyGate();
     }
-    hideLoadingScreen();
-    await renderRoute();
     healthPromise.then(() => {
-      if (currentRoute?.name === "settings") renderRoute();
+      const shell = document.getElementById("app-shell");
+      if (shell && !shell.hidden && currentRoute?.name === "settings") renderRoute();
     });
   }
 
