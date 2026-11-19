@@ -1,24 +1,13 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f6f7f9">
   <meta name="description" content="MathLabs is a focused mathematics learning workspace powered by MathAPI.">
-  <meta name="theme-color" content="#171513">
   <title>Dashboard · MathLabs</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23FE9332'/%3E%3Ctext x='32' y='45' font-family='Poppins,Arial,sans-serif' font-size='36' font-weight='700' text-anchor='middle' fill='%23171513'%3E%E2%88%91%3C/text%3E%3C/svg%3E">
-  <script>
-    (function () {
-      try {
-        var theme = localStorage.getItem('mathlabs.theme');
-        if (theme === 'light' || theme === 'dark') {
-          document.documentElement.dataset.theme = theme;
-        }
-      } catch (error) {
-        document.documentElement.dataset.theme = 'dark';
-      }
-    }());
-  </script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23E87722'/%3E%3Ctext x='32' y='45' font-family='Poppins,Arial,sans-serif' font-size='36' font-weight='700' text-anchor='middle' fill='%23fff'%3E%E2%88%91%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -60,7 +49,7 @@
         <label class="field-label" for="api-key-input">MathAPI key</label>
         <div class="auth-key-field">
           <input class="input" id="api-key-input" name="api-key" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="mathapi_key_..." aria-describedby="auth-error">
-          <button class="btn btn-ghost btn-sm auth-key-toggle" type="button" data-action="toggle-key-visibility" aria-pressed="false">Show</button>
+          <button class="btn btn-ghost btn-sm auth-key-toggle" type="button" data-action="toggle-key-visibility" aria-pressed="false" aria-label="Show API key">Show</button>
         </div>
         <p class="auth-error" id="auth-error" role="alert" hidden></p>
         <button class="btn btn-primary btn-full" id="auth-submit" type="submit">Connect to MathAPI</button>
@@ -87,7 +76,7 @@
         <span class="brand-mark" aria-hidden="true">∑</span>
         <span class="brand-copy">
           <strong>MathLabs</strong>
-          <small>Powered by MathAPI</small>
+          <small>MathAPI workspace</small>
         </span>
       </a>
 
@@ -158,7 +147,7 @@
         </button>
       </div>
 
-      <p class="sidebar-note">Live MathAPI workspace</p>
+      <p class="sidebar-note">MathAPI workspace</p>
     </aside>
 
     <button class="sidebar-backdrop" id="sidebar-backdrop" type="button" aria-label="Close navigation"></button>
@@ -182,17 +171,13 @@
           <a class="icon-btn" href="#/random" title="Random question" aria-label="Open a random question">
             <span data-icon="shuffle"></span>
           </a>
-          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false">
-            <span class="theme-icon theme-icon-sun" data-icon="sun"></span>
-            <span class="theme-icon theme-icon-moon" data-icon="moon"></span>
-          </button>
         </div>
       </header>
 
       <main class="view" id="view" tabindex="-1"></main>
 
       <footer class="app-footer">
-        <span>MathLabs — MathAPI learning workspace.</span>
+        <span>MathLabs · MathAPI learning workspace</span>
         <span>LaTeX by KaTeX · Data by MathAPI</span>
       </footer>
     </div>

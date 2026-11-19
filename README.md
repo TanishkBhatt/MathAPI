@@ -175,7 +175,7 @@ Paste the returned `api_key` into the MathLabs connection screen to use the app.
 
 ## About MathLabs
 
-MathLabs is a deployed frontend web application powered by MathAPI, built with HTML, CSS, and JavaScript, providing users an interactive experience and developers an idea of how to use our services. The live app is available at [mathlabs-mathapi.vercel.app](https://mathlabs-mathapi.vercel.app) and connects to the production MathAPI endpoint. Users connect with their own MathAPI key; no account is created automatically. The key stays in the browser tab only.
+MathLabs is a deployed frontend web application powered by MathAPI, built with HTML, CSS, and JavaScript, providing users an interactive experience and developers an idea of how to use our services. The interface is intentionally light-only. The live app is available at [mathlabs-mathapi.vercel.app](https://mathlabs-mathapi.vercel.app) and connects to the production MathAPI endpoint. Users connect with their own MathAPI key; no account is created automatically. The key stays in the browser tab only.
 
 The App Includes:
 
@@ -187,7 +187,7 @@ The App Includes:
 - Daily Challenge and Random Question quizzes with hints, expected time limits, and solution sources
 - Formula Vault with copyable LaTeX formula sheets
 - Session-only API key, saved topics, quiz progress, accuracy tracking, and recent sessions
-- Settings for API key management, API health, theme, cache, and session learning data
+- Settings for API key management, API health, cache, and session learning data
 
 [![MathLabs](https://img.shields.io/badge/MathLabs-orange?style=for-the-badge&logo=fastapi&logoColor=white)](https://mathlabs-mathapi.vercel.app)
 
